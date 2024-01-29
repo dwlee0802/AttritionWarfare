@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://bvyo1sjvno0yx"]
+[gd_scene load_steps=4 format=3 uid="uid://bvyo1sjvno0yx"]
+
+[ext_resource type="Script" path="res://Script/Nation.gd" id="1_61ht0"]
+[ext_resource type="Script" path="res://Scene/game.gd" id="1_njrv5"]
+[ext_resource type="Script" path="res://Scene/EconomyTab.gd" id="2_3ln5g"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -7,12 +11,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_njrv5")
 
 [node name="EconomyTab" type="Label" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 text = "Economy"
+script = ExtResource("2_3ln5g")
 
 [node name="CivCountLabel" type="Label" parent="EconomyTab"]
 layout_mode = 0
@@ -31,6 +37,7 @@ offset_bottom = 58.0
 text = "Invest Civ Cost: 0000"
 
 [node name="MilCountLabel" type="Label" parent="EconomyTab"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = 60.0
 offset_right = 61.0
@@ -38,6 +45,7 @@ offset_bottom = 83.0
 text = "Mils: 00"
 
 [node name="MilInvestButton" type="Button" parent="EconomyTab"]
+layout_mode = 0
 offset_left = 124.0
 offset_top = 60.0
 offset_right = 291.0
@@ -45,6 +53,7 @@ offset_bottom = 91.0
 text = "Invest Mil Cost: 0000"
 
 [node name="IncomeLabel" type="Label" parent="EconomyTab"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 106.0
 offset_right = 104.0
@@ -52,6 +61,7 @@ offset_bottom = 129.0
 text = "Income: 0000"
 
 [node name="NationalTreasuryLabel" type="Label" parent="EconomyTab"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = 136.0
 offset_right = 76.0
@@ -80,18 +90,21 @@ offset_bottom = 96.0
 text = "Type"
 
 [node name="ColumnTitleLabel" type="Label" parent="ProductionTab/ColumnTitleLabel"]
+layout_mode = 0
 offset_left = 56.0
 offset_right = 114.0
 offset_bottom = 23.0
 text = "Factory"
 
 [node name="ColumnTitleLabel2" type="Label" parent="ProductionTab/ColumnTitleLabel"]
+layout_mode = 0
 offset_left = 127.0
 offset_right = 231.0
 offset_bottom = 23.0
 text = "Prod."
 
 [node name="ColumnTitleLabel3" type="Label" parent="ProductionTab/ColumnTitleLabel"]
+layout_mode = 0
 offset_left = 180.0
 offset_right = 284.0
 offset_bottom = 23.0
@@ -113,6 +126,7 @@ Armor
 AT"
 
 [node name="FactoryCountLabel" type="Label" parent="ProductionTab/DataColumns"]
+layout_mode = 0
 offset_left = 80.0
 offset_top = 110.0
 offset_right = 163.0
@@ -123,6 +137,7 @@ text = "0
 0"
 
 [node name="ProducedLabel" type="Label" parent="ProductionTab/DataColumns"]
+layout_mode = 0
 offset_left = 137.0
 offset_top = 109.0
 offset_right = 220.0
@@ -133,6 +148,7 @@ text = "0
 0"
 
 [node name="StockLabel" type="Label" parent="ProductionTab/DataColumns"]
+layout_mode = 0
 offset_left = 196.0
 offset_top = 110.0
 offset_right = 279.0
@@ -143,6 +159,7 @@ text = "0
 0"
 
 [node name="IncreaseLevelButton" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
 offset_left = 96.0
 offset_top = 104.0
 offset_right = 114.0
@@ -151,6 +168,7 @@ theme_override_font_sizes/font_size = 10
 text = "+"
 
 [node name="DecreaseLevelButton" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
 offset_left = 56.0
 offset_top = 104.0
 offset_right = 70.0
@@ -159,6 +177,7 @@ theme_override_font_sizes/font_size = 10
 text = "-"
 
 [node name="IncreaseLevelButton2" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
 offset_left = 96.0
 offset_top = 136.0
 offset_right = 114.0
@@ -167,6 +186,7 @@ theme_override_font_sizes/font_size = 10
 text = "+"
 
 [node name="DecreaseLevelButton2" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
 offset_left = 56.0
 offset_top = 136.0
 offset_right = 70.0
@@ -175,6 +195,7 @@ theme_override_font_sizes/font_size = 10
 text = "-"
 
 [node name="IncreaseLevelButton3" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
 offset_left = 96.0
 offset_top = 168.0
 offset_right = 114.0
@@ -183,6 +204,7 @@ theme_override_font_sizes/font_size = 10
 text = "+"
 
 [node name="DecreaseLevelButton3" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
 offset_left = 56.0
 offset_top = 168.0
 offset_right = 70.0
@@ -191,6 +213,7 @@ theme_override_font_sizes/font_size = 10
 text = "-"
 
 [node name="IncreaseLevelButton4" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
 offset_left = 96.0
 offset_top = 200.0
 offset_right = 114.0
@@ -199,6 +222,7 @@ theme_override_font_sizes/font_size = 10
 text = "+"
 
 [node name="DecreaseLevelButton4" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
 offset_left = 56.0
 offset_top = 200.0
 offset_right = 70.0
@@ -214,30 +238,35 @@ offset_bottom = 40.0
 text = "Military"
 
 [node name="ColumnTitleLabel" type="Label" parent="MilitaryTab"]
+layout_mode = 0
 offset_top = 72.0
 offset_right = 40.0
 offset_bottom = 95.0
 text = "Type"
 
 [node name="ColumnTitleLabel" type="Label" parent="MilitaryTab/ColumnTitleLabel"]
+layout_mode = 0
 offset_left = 72.0
 offset_right = 130.0
 offset_bottom = 23.0
 text = "LV"
 
 [node name="ColumnTitleLabel2" type="Label" parent="MilitaryTab/ColumnTitleLabel"]
+layout_mode = 0
 offset_left = 128.0
 offset_right = 232.0
 offset_bottom = 23.0
 text = "Supply"
 
 [node name="ColumnTitleLabel3" type="Label" parent="MilitaryTab/ColumnTitleLabel"]
+layout_mode = 0
 offset_left = 208.0
 offset_right = 312.0
 offset_bottom = 23.0
 text = "Stats"
 
 [node name="ColumnTitleLabel4" type="Label" parent="MilitaryTab/ColumnTitleLabel"]
+layout_mode = 0
 offset_left = 280.0
 offset_right = 384.0
 offset_bottom = 23.0
@@ -261,6 +290,7 @@ AT
 Total"
 
 [node name="LevelLabel" type="Label" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
 offset_left = 80.0
 offset_top = 110.0
 offset_right = 163.0
@@ -271,6 +301,7 @@ text = "0
 0"
 
 [node name="SupplyLabel" type="Label" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
 offset_left = 137.0
 offset_top = 109.0
 offset_right = 220.0
@@ -281,6 +312,7 @@ text = "0
 0"
 
 [node name="StatLabel" type="Label" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
 offset_left = 217.0
 offset_top = 111.0
 offset_right = 300.0
@@ -291,6 +323,7 @@ text = "0
 0"
 
 [node name="EffectLabel" type="Label" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
 offset_left = 292.0
 offset_top = 111.0
 offset_right = 375.0
@@ -310,6 +343,7 @@ theme_override_font_sizes/font_size = 10
 text = "+"
 
 [node name="DecreaseLevelButton" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
 offset_left = 56.0
 offset_top = 104.0
 offset_right = 70.0
@@ -318,6 +352,7 @@ theme_override_font_sizes/font_size = 10
 text = "-"
 
 [node name="IncreaseLevelButton2" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
 offset_left = 96.0
 offset_top = 136.0
 offset_right = 114.0
@@ -326,6 +361,7 @@ theme_override_font_sizes/font_size = 10
 text = "+"
 
 [node name="DecreaseLevelButton2" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
 offset_left = 56.0
 offset_top = 136.0
 offset_right = 70.0
@@ -334,6 +370,7 @@ theme_override_font_sizes/font_size = 10
 text = "-"
 
 [node name="IncreaseLevelButton3" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
 offset_left = 96.0
 offset_top = 168.0
 offset_right = 114.0
@@ -342,6 +379,7 @@ theme_override_font_sizes/font_size = 10
 text = "+"
 
 [node name="DecreaseLevelButton3" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
 offset_left = 56.0
 offset_top = 168.0
 offset_right = 70.0
@@ -350,6 +388,7 @@ theme_override_font_sizes/font_size = 10
 text = "-"
 
 [node name="IncreaseLevelButton4" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
 offset_left = 96.0
 offset_top = 200.0
 offset_right = 114.0
@@ -358,9 +397,16 @@ theme_override_font_sizes/font_size = 10
 text = "+"
 
 [node name="DecreaseLevelButton4" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
 offset_left = 56.0
 offset_top = 200.0
 offset_right = 70.0
 offset_bottom = 222.0
 theme_override_font_sizes/font_size = 10
 text = "-"
+
+[node name="PlayerNation" type="Node" parent="."]
+script = ExtResource("1_61ht0")
+
+[connection signal="pressed" from="EconomyTab/CivInvestButton" to="PlayerNation" method="CivInvest"]
+[connection signal="pressed" from="EconomyTab/MilInvestButton" to="PlayerNation" method="MilInvest"]
