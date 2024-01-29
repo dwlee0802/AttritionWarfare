@@ -257,9 +257,10 @@ offset_bottom = 276.0
 text = "Inf
 Arty
 Armor
-AT"
+AT
+Total"
 
-[node name="FactoryCountLabel" type="Label" parent="MilitaryTab/DataColumns"]
+[node name="LevelLabel" type="Label" parent="MilitaryTab/DataColumns"]
 offset_left = 80.0
 offset_top = 110.0
 offset_right = 163.0
@@ -269,7 +270,7 @@ text = "0
 0
 0"
 
-[node name="ProducedLabel" type="Label" parent="MilitaryTab/DataColumns"]
+[node name="SupplyLabel" type="Label" parent="MilitaryTab/DataColumns"]
 offset_left = 137.0
 offset_top = 109.0
 offset_right = 220.0
