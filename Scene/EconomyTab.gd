@@ -19,7 +19,7 @@ func _ready():
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	civInvestButton.text = "Invest " + str(Game.playerNation.civCount * Game.playerNation.baseInvestmentAmount)
 	if Game.playerNation.CivInvestAvailable():
 		civInvestButton.disabled = false
@@ -33,3 +33,6 @@ func _process(delta):
 		milInvestButton.disabled = true
 	
 	nationalTreasuryLabel.text = "National Treasury: " + str(Game.playerNation.nationalTreasury)
+	incomeLabel.text = "Income: " + str(Game.playerNation.revenuePerCiv * Game.playerNation.civCount) + " / s"
+	civCountLabel.text = "Civs: " + str(Game.playerNation.civCount)
+	milCountLabel.text = "Mils: " + str(Game.playerNation.milCount)

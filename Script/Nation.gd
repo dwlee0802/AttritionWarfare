@@ -3,10 +3,10 @@ class_name Nation
 
 var nationalTreasury: int = 0
 var civCount: int = 1
-var milCount: int = 0
+var milCount: int = 1
 
 var revenuePerCiv: int = 100
-var baseInvestmentAmount = 1000
+var baseInvestmentAmount = 500
 
 @onready var military: Military = Military.new()
 
