@@ -1,9 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvyo1sjvno0yx"]
+[gd_scene load_steps=10 format=3 uid="uid://bvyo1sjvno0yx"]
 
 [ext_resource type="Script" path="res://Script/Nation.gd" id="1_61ht0"]
-[ext_resource type="Script" path="res://Scene/game.gd" id="1_njrv5"]
-[ext_resource type="Script" path="res://Scene/EconomyTab.gd" id="2_3ln5g"]
-[ext_resource type="Script" path="res://Scene/ProductionTab.gd" id="3_5ub18"]
+[ext_resource type="Script" path="res://Script/game.gd" id="1_njrv5"]
+[ext_resource type="Script" path="res://Script/EconomyTab.gd" id="2_3ln5g"]
+[ext_resource type="Script" path="res://ProductionTab.gd" id="3_5ub18"]
+[ext_resource type="Script" path="res://Script/HQ.gd" id="5_ow5tt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cjsau"]
+size = Vector2(1140, 69)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p5cne"]
+size = Vector2(100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wbwj"]
+size = Vector2(50, 49)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_r7yqw"]
+size = Vector2(50, 50)
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -410,6 +423,51 @@ text = "-"
 [node name="PlayerNation" type="Node" parent="."]
 script = ExtResource("1_61ht0")
 
+[node name="World" type="Node2D" parent="."]
+position = Vector2(16, 583)
+
+[node name="Ground" type="StaticBody2D" parent="World"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Ground"]
+position = Vector2(560, 24.5)
+shape = SubResource("RectangleShape2D_cjsau")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Ground"]
+position = Vector2(560.5, 24.5)
+scale = Vector2(11.37, 0.65)
+texture = SubResource("PlaceholderTexture2D_p5cne")
+
+[node name="PlayerHQ" type="StaticBody2D" parent="World"]
+position = Vector2(1, -14)
+script = ExtResource("5_ow5tt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PlayerHQ"]
+position = Vector2(16, -19.5)
+shape = SubResource("RectangleShape2D_4wbwj")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/PlayerHQ"]
+position = Vector2(16, -19)
+texture = SubResource("PlaceholderTexture2D_r7yqw")
+
+[node name="SpawnTimer" type="Timer" parent="World/PlayerHQ"]
+autostart = true
+
+[node name="EnemyHQ" type="StaticBody2D" parent="World"]
+position = Vector2(1088, -14)
+script = ExtResource("5_ow5tt")
+isPlayerHQ = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/EnemyHQ"]
+position = Vector2(16, -19.5)
+shape = SubResource("RectangleShape2D_4wbwj")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/EnemyHQ"]
+position = Vector2(16, -19)
+texture = SubResource("PlaceholderTexture2D_r7yqw")
+
+[node name="SpawnTimer" type="Timer" parent="World/EnemyHQ"]
+autostart = true
+
 [connection signal="pressed" from="EconomyTab/CivInvestButton" to="PlayerNation" method="CivInvest"]
 [connection signal="pressed" from="EconomyTab/MilInvestButton" to="PlayerNation" method="MilInvest"]
 [connection signal="pressed" from="ProductionTab/DataColumns/IncreaseLevelButton" to="PlayerNation" method="AssignMil" binds= [0, 1]]
@@ -420,3 +478,5 @@ script = ExtResource("1_61ht0")
 [connection signal="pressed" from="ProductionTab/DataColumns/DecreaseLevelButton3" to="PlayerNation" method="AssignMil" binds= [2, -1]]
 [connection signal="pressed" from="ProductionTab/DataColumns/IncreaseLevelButton4" to="PlayerNation" method="AssignMil" binds= [3, 1]]
 [connection signal="pressed" from="ProductionTab/DataColumns/DecreaseLevelButton4" to="PlayerNation" method="AssignMil" binds= [3, -1]]
+[connection signal="timeout" from="World/PlayerHQ/SpawnTimer" to="World/PlayerHQ" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="World/EnemyHQ/SpawnTimer" to="World/EnemyHQ" method="_on_spawn_timer_timeout"]
