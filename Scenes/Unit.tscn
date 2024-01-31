@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b8ahm4dogxoy5"]
 
-[ext_resource type="Script" path="res://Script/Unit.gd" id="1_qbsdc"]
+[ext_resource type="Script" path="res://Scripts/Unit.gd" id="1_y5a62"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_brevo"]
 size = Vector2(32, 32)
@@ -13,7 +13,7 @@ resource_local_to_scene = true
 
 [node name="Unit" type="CharacterBody2D"]
 collision_mask = 0
-script = ExtResource("1_qbsdc")
+script = ExtResource("1_y5a62")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_brevo")
@@ -27,3 +27,8 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("RectangleShape2D_fqqx3")
+
+[node name="AttackTimer" type="Timer" parent="."]
+process_callback = 0
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

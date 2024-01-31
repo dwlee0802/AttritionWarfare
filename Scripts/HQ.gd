@@ -1,7 +1,7 @@
 extends StaticBody2D
 class_name HQ
 
-var unitScene = load("res://Scene/Unit.tscn")
+var unitScene = load("res://Scenes/Unit.tscn")
 @export var isPlayerHQ: bool = true
 
 

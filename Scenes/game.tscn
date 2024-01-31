@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://bvyo1sjvno0yx"]
 
-[ext_resource type="Script" path="res://Script/Nation.gd" id="1_61ht0"]
-[ext_resource type="Script" path="res://Script/game.gd" id="1_njrv5"]
-[ext_resource type="Script" path="res://Script/EconomyTab.gd" id="2_3ln5g"]
-[ext_resource type="Script" path="res://ProductionTab.gd" id="3_5ub18"]
-[ext_resource type="Script" path="res://Script/HQ.gd" id="5_ow5tt"]
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_haicd"]
+[ext_resource type="Script" path="res://Scripts/EconomyTab.gd" id="2_frf5n"]
+[ext_resource type="Script" path="res://ProductionTab.gd" id="3_qnnc4"]
+[ext_resource type="Script" path="res://Scripts/Nation.gd" id="4_kokw5"]
+[ext_resource type="Script" path="res://Scripts/HQ.gd" id="5_ajpi1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wbwj"]
 size = Vector2(50, 49)
@@ -19,14 +19,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_njrv5")
+script = ExtResource("1_haicd")
 
 [node name="EconomyTab" type="Label" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 text = "Economy"
-script = ExtResource("2_3ln5g")
+script = ExtResource("2_frf5n")
 
 [node name="CivCountLabel" type="Label" parent="EconomyTab"]
 layout_mode = 0
@@ -82,7 +82,7 @@ offset_left = 384.0
 offset_right = 470.0
 offset_bottom = 40.0
 text = "Production"
-script = ExtResource("3_5ub18")
+script = ExtResource("3_qnnc4")
 
 [node name="MilUsageLabel" type="Label" parent="ProductionTab"]
 layout_mode = 0
@@ -415,7 +415,7 @@ theme_override_font_sizes/font_size = 10
 text = "-"
 
 [node name="PlayerNation" type="Node" parent="."]
-script = ExtResource("1_61ht0")
+script = ExtResource("4_kokw5")
 
 [node name="World" type="Node2D" parent="."]
 position = Vector2(16, 583)
@@ -424,7 +424,7 @@ position = Vector2(16, 583)
 position = Vector2(1, -14)
 collision_layer = 0
 collision_mask = 0
-script = ExtResource("5_ow5tt")
+script = ExtResource("5_ajpi1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/PlayerHQ"]
 position = Vector2(16, -19.5)
@@ -435,13 +435,14 @@ position = Vector2(16, -19)
 texture = SubResource("PlaceholderTexture2D_r7yqw")
 
 [node name="SpawnTimer" type="Timer" parent="World/PlayerHQ"]
+wait_time = 2.0
 autostart = true
 
 [node name="EnemyHQ" type="StaticBody2D" parent="World"]
 position = Vector2(1088, -14)
 collision_layer = 0
 collision_mask = 0
-script = ExtResource("5_ow5tt")
+script = ExtResource("5_ajpi1")
 isPlayerHQ = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/EnemyHQ"]
@@ -453,6 +454,7 @@ position = Vector2(16, -19)
 texture = SubResource("PlaceholderTexture2D_r7yqw")
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemyHQ"]
+wait_time = 2.0
 autostart = true
 
 [connection signal="pressed" from="EconomyTab/CivInvestButton" to="PlayerNation" method="CivInvest"]
