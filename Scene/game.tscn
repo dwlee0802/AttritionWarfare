@@ -1,16 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvyo1sjvno0yx"]
+[gd_scene load_steps=8 format=3 uid="uid://bvyo1sjvno0yx"]
 
 [ext_resource type="Script" path="res://Script/Nation.gd" id="1_61ht0"]
 [ext_resource type="Script" path="res://Script/game.gd" id="1_njrv5"]
 [ext_resource type="Script" path="res://Script/EconomyTab.gd" id="2_3ln5g"]
 [ext_resource type="Script" path="res://ProductionTab.gd" id="3_5ub18"]
 [ext_resource type="Script" path="res://Script/HQ.gd" id="5_ow5tt"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cjsau"]
-size = Vector2(1140, 69)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p5cne"]
-size = Vector2(100, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wbwj"]
 size = Vector2(50, 49)
@@ -426,19 +420,10 @@ script = ExtResource("1_61ht0")
 [node name="World" type="Node2D" parent="."]
 position = Vector2(16, 583)
 
-[node name="Ground" type="StaticBody2D" parent="World"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Ground"]
-position = Vector2(560, 24.5)
-shape = SubResource("RectangleShape2D_cjsau")
-
-[node name="Sprite2D" type="Sprite2D" parent="World/Ground"]
-position = Vector2(560.5, 24.5)
-scale = Vector2(11.37, 0.65)
-texture = SubResource("PlaceholderTexture2D_p5cne")
-
 [node name="PlayerHQ" type="StaticBody2D" parent="World"]
 position = Vector2(1, -14)
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("5_ow5tt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/PlayerHQ"]
@@ -454,6 +439,8 @@ autostart = true
 
 [node name="EnemyHQ" type="StaticBody2D" parent="World"]
 position = Vector2(1088, -14)
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("5_ow5tt")
 isPlayerHQ = false
 
