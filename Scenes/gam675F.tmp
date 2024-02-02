@@ -1,0 +1,464 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvyo1sjvno0yx"]
+
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_haicd"]
+[ext_resource type="Script" path="res://Scripts/Nation.gd" id="4_kokw5"]
+[ext_resource type="Script" path="res://Scenes/Industry.gd" id="5_2rvh2"]
+[ext_resource type="Script" path="res://Scripts/HQ.gd" id="5_ajpi1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wbwj"]
+size = Vector2(50, 49)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_r7yqw"]
+size = Vector2(50, 50)
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_haicd")
+
+[node name="EconomyTab" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "Economy"
+
+[node name="CivCountLabel" type="Label" parent="EconomyTab"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 29.0
+offset_right = 60.0
+offset_bottom = 52.0
+text = "Civs: 00"
+
+[node name="CivInvestButton" type="Button" parent="EconomyTab"]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 27.0
+offset_right = 289.0
+offset_bottom = 58.0
+text = "Invest Civ Cost: 0000"
+
+[node name="MilCountLabel" type="Label" parent="EconomyTab"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 60.0
+offset_right = 61.0
+offset_bottom = 83.0
+text = "Mils: 00"
+
+[node name="MilInvestButton" type="Button" parent="EconomyTab"]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 60.0
+offset_right = 291.0
+offset_bottom = 91.0
+text = "Invest Mil Cost: 0000"
+
+[node name="IncomeLabel" type="Label" parent="EconomyTab"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 106.0
+offset_right = 104.0
+offset_bottom = 129.0
+text = "Income: 0000"
+
+[node name="NationalTreasuryLabel" type="Label" parent="EconomyTab"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 136.0
+offset_right = 76.0
+offset_bottom = 159.0
+text = "National Treasury: 00000000"
+
+[node name="ProductionTab" type="Label" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_right = 470.0
+offset_bottom = 40.0
+text = "Production"
+
+[node name="MilUsageLabel" type="Label" parent="ProductionTab"]
+layout_mode = 0
+offset_top = 34.0
+offset_right = 122.0
+offset_bottom = 57.0
+text = "Mils 00/00 Used"
+
+[node name="ColumnTitleLabel" type="Label" parent="ProductionTab"]
+layout_mode = 0
+offset_top = 73.0
+offset_right = 40.0
+offset_bottom = 96.0
+text = "Type"
+
+[node name="ColumnTitleLabel" type="Label" parent="ProductionTab/ColumnTitleLabel"]
+layout_mode = 0
+offset_left = 56.0
+offset_right = 114.0
+offset_bottom = 23.0
+text = "Factory"
+
+[node name="ColumnTitleLabel2" type="Label" parent="ProductionTab/ColumnTitleLabel"]
+layout_mode = 0
+offset_left = 127.0
+offset_right = 231.0
+offset_bottom = 23.0
+text = "Prod."
+
+[node name="ColumnTitleLabel3" type="Label" parent="ProductionTab/ColumnTitleLabel"]
+layout_mode = 0
+offset_left = 180.0
+offset_right = 284.0
+offset_bottom = 23.0
+text = "Stock"
+
+[node name="DataColumns" type="Control" parent="ProductionTab"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TypesLabel" type="Label" parent="ProductionTab/DataColumns"]
+layout_mode = 0
+offset_top = 110.0
+offset_right = 83.0
+offset_bottom = 276.0
+text = "Inf. Eq.
+Arty
+Armor
+AT"
+
+[node name="FactoryCountLabel" type="Label" parent="ProductionTab/DataColumns"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 110.0
+offset_right = 163.0
+offset_bottom = 276.0
+text = "0
+0
+0
+0"
+
+[node name="ProducedLabel" type="Label" parent="ProductionTab/DataColumns"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 109.0
+offset_right = 220.0
+offset_bottom = 275.0
+text = "0
+0
+0
+0"
+
+[node name="StockLabel" type="Label" parent="ProductionTab/DataColumns"]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 110.0
+offset_right = 279.0
+offset_bottom = 276.0
+text = "0
+0
+0
+0"
+
+[node name="IncreaseLevelButton" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 104.0
+offset_right = 114.0
+offset_bottom = 126.0
+theme_override_font_sizes/font_size = 10
+text = "+"
+
+[node name="DecreaseLevelButton" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 104.0
+offset_right = 70.0
+offset_bottom = 126.0
+theme_override_font_sizes/font_size = 10
+text = "-"
+
+[node name="IncreaseLevelButton2" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 136.0
+offset_right = 114.0
+offset_bottom = 158.0
+theme_override_font_sizes/font_size = 10
+text = "+"
+
+[node name="DecreaseLevelButton2" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 136.0
+offset_right = 70.0
+offset_bottom = 158.0
+theme_override_font_sizes/font_size = 10
+text = "-"
+
+[node name="IncreaseLevelButton3" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 168.0
+offset_right = 114.0
+offset_bottom = 190.0
+theme_override_font_sizes/font_size = 10
+text = "+"
+
+[node name="DecreaseLevelButton3" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 168.0
+offset_right = 70.0
+offset_bottom = 190.0
+theme_override_font_sizes/font_size = 10
+text = "-"
+
+[node name="IncreaseLevelButton4" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 200.0
+offset_right = 114.0
+offset_bottom = 222.0
+theme_override_font_sizes/font_size = 10
+text = "+"
+
+[node name="DecreaseLevelButton4" type="Button" parent="ProductionTab/DataColumns"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 200.0
+offset_right = 70.0
+offset_bottom = 222.0
+theme_override_font_sizes/font_size = 10
+text = "-"
+
+[node name="MilitaryTab" type="Label" parent="."]
+layout_mode = 0
+offset_left = 736.0
+offset_right = 796.0
+offset_bottom = 40.0
+text = "Military"
+
+[node name="ColumnTitleLabel" type="Label" parent="MilitaryTab"]
+layout_mode = 0
+offset_top = 72.0
+offset_right = 40.0
+offset_bottom = 95.0
+text = "Type"
+
+[node name="ColumnTitleLabel" type="Label" parent="MilitaryTab/ColumnTitleLabel"]
+layout_mode = 0
+offset_left = 72.0
+offset_right = 130.0
+offset_bottom = 23.0
+text = "LV"
+
+[node name="ColumnTitleLabel2" type="Label" parent="MilitaryTab/ColumnTitleLabel"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 232.0
+offset_bottom = 23.0
+text = "Supply"
+
+[node name="ColumnTitleLabel3" type="Label" parent="MilitaryTab/ColumnTitleLabel"]
+layout_mode = 0
+offset_left = 208.0
+offset_right = 312.0
+offset_bottom = 23.0
+text = "Stats"
+
+[node name="ColumnTitleLabel4" type="Label" parent="MilitaryTab/ColumnTitleLabel"]
+layout_mode = 0
+offset_left = 280.0
+offset_right = 384.0
+offset_bottom = 23.0
+text = "Effect"
+
+[node name="DataColumns" type="Control" parent="MilitaryTab"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TypesLabel" type="Label" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
+offset_top = 110.0
+offset_right = 83.0
+offset_bottom = 276.0
+text = "Inf
+Arty
+Armor
+AT
+Total"
+
+[node name="LevelLabel" type="Label" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 110.0
+offset_right = 163.0
+offset_bottom = 276.0
+text = "0
+0
+0
+0"
+
+[node name="SupplyLabel" type="Label" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 109.0
+offset_right = 220.0
+offset_bottom = 275.0
+text = "0
+0
+0
+0"
+
+[node name="StatLabel" type="Label" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
+offset_left = 217.0
+offset_top = 111.0
+offset_right = 300.0
+offset_bottom = 277.0
+text = "0
+0
+0
+0"
+
+[node name="EffectLabel" type="Label" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
+offset_left = 292.0
+offset_top = 111.0
+offset_right = 375.0
+offset_bottom = 277.0
+text = "0
+0
+0
+0"
+
+[node name="IncreaseLevelButton" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 104.0
+offset_right = 114.0
+offset_bottom = 126.0
+theme_override_font_sizes/font_size = 10
+text = "+"
+
+[node name="DecreaseLevelButton" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 104.0
+offset_right = 70.0
+offset_bottom = 126.0
+theme_override_font_sizes/font_size = 10
+text = "-"
+
+[node name="IncreaseLevelButton2" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 136.0
+offset_right = 114.0
+offset_bottom = 158.0
+theme_override_font_sizes/font_size = 10
+text = "+"
+
+[node name="DecreaseLevelButton2" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 136.0
+offset_right = 70.0
+offset_bottom = 158.0
+theme_override_font_sizes/font_size = 10
+text = "-"
+
+[node name="IncreaseLevelButton3" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 168.0
+offset_right = 114.0
+offset_bottom = 190.0
+theme_override_font_sizes/font_size = 10
+text = "+"
+
+[node name="DecreaseLevelButton3" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 168.0
+offset_right = 70.0
+offset_bottom = 190.0
+theme_override_font_sizes/font_size = 10
+text = "-"
+
+[node name="IncreaseLevelButton4" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 200.0
+offset_right = 114.0
+offset_bottom = 222.0
+theme_override_font_sizes/font_size = 10
+text = "+"
+
+[node name="DecreaseLevelButton4" type="Button" parent="MilitaryTab/DataColumns"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 200.0
+offset_right = 70.0
+offset_bottom = 222.0
+theme_override_font_sizes/font_size = 10
+text = "-"
+
+[node name="PlayerNation" type="Node" parent="."]
+script = ExtResource("4_kokw5")
+
+[node name="Industry" type="Node" parent="PlayerNation"]
+
+[node name="IronMines" type="Node" parent="PlayerNation/Industry"]
+script = ExtResource("5_2rvh2")
+productionType = 1
+
+[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/IronMines"]
+one_shot = true
+
+[node name="World" type="Node2D" parent="."]
+position = Vector2(16, 583)
+
+[node name="PlayerHQ" type="StaticBody2D" parent="World"]
+position = Vector2(1, -14)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("5_ajpi1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PlayerHQ"]
+position = Vector2(16, -19.5)
+shape = SubResource("RectangleShape2D_4wbwj")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/PlayerHQ"]
+position = Vector2(16, -19)
+texture = SubResource("PlaceholderTexture2D_r7yqw")
+
+[node name="EnemyHQ" type="StaticBody2D" parent="World"]
+position = Vector2(1088, -14)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("5_ajpi1")
+isPlayerHQ = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/EnemyHQ"]
+position = Vector2(16, -19.5)
+shape = SubResource("RectangleShape2D_4wbwj")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/EnemyHQ"]
+position = Vector2(16, -19)
+texture = SubResource("PlaceholderTexture2D_r7yqw")
+
+[node name="SpawnTimer" type="Timer" parent="World/EnemyHQ"]
+wait_time = 2.0
+autostart = true
+
+[connection signal="pressed" from="EconomyTab/CivInvestButton" to="PlayerNation" method="CivInvest"]
+[connection signal="pressed" from="EconomyTab/MilInvestButton" to="PlayerNation" method="MilInvest"]
+[connection signal="timeout" from="World/EnemyHQ/SpawnTimer" to="World/EnemyHQ" method="_on_spawn_timer_timeout"]

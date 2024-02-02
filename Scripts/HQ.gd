@@ -21,6 +21,3 @@ func SpawnUnit(unitType):
 	add_child(newUnit)
 	newUnit.global_position = global_position
 	newUnit.SetPlayerUnit(isPlayerHQ)
-
-func _on_spawn_timer_timeout():
-	SpawnUnit(0)

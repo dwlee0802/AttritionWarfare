@@ -8,6 +8,7 @@ static var playerNation: Nation
 func _ready():
 	self.playerNation = $PlayerNation
 	
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
