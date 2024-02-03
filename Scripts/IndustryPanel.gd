@@ -78,3 +78,5 @@ func _on_change_level_button_pressed(extra_arg_0):
 		# level down
 		if industry.level == 0:
 			return
+		else:
+			industry.level -= 1

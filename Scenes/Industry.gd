@@ -7,7 +7,7 @@ class_name Industry
 @export var productionType: Enums.GoodType = Enums.GoodType.None
 @export var productionAmount: int = 0
 @export var stockpile: int = 0
-@export var stockpileMax: int = 3
+@export var stockpileMax: int = 100
 
 @export var ingredientType0: Enums.GoodType = Enums.GoodType.None
 @export var ingredientType0_Amount: int = 0
@@ -19,8 +19,11 @@ var ingredientType1_available: bool = false
 @export var ingredientType2_Amount: int = 0
 var ingredientType2_available: bool = false
 
-@onready var productionTimer: Timer = $ProductionTimer
+var allIngredientsAvailable:bool = false
 
+@export var baseProductionTime: float = 1
+
+@onready var productionTimer: Timer = $ProductionTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,32 +39,40 @@ func _process(delta):
 	if stockpile >= stockpileMax:
 		productionTimer.stop()
 		return
-		
+	
+	allIngredientsAvailable = true
+	
 	# check if production timer is running
 	if productionTimer.is_stopped():
 		# check if nation has enough ingredients
 		if ingredientType0 != Enums.GoodType.None:
-			if !get_parent().get_parent().ConsumeResource(ingredientType0, ingredientType0_Amount):
+			if !get_parent().get_parent().CheckResourceAvailable(ingredientType0, ingredientType0_Amount):
 				ingredientType0_available = false
-				return
+				allIngredientsAvailable = false
 			else:
 				ingredientType0_available = true
 				
 		if ingredientType1 != Enums.GoodType.None:
-			if !get_parent().get_parent().ConsumeResource(ingredientType1, ingredientType1_Amount):
+			if !get_parent().get_parent().CheckResourceAvailable(ingredientType1, ingredientType1_Amount):
 				ingredientType1_available = false
-				return
+				allIngredientsAvailable = false
 			else:
 				ingredientType1_available = true
 				
 		if ingredientType2 != Enums.GoodType.None:
-			if !get_parent().get_parent().ConsumeResource(ingredientType2, ingredientType2_Amount):
+			if !get_parent().get_parent().CheckResourceAvailable(ingredientType2, ingredientType2_Amount):
 				ingredientType2_available = false
-				return
+				allIngredientsAvailable = false
 			else:
 				ingredientType2_available = true
+	
+		if allIngredientsAvailable:
+			# consume ingredients
+			get_parent().get_parent().ConsumeResource(ingredientType0, ingredientType0_Amount)
+			get_parent().get_parent().ConsumeResource(ingredientType1, ingredientType1_Amount)
+			get_parent().get_parent().ConsumeResource(ingredientType2, ingredientType2_Amount)
 			
-		productionTimer.start()
+			productionTimer.start(baseProductionTime / level)
 
 
 func Production():

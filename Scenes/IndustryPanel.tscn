@@ -27,20 +27,24 @@ offset_bottom = 147.0
 
 [node name="NameLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 4.0
-offset_right = 51.0
-offset_bottom = 23.0
+offset_left = 3.75
+offset_top = 3.75
+offset_right = 50.75
+offset_bottom = 26.75
 theme_override_font_sizes/font_size = 12
 text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LevelLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -71.0
-offset_right = -24.0
-offset_bottom = 23.0
+offset_left = -71.25
+offset_top = 3.75
+offset_right = -24.25
+offset_bottom = 26.75
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 12
 text = "Lv: 00"
@@ -97,10 +101,10 @@ vertical_alignment = 1
 
 [node name="IncreaseLevelButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 148.75
-offset_top = 1.25
-offset_right = 168.75
-offset_bottom = 22.25
+offset_left = 148.0
+offset_top = 5.0
+offset_right = 168.0
+offset_bottom = 26.0
 texture_normal = ExtResource("2_d2jbo")
 texture_pressed = ExtResource("3_afkc8")
 texture_disabled = ExtResource("3_afkc8")
@@ -109,9 +113,10 @@ stretch_mode = 0
 
 [node name="DecreaseLevelButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 77.5
-offset_right = 97.5
-offset_bottom = 21.0
+offset_left = 77.0
+offset_top = 5.0
+offset_right = 97.0
+offset_bottom = 26.0
 texture_normal = ExtResource("4_cbf4u")
 texture_pressed = ExtResource("5_4w7pv")
 texture_disabled = ExtResource("5_4w7pv")
