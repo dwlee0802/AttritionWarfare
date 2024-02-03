@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bvyo1sjvno0yx"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_haicd"]
-[ext_resource type="Script" path="res://Scenes/IndustryTab.gd" id="2_acc5o"]
+[ext_resource type="Script" path="res://Scripts/IndustryTab.gd" id="2_acc5o"]
 [ext_resource type="PackedScene" uid="uid://bn5ogomcqlvd1" path="res://Scenes/IndustryPanel.tscn" id="3_kbdac"]
 [ext_resource type="Script" path="res://Scripts/Nation.gd" id="4_kokw5"]
 [ext_resource type="Script" path="res://Scenes/Industry.gd" id="5_2rvh2"]
@@ -47,11 +47,12 @@ offset_top = 23.0
 offset_bottom = 168.0
 industry = NodePath("../../../PlayerNation/Industry/Iron Mines")
 
-[node name="IndustryPanel2" parent="IndustryTab/BasicIndustry" instance=ExtResource("3_kbdac")]
+[node name="IndustryPanel2" parent="IndustryTab/BasicIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
 offset_left = 172.0
 offset_top = 23.0
 offset_right = 343.0
 offset_bottom = 168.0
+industry = NodePath("../../../PlayerNation/Industry/Coal Mines")
 
 [node name="ProcessedIndustry" type="Control" parent="IndustryTab"]
 anchors_preset = 0
@@ -66,9 +67,10 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "Processed"
 
-[node name="IndustryPanel" parent="IndustryTab/ProcessedIndustry" instance=ExtResource("3_kbdac")]
+[node name="IndustryPanel" parent="IndustryTab/ProcessedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
 offset_top = 25.0
 offset_bottom = 170.0
+industry = NodePath("../../../PlayerNation/Industry/Steel Mill")
 
 [node name="ManufacturedIndustry" type="Control" parent="IndustryTab"]
 anchors_preset = 0
@@ -83,11 +85,12 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "Manufactured"
 
-[node name="IndustryPanel" parent="IndustryTab/ManufacturedIndustry" instance=ExtResource("3_kbdac")]
+[node name="IndustryPanel" parent="IndustryTab/ManufacturedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
 offset_left = 1.0
 offset_top = 25.0
 offset_right = 172.0
 offset_bottom = 170.0
+industry = NodePath("../../../PlayerNation/Industry/Gun Factory")
 
 [node name="IndustryPanel2" parent="IndustryTab/ManufacturedIndustry" instance=ExtResource("3_kbdac")]
 offset_left = 173.0
@@ -157,6 +160,57 @@ productionType = 1
 productionAmount = 1
 
 [node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Iron Mines"]
+one_shot = true
+
+[node name="Coal Mines" type="Node" parent="PlayerNation/Industry"]
+script = ExtResource("5_2rvh2")
+level = 1
+productionType = 0
+productionAmount = 1
+
+[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Coal Mines"]
+one_shot = true
+
+[node name="Steel Mill" type="Node" parent="PlayerNation/Industry"]
+script = ExtResource("5_2rvh2")
+level = 1
+industrySector = 1
+productionType = 2
+productionAmount = 1
+ingredientType0 = 0
+ingredientType0_Amount = 1
+ingredientType1 = 1
+ingredientType1_Amount = 1
+
+[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Steel Mill"]
+one_shot = true
+
+[node name="Gun Factory" type="Node" parent="PlayerNation/Industry"]
+script = ExtResource("5_2rvh2")
+level = 1
+industrySector = 2
+productionType = 3
+productionAmount = 1
+ingredientType0 = 2
+ingredientType0_Amount = 1
+
+[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Gun Factory"]
+one_shot = true
+
+[node name="Cannon Factory" type="Node" parent="PlayerNation/Industry"]
+script = ExtResource("5_2rvh2")
+level = 1
+industrySector = 2
+
+[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Cannon Factory"]
+one_shot = true
+
+[node name="Tank Factory" type="Node" parent="PlayerNation/Industry"]
+script = ExtResource("5_2rvh2")
+level = 1
+industrySector = 2
+
+[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Tank Factory"]
 one_shot = true
 
 [node name="World" type="Node2D" parent="."]

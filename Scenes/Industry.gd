@@ -6,13 +6,18 @@ class_name Industry
 @export var industrySector: Enums.IndustrySector = Enums.IndustrySector.Basic
 @export var productionType: Enums.GoodType = Enums.GoodType.None
 @export var productionAmount: int = 0
+@export var stockpile: int = 0
+@export var stockpileMax: int = 3
 
 @export var ingredientType0: Enums.GoodType = Enums.GoodType.None
 @export var ingredientType0_Amount: int = 0
+var ingredientType0_available: bool = false
 @export var ingredientType1: Enums.GoodType = Enums.GoodType.None
 @export var ingredientType1_Amount: int = 0
+var ingredientType1_available: bool = false
 @export var ingredientType2: Enums.GoodType = Enums.GoodType.None
 @export var ingredientType2_Amount: int = 0
+var ingredientType2_available: bool = false
 
 @onready var productionTimer: Timer = $ProductionTimer
 
@@ -25,34 +30,43 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if level == 0:
+		productionTimer.stop()
+		return
+	
+	if stockpile >= stockpileMax:
+		productionTimer.stop()
 		return
 		
 	# check if production timer is running
 	if productionTimer.is_stopped():
 		# check if nation has enough ingredients
 		if ingredientType0 != Enums.GoodType.None:
-			if Game.playerNation.resources[ingredientType0] < ingredientType0_Amount:
+			if !get_parent().get_parent().ConsumeResource(ingredientType0, ingredientType0_Amount):
+				ingredientType0_available = false
 				return
 			else:
-				Game.playerNation.resources[ingredientType0] -= ingredientType0_Amount
+				ingredientType0_available = true
 				
 		if ingredientType1 != Enums.GoodType.None:
-			if Game.playerNation.resources[ingredientType1] < ingredientType1_Amount:
+			if !get_parent().get_parent().ConsumeResource(ingredientType1, ingredientType1_Amount):
+				ingredientType1_available = false
 				return
 			else:
-				Game.playerNation.resources[ingredientType1] -= ingredientType1_Amount
+				ingredientType1_available = true
 				
 		if ingredientType2 != Enums.GoodType.None:
-			if Game.playerNation.resources[ingredientType2] < ingredientType2_Amount:
+			if !get_parent().get_parent().ConsumeResource(ingredientType2, ingredientType2_Amount):
+				ingredientType2_available = false
 				return
 			else:
-				Game.playerNation.resources[ingredientType2] -= ingredientType2_Amount
+				ingredientType2_available = true
 			
 		productionTimer.start()
 
 
 func Production():
-	get_parent().get_parent().resources[productionType] += productionAmount
+	stockpile += productionAmount
+	if stockpile > stockpileMax:
+		stockpile = stockpileMax
+		
 	#print("Produced " + str(productionAmount) + " of " + Enums.GoodTypeToString(productionType))
-
-
