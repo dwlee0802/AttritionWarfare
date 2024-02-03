@@ -78,6 +78,7 @@ func ReceiveHit(amount):
 	MakeDamagePopup(str(amount))
 	if hitPoints < 0:
 		print("dead!")
+		Game.MakeDeathEffect(global_position)
 		queue_free()
 
 
