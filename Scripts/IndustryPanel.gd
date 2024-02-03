@@ -67,3 +67,14 @@ func _process(delta):
 				
 		# update produced goods stock
 		stockpileLabel.text = str(industry.stockpile) + "/" + str(industry.stockpileMax)
+
+
+# true is up false is down
+func _on_change_level_button_pressed(extra_arg_0):
+	if extra_arg_0:
+		# level up
+		industry.level += 1
+	else:
+		# level down
+		if industry.level == 0:
+			return

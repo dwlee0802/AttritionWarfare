@@ -191,3 +191,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("PlaceholderTexture2D_laheh")
 stretch_mode = 2
+
+[connection signal="pressed" from="IncreaseLevelButton" to="." method="_on_change_level_button_pressed" binds= [true]]
+[connection signal="pressed" from="DecreaseLevelButton" to="." method="_on_change_level_button_pressed" binds= [false]]
