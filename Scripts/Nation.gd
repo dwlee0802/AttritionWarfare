@@ -31,7 +31,7 @@ func ConsumeResource(type, amount) -> bool:
 		
 	if amount <= industries[type].stockpile:
 		industries[type].stockpile -= amount
-		print("consumed " + Enums.GoodTypeToString(type) + " amount: " + str(amount))
+		#print("consumed " + Enums.GoodTypeToString(type) + " amount: " + str(amount))
 		return true
 	else:
 		return false

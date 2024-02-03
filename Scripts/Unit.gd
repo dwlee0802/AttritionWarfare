@@ -3,10 +3,13 @@ class_name Unit
 
 static var damagePopup = preload("res://Scenes/damage_popup.tscn")
 
+static var bulletScene = preload("res://Scenes/projectile.tscn")
+
 var hitPoints: int = 100
-var speed : int = 100
-var isPlayerUnit: bool = true
-var attackRange: int = 150
+@onready var hitPointBar: ProgressBar = $HPProgressBar
+@export var speed : int = 200
+@export var isPlayerUnit: bool = true
+var attackRange: int = 500
 @onready var attackArea: Area2D = $AttackArea
 var attackTarget
 var minDamage: int = 20
@@ -18,6 +21,12 @@ var attackSpeed: float = 1
 
 func _ready():
 	attackArea.get_node("CollisionShape2D").shape.size = Vector2(attackRange, 20)
+	SetPlayerUnit(isPlayerUnit)
+	hitPointBar.max_value = hitPoints
+	
+
+func _process(delta):
+	hitPointBar.value = hitPoints
 
 
 func SetPlayerUnit(val):
@@ -81,4 +90,7 @@ func MakeDamagePopup(text, color = Color.RED):
 	
 	
 func _on_attack_timer_timeout():
-	attackTarget.ReceiveHit(randi_range(minDamage, maxDamage))
+	var newBullet: Projectile = bulletScene.instantiate()
+	newBullet.SetPlayerUnit(isPlayerUnit)
+	newBullet.damage = randi_range(minDamage, maxDamage)
+	add_child(newBullet)

@@ -286,7 +286,6 @@ position = Vector2(248, 852)
 
 [node name="PlayerHQ" type="StaticBody2D" parent="World"]
 position = Vector2(-213, -10)
-collision_layer = 0
 collision_mask = 0
 script = ExtResource("5_ajpi1")
 
@@ -297,11 +296,12 @@ shape = SubResource("RectangleShape2D_4wbwj")
 texture = SubResource("PlaceholderTexture2D_r7yqw")
 
 [node name="EnemyHQ" type="StaticBody2D" parent="World"]
-position = Vector2(1297, -3)
-collision_layer = 0
+position = Vector2(1297, -10)
+collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ajpi1")
 isPlayerHQ = false
+autoSpawn = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/EnemyHQ"]
 shape = SubResource("RectangleShape2D_4wbwj")
@@ -310,7 +310,6 @@ shape = SubResource("RectangleShape2D_4wbwj")
 texture = SubResource("PlaceholderTexture2D_r7yqw")
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemyHQ"]
-wait_time = 2.0
 autostart = true
 
-[connection signal="timeout" from="World/EnemyHQ/SpawnTimer" to="World/EnemyHQ" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="World/EnemyHQ/SpawnTimer" to="World/EnemyHQ" method="SpawnUnit" binds= [0]]
