@@ -91,6 +91,11 @@ func MakeDamagePopup(text, color = Color.RED):
 	
 	
 func _on_attack_timer_timeout():
+	# check if enough ammo exists
+	if isPlayerUnit:
+		if !Game.playerNation.ConsumeResource(Enums.GoodType.Ammunition, 1):
+			return
+			
 	var newBullet: Projectile = bulletScene.instantiate()
 	newBullet.SetPlayerUnit(isPlayerUnit)
 	newBullet.damage = randi_range(minDamage, maxDamage)

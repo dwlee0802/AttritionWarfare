@@ -1,6 +1,7 @@
 extends Node
 class_name Industry
 
+@export var isPlayer: bool = true
 @export var level: int = 0
 @export_group("Production")
 @export var industrySector: Enums.IndustrySector = Enums.IndustrySector.Basic
@@ -25,20 +26,21 @@ var allIngredientsAvailable:bool = false
 
 @onready var productionTimer: Timer = $ProductionTimer
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	productionTimer.timeout.connect(Production)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if level == 0:
 		productionTimer.stop()
 		return
-	
-	if stockpile >= stockpileMax:
-		productionTimer.stop()
-		return
+		
+	#change this to national stockpile max
+	#if stockpile >= stockpileMax:
+		#productionTimer.stop()
+		#return
 	
 	allIngredientsAvailable = true
 	
@@ -76,8 +78,4 @@ func _process(delta):
 
 
 func Production():
-	stockpile += productionAmount
-	if stockpile > stockpileMax:
-		stockpile = stockpileMax
-		
-	#print("Produced " + str(productionAmount) + " of " + Enums.GoodTypeToString(productionType))
+	Game.playerNation.AddResource(productionType, productionAmount)

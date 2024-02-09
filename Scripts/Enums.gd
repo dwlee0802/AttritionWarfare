@@ -1,7 +1,7 @@
 class_name Enums
 
-enum GoodType {Coal, Iron, Steel, Gun, Cannon, Tank, Infantry, Artillery, Armored, AntiTank, None}
-static var GOOD_TYPE_COUNT: int = 6
+enum GoodType {Coal, Iron, Steel, Gun, Cannon, Tank, Ammunition, Infantry, Artillery, Armored, AntiTank, None}
+static var GOOD_TYPE_COUNT: int = 7
 static func GoodTypeToString(num):
 	if num == 0:
 		return "Coal"
@@ -15,6 +15,8 @@ static func GoodTypeToString(num):
 		return "Cannon"
 	if num == 5:
 		return "Tank"
+	if num == 6:
+		return "Ammunition"
 
 
 enum IndustrySector {Basic, Processed, Manufactured, Recruitment}
