@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=2 format=3 uid="uid://cwmo22ct8j1ro"]
+
+[ext_resource type="Script" path="res://Data/unit_data.gd" id="1_whjog"]
+
+[resource]
+script = ExtResource("1_whjog")
+unitType = 1
+hitPoints = 50
+attackRange = 600
+minAttackRange = 100
+minDamage = 50
+maxDamage = 100
+attackSpeed = 2.5
+speed = 50
+splashDamage = true
+splashRange = 100
+indirectFire = true

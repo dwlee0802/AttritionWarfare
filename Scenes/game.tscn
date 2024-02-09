@@ -668,6 +668,7 @@ one_shot = true
 
 [node name="Artillery Recruitment" type="Node" parent="PlayerNation/Industry"]
 script = ExtResource("6_wie21")
+unitType = 1
 level = 1
 industrySector = 3
 productionType = 7
@@ -680,6 +681,7 @@ one_shot = true
 
 [node name="Armored Recruitment" type="Node" parent="PlayerNation/Industry"]
 script = ExtResource("6_wie21")
+unitType = 2
 level = 1
 industrySector = 3
 productionType = 8
@@ -694,6 +696,7 @@ one_shot = true
 
 [node name="Antitank Recruitment" type="Node" parent="PlayerNation/Industry"]
 script = ExtResource("6_wie21")
+unitType = 3
 level = 1
 industrySector = 3
 productionType = 9
@@ -733,6 +736,7 @@ shape = SubResource("RectangleShape2D_4wbwj")
 texture = SubResource("PlaceholderTexture2D_r7yqw")
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemyHQ"]
+process_callback = 0
 autostart = true
 
 [connection signal="pressed" from="OrderTab/OffensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [0]]

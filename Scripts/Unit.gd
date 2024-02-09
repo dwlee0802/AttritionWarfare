@@ -5,11 +5,12 @@ static var damagePopup = preload("res://Scenes/damage_popup.tscn")
 
 static var bulletScene = preload("res://Scenes/projectile.tscn")
 
+
 var hitPoints: int = 100
 @onready var hitPointBar: ProgressBar = $HPProgressBar
-@export var speed : int = 200
+@export var speed : int
 @export var isPlayerUnit: bool = true
-var attackRange: int = 500
+var attackRange: int = 300
 @onready var attackArea: Area2D = $AttackArea
 var attackTarget
 var minDamage: int = 20
@@ -17,6 +18,7 @@ var maxDamage: int = 40
 # attack speed in attacks per second
 var attackSpeed: float = 1
 @onready var attackTimer: Timer = $AttackTimer
+var unitData: UnitData
 
 
 func _ready():
@@ -35,6 +37,16 @@ func SetPlayerUnit(val):
 	if !isPlayerUnit:
 		collision_layer = 2
 		attackArea.collision_mask = 1
+	
+
+func SetStats(data: UnitData):
+	hitPoints = data.hitPoints
+	attackRange = data.attackRange
+	minDamage = data.minDamage
+	maxDamage = data.maxDamage
+	attackSpeed = data.attackSpeed
+	speed = data.speed
+	unitData = data
 	
 	
 func _physics_process(delta):
@@ -98,5 +110,8 @@ func _on_attack_timer_timeout():
 			
 	var newBullet: Projectile = bulletScene.instantiate()
 	newBullet.SetPlayerUnit(isPlayerUnit)
+	
+	newBullet.explosive = unitData.splashDamage
+	
 	newBullet.damage = randi_range(minDamage, maxDamage)
 	add_child(newBullet)

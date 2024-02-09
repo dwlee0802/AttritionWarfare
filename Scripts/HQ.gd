@@ -2,6 +2,9 @@ extends StaticBody2D
 class_name HQ
 
 var unitScene = load("res://Scenes/Unit.tscn")
+var infantryData: UnitData = load("res://Data/infantry.tres")
+var artilleryData: UnitData = load("res://Data/artillery.tres")
+
 @export var isPlayerHQ: bool = true
 
 @export var autoSpawn: bool = false
@@ -21,6 +24,11 @@ func _process(delta):
 # spawns a unit of type unittype at its location
 func SpawnUnit(unitType):
 	var newUnit: Unit = unitScene.instantiate()
+	if unitType == Enums.UnitType.Infantry:
+		newUnit.SetStats(infantryData)
+	elif unitType == Enums.UnitType.Artillery:
+		newUnit.SetStats(artilleryData)
+		
 	add_child(newUnit)
 	newUnit.global_position = global_position
 	newUnit.SetPlayerUnit(isPlayerHQ)

@@ -27,6 +27,7 @@ _data = {
 }
 
 [node name="DeathEffect" type="Node2D"]
+visible = false
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 amount = 20
