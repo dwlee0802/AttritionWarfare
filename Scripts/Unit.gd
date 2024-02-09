@@ -48,6 +48,13 @@ func SetStats(data: UnitData):
 	speed = data.speed
 	unitData = data
 	
+	if data.unitType == Enums.UnitType.Infantry:
+		$Sprite2D.modulate = Color.DARK_OLIVE_GREEN
+	elif data.unitType == Enums.UnitType.Artillery:
+		$Sprite2D.modulate = Color.DARK_RED
+	else:
+		queue_free()
+		
 	
 func _physics_process(delta):
 	var results = attackArea.get_overlapping_bodies()
@@ -55,7 +62,7 @@ func _physics_process(delta):
 	if len(results) > 0:
 		attackTarget = FindClosest(results)
 		if attackTimer.is_stopped():
-			attackTimer.start()
+			attackTimer.start(attackSpeed)
 	else:
 		if !attackTimer.is_stopped():
 			attackTimer.stop()

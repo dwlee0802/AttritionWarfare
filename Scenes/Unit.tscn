@@ -1,9 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b8ahm4dogxoy5"]
 
 [ext_resource type="Script" path="res://Scripts/Unit.gd" id="1_y5a62"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_brevo"]
-size = Vector2(32, 32)
+[ext_resource type="Texture2D" uid="uid://b3tukx4fv5uhk" path="res://Art/36x36_white_square.png" id="2_41h6n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kovw2"]
 size = Vector2(32, 32)
@@ -16,7 +14,8 @@ collision_mask = 0
 script = ExtResource("1_y5a62")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("PlaceholderTexture2D_brevo")
+process_mode = 1
+texture = ExtResource("2_41h6n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kovw2")
