@@ -1,8 +1,7 @@
 extends Label
 class_name OrderTab
 
-static var order: OrderType = OrderType.Offensive
-enum OrderType {Offensive, Defensive, Retreat}
+static var order: Enums.OrderType = Enums.OrderType.Offensive
 
 
 func _on_order_button_pressed(extra_arg_0):

@@ -23,3 +23,6 @@ enum IndustrySector {Basic, Processed, Manufactured, Recruitment}
 
 
 enum UnitType {Infantry, Artillery, Armored, Antitank}
+
+
+enum OrderType {Offensive, Defensive, Retreat}

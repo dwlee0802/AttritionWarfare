@@ -70,6 +70,9 @@ func _physics_process(delta):
 		velocity = Vector2.RIGHT * speed
 		if !isPlayerUnit:
 			velocity *= -1
+		else:
+			if OrderTab.order == Enums.OrderType.Defensive and global_position.x >= CommandMarker.location:
+				return
 			
 		move_and_slide()
 		

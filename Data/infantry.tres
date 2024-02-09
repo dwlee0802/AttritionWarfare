@@ -6,12 +6,12 @@
 script = ExtResource("1_3kf3h")
 unitType = 0
 hitPoints = 100
-attackRange = 300
+attackRange = 200
 minAttackRange = 0
 minDamage = 20
 maxDamage = 40
 attackSpeed = 1.0
-speed = 100
+speed = 50
 splashDamage = false
 splashRange = 100
 indirectFire = false

@@ -565,7 +565,6 @@ button_group = ExtResource("6_wm73h")
 text = "Defensive"
 
 [node name="RetreatButton" type="Button" parent="OrderTab"]
-visible = false
 layout_mode = 0
 offset_left = 190.0
 offset_top = 34.0
@@ -758,7 +757,7 @@ position = Vector2(894.5, 38)
 shape = SubResource("RectangleShape2D_tbgo0")
 
 [node name="CommandMarker" type="CharacterBody2D" parent="World"]
-position = Vector2(0, -150)
+position = Vector2(269, -145)
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("12_ut6k3")
