@@ -5,6 +5,7 @@ extends TextureButton
 @export var ingredientAmount_1: int = 0
 @export var ingredientType_2: Enums.GoodType = Enums.GoodType.None
 @export var ingredientAmount_2: int = 0
+@onready var costLabel: Label = $CostLabel
 
 @export var spawnCooldown: float = 4
 
@@ -21,7 +22,6 @@ var queuedAmount: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Set cost label
-	var costLabel: Label = $CostLabel
 	var costText = ""
 	if ingredientType_1 != Enums.GoodType.None:
 		costText += Enums.GoodTypeToString(ingredientType_1) + " " + str(ingredientAmount_1)
@@ -36,7 +36,12 @@ func _process(delta):
 	UpdateCooldownShadow(spawnTimer.time_left / spawnTimer.wait_time)
 	
 	if queuedAmount > 0 and spawnTimer.time_left <= 0:
-		if Game.playerNation.CheckResourceAvailable(ingredientType_1, ingredientAmount_1) and Game.playerNation.CheckResourceAvailable(ingredientType_2, ingredientAmount_2):
+		if !Game.playerNation.CheckResourceAvailable(ingredientType_1, ingredientAmount_1):
+			costLabel.self_modulate = Color.RED
+		elif !Game.playerNation.CheckResourceAvailable(ingredientType_2, ingredientAmount_2):
+			costLabel.self_modulate = Color.RED
+		else:
+			costLabel.self_modulate = Color.WHITE
 			Game.playerNation.ConsumeResource(ingredientType_1, ingredientAmount_1)
 			Game.playerNation.ConsumeResource(ingredientType_2, ingredientAmount_2)
 			queuedAmount -= 1
