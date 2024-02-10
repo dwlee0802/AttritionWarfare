@@ -7,16 +7,70 @@ var industries = []
 
 @export var hq: HQ
 
+# supply order system
+# 3D array of supply orders
+# first index is the good type of the request
+# second index is the priority levels of the request
+# third is the actual order
+var supplyOrders = []
+const MAX_PRIORITY_LEVEL: int = 10
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for item in get_node("Industry").get_children():
 		industries.append(item)
+	
+	for i in range(Enums.GOOD_TYPE_COUNT):
+		var new2D = Array()
+		for j in range(MAX_PRIORITY_LEVEL):
+			var newList = Array()
+			new2D.append(newList)
+			
+		supplyOrders.append(new2D)
+		
+	ClearSupplyOrders()
+
+
+func ClearSupplyOrders():
+	for i in range(Enums.GOOD_TYPE_COUNT):
+		for j in range(MAX_PRIORITY_LEVEL):
+			supplyOrders[i][j].clear()
+
+
+func AddSupplyOrder(order: SupplyOrder):
+	supplyOrders[order.goodType][order.origin.supplyPriorityLevel].append(order)
+	
+
+func ProcessSupplyOrders():
+	for type in range(Enums.GOOD_TYPE_COUNT):
+		for level in range(MAX_PRIORITY_LEVEL):
+			if len(supplyOrders[type][level]) == 0:
+				continue
+				
+			var averageAmount: float = resources[type] / len(supplyOrders[type][level])
+			for order: SupplyOrder in supplyOrders[type][level]:
+				if averageAmount > order.amount:
+					if type == order.origin.ingredientType0:
+						order.origin.ingredientType0_Received += order.amount
+						resources[type] -= order.amount
+						continue
+					if type == order.origin.ingredientType1:
+						order.origin.ingredientType1_Received += order.amount
+						resources[type] -= order.amount
+						continue
+					if type == order.origin.ingredientType2:
+						order.origin.ingredientType2_Received += order.amount
+						resources[type] -= order.amount
+						continue
+						
+					
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	ProcessSupplyOrders()
+	ClearSupplyOrders()
 
 
 func PrintResourceStock():
