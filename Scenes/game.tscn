@@ -525,7 +525,6 @@ button_group = ExtResource("6_wm73h")
 text = "Defensive"
 
 [node name="RetreatButton" type="Button" parent="OrderTab"]
-visible = false
 layout_mode = 0
 offset_left = 190.0
 offset_top = 34.0

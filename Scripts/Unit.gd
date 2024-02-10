@@ -74,8 +74,17 @@ func _physics_process(delta):
 		if !isPlayerUnit:
 			velocity *= -1
 		else:
-			if OrderTab.order == Enums.OrderType.Defensive and global_position.x >= CommandMarker.location:
-				return
+			# garrison at command marker
+			if OrderTab.order == Enums.OrderType.Defensive:
+				# if in front of marker, go back
+				if global_position.x >= CommandMarker.location:
+					velocity *= -1
+			# go back regardless of marker position
+			if OrderTab.order == Enums.OrderType.Retreat:
+				if global_position.x > Game.playerNation.hq.global_position.x:
+					velocity *= -1
+				else:
+					return
 			
 		move_and_slide()
 		
@@ -127,4 +136,5 @@ func _on_attack_timer_timeout():
 	newBullet.explosive = unitData.splashDamage
 	
 	newBullet.damage = randi_range(minDamage, maxDamage)
-	add_child(newBullet)
+	get_tree().root.add_child(newBullet)
+	newBullet.global_position = global_position
