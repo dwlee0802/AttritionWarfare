@@ -82,6 +82,9 @@ func _process(delta):
 
 func Production():
 	Game.playerNation.AddResource(productionType, productionAmount)
+	ingredientType0_Received = false
+	ingredientType1_Received = false
+	ingredientType2_Received = false
 	
 	
 # Checks if ingredients are sufficient to produce good
