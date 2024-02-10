@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=2 format=3 uid="uid://cm42h8d7u5a5a"]
+
+[ext_resource type="Script" path="res://Data/unit_data.gd" id="1_dyum4"]
+
+[resource]
+script = ExtResource("1_dyum4")
+unitType = 2
+hitPoints = 200
+attackRange = 250
+minAttackRange = 0
+minDamage = 20
+maxDamage = 40
+attackSpeed = 2.0
+speed = 70
+splashDamage = false
+splashRange = 100
+indirectFire = false

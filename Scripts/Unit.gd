@@ -37,6 +37,7 @@ func SetPlayerUnit(val):
 	if !isPlayerUnit:
 		collision_layer = 2
 		attackArea.collision_mask = 1
+		hitPointBar.self_modulate = Color.RED
 	
 
 func SetStats(data: UnitData):
@@ -52,6 +53,8 @@ func SetStats(data: UnitData):
 		$Sprite2D.modulate = Color.DARK_OLIVE_GREEN
 	elif data.unitType == Enums.UnitType.Artillery:
 		$Sprite2D.modulate = Color.DARK_RED
+	elif data.unitType == Enums.UnitType.Armored:
+		$Sprite2D.modulate = Color.DIM_GRAY
 	else:
 		queue_free()
 		

@@ -4,6 +4,7 @@ class_name HQ
 var unitScene = load("res://Scenes/Unit.tscn")
 var infantryData: UnitData = load("res://Data/infantry.tres")
 var artilleryData: UnitData = load("res://Data/artillery.tres")
+var armoredData: UnitData = load("res://Data/armored.tres")
 
 @export var isPlayerHQ: bool = true
 
@@ -28,6 +29,8 @@ func SpawnUnit(unitType):
 		newUnit.SetStats(infantryData)
 	elif unitType == Enums.UnitType.Artillery:
 		newUnit.SetStats(artilleryData)
+	elif unitType == Enums.UnitType.Armored:
+		newUnit.SetStats(armoredData)
 		
 	add_child(newUnit)
 	newUnit.global_position = global_position

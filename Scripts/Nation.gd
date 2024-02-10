@@ -39,6 +39,9 @@ func ConsumeResource(type, amount) -> bool:
 		
 		
 func CheckResourceAvailable(type, amount) -> bool:
+	if type == Enums.GoodType.None:
+		return true
+		
 	if amount <= resources[type]:
 		return true
 	else:
