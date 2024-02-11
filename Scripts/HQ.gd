@@ -15,6 +15,7 @@ var armoredData: UnitData = load("res://Data/armored.tres")
 func _ready():
 	if autoSpawn:
 		SpawnUnit(0)
+		SpawnUnit(1)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

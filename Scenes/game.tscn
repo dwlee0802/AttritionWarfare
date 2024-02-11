@@ -839,7 +839,12 @@ texture = SubResource("PlaceholderTexture2D_r7yqw")
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemyHQ"]
 process_callback = 0
-wait_time = 4.0
+wait_time = 2.0
+autostart = true
+
+[node name="SpawnTimer2" type="Timer" parent="World/EnemyHQ"]
+process_callback = 0
+wait_time = 6.0
 autostart = true
 
 [node name="Ground" type="StaticBody2D" parent="World"]
@@ -869,3 +874,4 @@ texture = ExtResource("12_o5a4t")
 [connection signal="pressed" from="OrderTab/DefensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [1]]
 [connection signal="pressed" from="OrderTab/RetreatButton" to="OrderTab" method="_on_order_button_pressed" binds= [2]]
 [connection signal="timeout" from="World/EnemyHQ/SpawnTimer" to="World/EnemyHQ" method="SpawnUnit" binds= [0]]
+[connection signal="timeout" from="World/EnemyHQ/SpawnTimer2" to="World/EnemyHQ" method="SpawnUnit" binds= [1]]
