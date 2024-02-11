@@ -51,27 +51,20 @@ func ProcessSupplyOrders():
 			var averageAmount: float = resources[type] / len(supplyOrders[type][level])
 			for order: SupplyOrder in supplyOrders[type][level]:
 				if averageAmount > order.amount:
-					if type == order.origin.ingredientType0:
-						order.origin.ingredientType0_Received += order.amount
-						resources[type] -= order.amount
-						continue
-					if type == order.origin.ingredientType1:
-						order.origin.ingredientType1_Received += order.amount
-						resources[type] -= order.amount
-						continue
-					if type == order.origin.ingredientType2:
-						order.origin.ingredientType2_Received += order.amount
-						resources[type] -= order.amount
-						continue
-						
+					order.origin.AddIngredient(type, order.amount)
+					resources[type] -= order.amount
+					continue
+				else:
+					order.origin.AddIngredient(type, averageAmount)
+					resources[type] -= averageAmount
+					continue
 					
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	ProcessSupplyOrders()
 	ClearSupplyOrders()
-
+	
 
 func PrintResourceStock():
 	var output = ""

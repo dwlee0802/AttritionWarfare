@@ -8,10 +8,10 @@ var origin: Industry
 var goodType: Enums.GoodType = Enums.GoodType.None
 
 # how much is being requested
-var amount: int = 0
+var amount: float = 0
 
 
-func _init(who, what: Enums.GoodType, much: int):
+func _init(who, what: Enums.GoodType, much: float):
 	origin = who
 	goodType = what
 	amount = much

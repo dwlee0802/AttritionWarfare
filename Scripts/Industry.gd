@@ -61,22 +61,22 @@ func _process(delta):
 		# check if there is enough ingredients in self's stockpile
 		# if enough ingredients, produce good
 		if allIngredientsAvailable:
-			productionTimer.start(baseProductionTime)
+			productionTimer.start(baseProductionTime / level)
 		else:
 			# if not enough ingredients, place supply orders to Nation
 			if ingredientType0 != Enums.GoodType.None:
 				if ingredientType0_Received < ingredientType0_Amount:
-					var newOrder = SupplyOrder.new(self, ingredientType0, ingredientType0_Amount)
+					var newOrder = SupplyOrder.new(self, ingredientType0, ingredientType0_Amount - ingredientType0_Received)
 					nation.AddSupplyOrder(newOrder)
 			# if not enough ingredients, place supply orders to Nation
 			if ingredientType1 != Enums.GoodType.None:
 				if ingredientType1_Received < ingredientType1_Amount:
-					var newOrder = SupplyOrder.new(self, ingredientType1, ingredientType1_Amount)
+					var newOrder = SupplyOrder.new(self, ingredientType1, ingredientType1_Amount - ingredientType1_Received)
 					nation.AddSupplyOrder(newOrder)
 			# if not enough ingredients, place supply orders to Nation
 			if ingredientType2 != Enums.GoodType.None:
 				if ingredientType2_Received < ingredientType2_Amount:
-					var newOrder = SupplyOrder.new(self, ingredientType2, ingredientType2_Amount)
+					var newOrder = SupplyOrder.new(self, ingredientType2, ingredientType2_Amount - ingredientType2_Received)
 					nation.AddSupplyOrder(newOrder)
 
 
@@ -104,3 +104,16 @@ func CheckIngredientsSatisfied() -> bool:
 			ingredientType2_available = false
 	
 	return ingredientType0_available and ingredientType1_available and ingredientType2_available
+
+
+func AddIngredient(type, amount):
+	if ingredientType0 == type:
+		ingredientType0_Received += amount
+		return
+	if ingredientType1 == type:
+		ingredientType1_Received += amount
+		return
+	if ingredientType2 == type:
+		ingredientType2_Received += amount
+		return
+	

@@ -48,18 +48,21 @@ func _process(delta):
 		
 		# check ingredient status
 		if ingredientLabel1.visible == true:
+			ingredientLabel1.text = Enums.GoodTypeToString(industry.ingredientType0) + " " + str(int(industry.ingredientType0_Received / industry.ingredientType0_Amount * 100)) + "%"
 			if !industry.ingredientType0_available:
 				ingredientLabel1.self_modulate = Color.RED
 			else:
 				ingredientLabel1.self_modulate = Color.WHITE
 				
 		if ingredientLabel2.visible == true:
+			ingredientLabel2.text = Enums.GoodTypeToString(industry.ingredientType1) + " " + str(int(industry.ingredientType1_Received / industry.ingredientType1_Amount * 100)) + "%"
 			if !industry.ingredientType1_available:
 				ingredientLabel2.self_modulate = Color.RED
 			else:
 				ingredientLabel2.self_modulate = Color.WHITE
 				
 		if ingredientLabel3.visible == true:
+			ingredientLabel3.text = Enums.GoodTypeToString(industry.ingredientType2) + " " + str(int(industry.ingredientType2_Received / industry.ingredientType2_Amount * 100)) + "%"
 			if !industry.ingredientType2_available:
 				ingredientLabel3.self_modulate = Color.RED
 			else:
