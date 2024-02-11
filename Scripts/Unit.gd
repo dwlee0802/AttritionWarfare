@@ -115,7 +115,6 @@ func ReceiveHit(amount):
 	hitAnimationPlayer.play("hit_animation")
 	if hitPoints < 0:
 		print("dead!")
-		Game.MakeDeathEffect(global_position)
 		queue_free()
 
 
@@ -151,3 +150,8 @@ func _on_attack_timer_timeout():
 func _on_supply_timer_timeout():
 	if isPlayerUnit:
 		pass
+
+
+func _exit_tree():
+	Game.MakeDeathEffect(global_position)
+	

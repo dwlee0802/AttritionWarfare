@@ -33,8 +33,6 @@ func SetInitialVelocity(vec):
 	
 	
 func _on_area_2d_body_entered(body):
-	print("hit " + body.name)
-	
 	if piercing > 0:
 		if explosive:
 			var results = explosionArea.get_overlapping_bodies()

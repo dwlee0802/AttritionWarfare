@@ -857,6 +857,13 @@ collision_mask = 4
 position = Vector2(894.5, 38)
 shape = SubResource("RectangleShape2D_tbgo0")
 
+[node name="Sprite2D" type="Sprite2D" parent="World/Ground"]
+self_modulate = Color(0.137255, 0.137255, 0.137255, 1)
+z_index = -10
+position = Vector2(890, 29)
+scale = Vector2(50.4444, 3.94444)
+texture = ExtResource("8_5i8bs")
+
 [node name="CommandMarker" type="CharacterBody2D" parent="World"]
 position = Vector2(0, -150)
 collision_layer = 4
