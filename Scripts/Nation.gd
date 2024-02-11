@@ -2,7 +2,7 @@ extends Node
 class_name Nation
 
 @export var resources = [0, 0, 0, 0, 0, 0, 0]
-@export var stockMax = [100, 100, 100, 100, 100, 100, 100]
+@export var stockMax = [50, 50, 50, 50, 50, 50, 50]
 var industries = []
 
 @export var hq: HQ
@@ -95,5 +95,15 @@ func CheckResourceAvailable(type, amount) -> bool:
 		return false
 
 
+func CheckStockSpace(type, amount) -> bool:
+	if resources[type] < stockMax[type]:
+		return true
+	else:
+		return false
+
+
 func AddResource(type, amount):
 	resources[type] += amount
+	
+	if resources[type] > stockMax[type]:
+		resources[type] = stockMax[type]

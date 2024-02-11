@@ -48,10 +48,10 @@ func _process(delta):
 		productionTimer.stop()
 		return
 		
-	#change this to national stockpile max
-	#if stockpile >= stockpileMax:
-		#productionTimer.stop()
-		#return
+	if isPlayer:
+		if !Game.playerNation.CheckStockSpace(productionType, productionAmount):
+			productionTimer.stop()
+			return
 	
 	allIngredientsAvailable = CheckIngredientsSatisfied()
 	
