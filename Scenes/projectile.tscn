@@ -1,9 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c7hsqsl03cnh5"]
 
 [ext_resource type="Script" path="res://Scripts/projectile.gd" id="1_linx1"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_okxeq"]
-size = Vector2(10, 10)
+[ext_resource type="Texture2D" uid="uid://b3tukx4fv5uhk" path="res://Art/36x36_white_square.png" id="2_qk6am"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kdurv"]
 radius = 6.0
@@ -19,7 +17,9 @@ script = ExtResource("1_linx1")
 isPlayer = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("PlaceholderTexture2D_okxeq")
+self_modulate = Color(1, 1, 0, 1)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_qk6am")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
