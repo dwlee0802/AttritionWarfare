@@ -138,3 +138,9 @@ func _on_attack_timer_timeout():
 	newBullet.damage = randi_range(minDamage, maxDamage)
 	get_tree().root.add_child(newBullet)
 	newBullet.global_position = global_position
+
+
+# try to consume resources from national stockpile
+func _on_supply_timer_timeout():
+	if isPlayerUnit:
+		pass

@@ -557,7 +557,7 @@ texture_normal = ExtResource("8_5i8bs")
 stretch_mode = 0
 script = ExtResource("9_k6hm2")
 ingredientType_1 = 3
-ingredientAmount_1 = 1
+ingredientAmount_1 = 10
 
 [node name="CooldownShadow" type="TextureRect" parent="OrderTab/SpawnTab/InfantrySpawnButton"]
 self_modulate = Color(0, 0, 0, 0.384314)
@@ -732,7 +732,7 @@ hq = NodePath("../World/PlayerHQ")
 script = ExtResource("5_2rvh2")
 level = 1
 productionType = 0
-productionAmount = 1
+productionAmount = 3
 
 [node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Coal Mines"]
 one_shot = true
@@ -741,7 +741,7 @@ one_shot = true
 script = ExtResource("5_2rvh2")
 level = 1
 productionType = 1
-productionAmount = 1
+productionAmount = 2
 
 [node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Iron Mines"]
 one_shot = true
@@ -753,7 +753,7 @@ industrySector = 1
 productionType = 2
 productionAmount = 1
 ingredientType0 = 0
-ingredientType0_Amount = 1
+ingredientType0_Amount = 2
 ingredientType1 = 1
 ingredientType1_Amount = 1
 
@@ -765,9 +765,9 @@ script = ExtResource("5_2rvh2")
 level = 1
 industrySector = 2
 productionType = 3
-productionAmount = 1
+productionAmount = 10
 ingredientType0 = 2
-ingredientType0_Amount = 1
+ingredientType0_Amount = 2
 
 [node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Gun Factory"]
 one_shot = true
@@ -803,7 +803,7 @@ script = ExtResource("5_2rvh2")
 level = 1
 industrySector = 2
 productionType = 6
-productionAmount = 1
+productionAmount = 10
 ingredientType0 = 2
 ingredientType0_Amount = 1
 

@@ -17,3 +17,5 @@ class_name UnitData
 @export var splashRange: int = 100
 
 @export var indirectFire: bool = false
+
+@export var supplyConsumptionType: Enums.GoodType = Enums.GoodType.None
