@@ -4,6 +4,7 @@ class_name Industry
 @export var isPlayer: bool = true
 @export var level: int = 0
 @onready var nation: Nation = get_parent().get_parent()
+@export var levelUpCost: int = 500
 
 @export_group("Production")
 @export var industrySector: Enums.IndustrySector = Enums.IndustrySector.Basic
@@ -117,3 +118,18 @@ func AddIngredient(type, amount):
 		ingredientType2_Received += amount
 		return
 	
+
+func IncreaseLevel(amount: int = 1):
+	if isPlayer:
+		if Game.playerNation.revenue >= levelUpCost * amount:
+			Game.playerNation.revenue -= levelUpCost * amount
+			level += 1
+
+
+func DecreaseLevel(amount: int = 1):
+	if level < amount:
+		return
+	
+	if isPlayer:
+		Game.playerNation.revenue += levelUpCost * 0.8 * amount
+		level -= amount

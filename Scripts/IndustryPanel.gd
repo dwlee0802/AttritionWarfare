@@ -78,14 +78,9 @@ func _process(delta):
 # true is up false is down
 func _on_change_level_button_pressed(extra_arg_0):
 	if extra_arg_0:
-		# level up
-		industry.level += 1
+		industry.IncreaseLevel(1)
 	else:
-		# level down
-		if industry.level == 0:
-			return
-		else:
-			industry.level -= 1
+		industry.DecreaseLevel(1)
 
 
 # true is up false is down

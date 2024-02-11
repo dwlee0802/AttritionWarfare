@@ -128,12 +128,11 @@ offset_bottom = 171.0
 industry = NodePath("../../../PlayerNation/Industry/Ammo Factory")
 
 [node name="ResourceStockLabel" type="Label" parent="IndustryTab"]
-visible = false
 layout_mode = 0
 offset_top = 50.0
 offset_right = 118.0
 offset_bottom = 73.0
-text = "Resource Stock"
+text = "Revenue: 0"
 
 [node name="LogisticsTab" type="Label" parent="."]
 layout_mode = 0

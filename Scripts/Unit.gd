@@ -5,7 +5,7 @@ static var damagePopup = preload("res://Scenes/damage_popup.tscn")
 
 static var bulletScene = preload("res://Scenes/projectile.tscn")
 
-
+var supplyPriorityLevel: int = 0
 var hitPoints: int = 100
 @onready var hitPointBar: ProgressBar = $HPProgressBar
 @export var speed : int
@@ -122,6 +122,10 @@ func MakeDamagePopup(text, color = Color.RED):
 	newPopup.modulate = color
 	add_sibling(newPopup)
 	newPopup.position = position
+	
+
+func AddIngredient(type, amount):
+	pass
 	
 	
 func _on_attack_timer_timeout():

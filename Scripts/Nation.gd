@@ -15,6 +15,9 @@ var industries = []
 var supplyOrders = []
 const MAX_PRIORITY_LEVEL: int = 10
 
+var revenue: float = 0
+var revenuePerSecond: float = 100
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -62,6 +65,8 @@ func ProcessSupplyOrders():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	revenue += delta * revenuePerSecond
+	
 	ProcessSupplyOrders()
 	ClearSupplyOrders()
 	
