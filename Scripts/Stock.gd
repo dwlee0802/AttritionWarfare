@@ -15,6 +15,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if isPlayer:
-		amountLabel.text = str(Game.playerNation.resources[type]) + "/" + str(Game.playerNation.stockMax[type])
+		amountLabel.text = str(int(Game.playerNation.resources[type] * 10) * 0.1) + "/" + str(Game.playerNation.stockMax[type])
 		progressBar.max_value = Game.playerNation.stockMax[type]
 		progressBar.value = Game.playerNation.resources[type]

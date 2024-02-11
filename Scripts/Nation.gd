@@ -45,11 +45,11 @@ func AddSupplyOrder(order: SupplyOrder):
 func ProcessSupplyOrders():
 	for type in range(Enums.GOOD_TYPE_COUNT):
 		for level in range(MAX_PRIORITY_LEVEL):
-			if len(supplyOrders[type][level]) == 0:
+			if len(supplyOrders[type][MAX_PRIORITY_LEVEL - level - 1]) == 0:
 				continue
 				
-			var averageAmount: float = resources[type] / len(supplyOrders[type][level])
-			for order: SupplyOrder in supplyOrders[type][level]:
+			var averageAmount: float = resources[type] / len(supplyOrders[type][MAX_PRIORITY_LEVEL - level - 1])
+			for order: SupplyOrder in supplyOrders[type][MAX_PRIORITY_LEVEL - level - 1]:
 				if averageAmount > order.amount:
 					order.origin.AddIngredient(type, order.amount)
 					resources[type] -= order.amount
