@@ -20,6 +20,8 @@ var attackSpeed: float = 1
 @onready var attackTimer: Timer = $AttackTimer
 var unitData: UnitData
 
+@onready var hitAnimationPlayer = $HitAnimationPlayer
+
 
 func _ready():
 	attackArea.get_node("CollisionShape2D").shape.size = Vector2(attackRange, 20)
@@ -110,6 +112,7 @@ func FindClosest(units):
 func ReceiveHit(amount):
 	hitPoints -= amount
 	MakeDamagePopup(str(amount))
+	hitAnimationPlayer.play("hit_animation")
 	if hitPoints < 0:
 		print("dead!")
 		Game.MakeDeathEffect(global_position)

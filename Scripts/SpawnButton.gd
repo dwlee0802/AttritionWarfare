@@ -50,7 +50,12 @@ func _process(delta):
 			
 
 func _pressed():
-	queuedAmount += 1
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		queuedAmount -= 1
+		if queuedAmount < 0:
+			queuedAmount = 0
+	else:
+		queuedAmount += 1
 
 
 func UpdateCooldownShadow(percent):

@@ -552,6 +552,7 @@ Right-Click: Remove 1
 Shift-Click: Add 5
 Shift-Right-Click: Remove 5
 Ctrl-Click: Set to Inf."
+button_mask = 3
 texture_normal = ExtResource("8_5i8bs")
 stretch_mode = 0
 script = ExtResource("9_k6hm2")
@@ -844,7 +845,7 @@ autostart = true
 
 [node name="SpawnTimer2" type="Timer" parent="World/EnemyHQ"]
 process_callback = 0
-wait_time = 6.0
+wait_time = 10.0
 autostart = true
 
 [node name="Ground" type="StaticBody2D" parent="World"]
