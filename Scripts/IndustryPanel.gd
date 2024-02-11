@@ -18,6 +18,8 @@ class_name IndustryPanel
 
 @onready var stockpileLabel = $StockpileLabel
 
+@onready var priorityLabel = $PriorityLabel
+
 
 func _ready():
 	if industry != null:
@@ -41,6 +43,7 @@ func _process(delta):
 	if industry != null:
 		nameLabel.text = industry.name
 		levelLabel.text = str(industry.level)
+		priorityLabel.text = "Priority: " + str(industry.supplyPriorityLevel)
 		productionProgressBar.max_value = industry.productionTimer.wait_time
 		productionProgressBar.value = industry.productionTimer.wait_time - industry.productionTimer.time_left
 		var left_time: String = str(int(industry.productionTimer.time_left * 100) * 0.01)
@@ -83,3 +86,16 @@ func _on_change_level_button_pressed(extra_arg_0):
 			return
 		else:
 			industry.level -= 1
+
+
+# true is up false is down
+func _on_change_priority_button_pressed(extra_arg_0):
+	if extra_arg_0:
+		# level up
+		industry.supplyPriorityLevel += 1
+	else:
+		# level down
+		if industry.supplyPriorityLevel == 0:
+			return
+		else:
+			industry.supplyPriorityLevel -= 1

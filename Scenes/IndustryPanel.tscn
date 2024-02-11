@@ -198,5 +198,57 @@ grow_vertical = 2
 texture = SubResource("PlaceholderTexture2D_laheh")
 stretch_mode = 2
 
+[node name="PriorityLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -58.5
+offset_top = -23.0
+offset_right = 58.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "Priority: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IncreasePriorityButton" type="TextureButton" parent="PriorityLabel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -10.5
+offset_bottom = 10.5
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("2_d2jbo")
+texture_pressed = ExtResource("3_afkc8")
+texture_disabled = ExtResource("3_afkc8")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="DecreasePriorityButton" type="TextureButton" parent="PriorityLabel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -10.5
+offset_right = 20.0
+offset_bottom = 10.5
+grow_vertical = 2
+texture_normal = ExtResource("4_cbf4u")
+texture_pressed = ExtResource("5_4w7pv")
+texture_disabled = ExtResource("5_4w7pv")
+ignore_texture_size = true
+stretch_mode = 0
+
 [connection signal="pressed" from="IncreaseLevelButton" to="." method="_on_change_level_button_pressed" binds= [true]]
 [connection signal="pressed" from="DecreaseLevelButton" to="." method="_on_change_level_button_pressed" binds= [false]]
+[connection signal="pressed" from="PriorityLabel/IncreasePriorityButton" to="." method="_on_change_priority_button_pressed" binds= [true]]
+[connection signal="pressed" from="PriorityLabel/DecreasePriorityButton" to="." method="_on_change_priority_button_pressed" binds= [false]]
