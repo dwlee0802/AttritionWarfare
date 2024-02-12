@@ -247,9 +247,9 @@ offset_bottom = 25.0
 
 [node name="ExpandButton" type="Button" parent="LogisticsTab/IronStock"]
 layout_mode = 0
-offset_left = 347.0
+offset_left = 346.0
 offset_top = -4.0
-offset_right = 413.0
+offset_right = 412.0
 offset_bottom = 27.0
 text = "Expand"
 
@@ -297,9 +297,9 @@ offset_bottom = 25.0
 
 [node name="ExpandButton" type="Button" parent="LogisticsTab/SteelStock"]
 layout_mode = 0
-offset_left = 347.0
+offset_left = 346.0
 offset_top = -4.0
-offset_right = 413.0
+offset_right = 412.0
 offset_bottom = 27.0
 text = "Expand"
 
@@ -1000,7 +1000,7 @@ script = ExtResource("5_2rvh2")
 level = 1
 industrySector = 2
 productionType = 3
-productionAmount = 1
+productionAmount = 10
 ingredientType0 = 2
 ingredientType0_Amount = 2
 

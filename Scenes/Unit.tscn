@@ -66,7 +66,12 @@ offset_bottom = 28.0
 value = 100.0
 show_percentage = false
 
+[node name="MaintenanceTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [node name="SupplyTimer" type="Timer" parent="."]
+one_shot = true
 autostart = true
 
 [node name="HitAnimationPlayer" type="AnimationPlayer" parent="."]
@@ -75,4 +80,5 @@ libraries = {
 }
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="MaintenanceTimer" to="." method="_on_maintenance_timer_timeout"]
 [connection signal="timeout" from="SupplyTimer" to="." method="_on_supply_timer_timeout"]

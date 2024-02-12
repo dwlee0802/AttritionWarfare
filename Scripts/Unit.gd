@@ -7,6 +7,7 @@ static var bulletScene = preload("res://Scenes/projectile.tscn")
 
 var supplyPriorityLevel: int = 2
 
+# hit points correspond to how much equipment this unit has stocked
 var hitPoints: float = 100
 @onready var hitPointBar: ProgressBar = $HPProgressBar
 @export var speed : int
@@ -14,14 +15,17 @@ var hitPoints: float = 100
 var attackRange: int = 300
 @onready var attackArea: Area2D = $AttackArea
 var attackTarget
-var minDamage: int = 20
-var maxDamage: int = 40
+
+var damageAmount: int = 20
 # attack speed in attacks per second
 var attackSpeed: float = 1
 @onready var attackTimer: Timer = $AttackTimer
+var defense: int = 0
 var unitData: UnitData
 
 @onready var hitAnimationPlayer = $HitAnimationPlayer
+
+@onready var supplyTimer = $SupplyTimer
 
 
 func _ready():
@@ -31,9 +35,6 @@ func _ready():
 	
 
 func _process(delta):
-	# healing
-	AddHP(delta)
-	
 	hitPointBar.value = hitPoints
 
 
@@ -49,10 +50,10 @@ func SetPlayerUnit(val):
 func SetStats(data: UnitData):
 	hitPoints = data.hitPoints
 	attackRange = data.attackRange
-	minDamage = data.minDamage
-	maxDamage = data.maxDamage
+	damageAmount = data.damageAmount
 	attackSpeed = data.attackSpeed
 	speed = data.speed
+	defense = data.defense
 	unitData = data
 	
 	if data.unitType == Enums.UnitType.Infantry:
@@ -70,7 +71,7 @@ func _physics_process(delta):
 	if OrderTab.orderDict[unitData.unitType] != Enums.OrderType.Retreat and len(results) > 0:
 		attackTarget = FindClosest(results)
 		if attackTimer.is_stopped():
-			attackTimer.start(attackSpeed)
+			attackTimer.start(1/ attackSpeed)
 	else:
 		if !attackTimer.is_stopped():
 			attackTimer.stop()
@@ -112,16 +113,30 @@ func FindClosest(units):
 	return output
 	
 		
-func ReceiveHit(amount):
-	hitPoints -= amount
-	Game.MakeDamagePopup(str(amount), global_position, Color.RED)
-	hitAnimationPlayer.play("hit_animation")
+func ReceiveHit(amount, pene = 0):
+	# check if defense succeeded
+	var effDefense = defense - pene
+	if effDefense < 0:
+		effDefense = 0
+	if effDefense > 100:
+		effDefense = 100
+	
+	if randi_range(0, 100) > defense:
+		hitPoints -= amount
+		Game.MakeDamagePopup(str(amount), global_position, Color.RED)
+		hitAnimationPlayer.play("hit_animation")
+	else:
+		Game.MakeDamagePopup("MISS", global_position, Color.RED)
+		
 	if hitPoints < 0:
 		queue_free()
 
 
 func AddHP(amount):
 	hitPoints += amount
+	if amount > 0:
+		Game.MakeDamagePopup(str(int(amount)), global_position, Color.GREEN)
+		
 	if hitPoints > unitData.hitPoints:
 		hitPoints = unitData.hitPoints
 		
@@ -135,7 +150,7 @@ func MakeDamagePopup(text, color = Color.RED):
 	
 
 func AddIngredient(type, amount):
-	pass
+	AddHP(amount)
 	
 	
 func _on_attack_timer_timeout():
@@ -149,17 +164,29 @@ func _on_attack_timer_timeout():
 	
 	newBullet.explosive = unitData.splashDamage
 	
-	newBullet.damage = randi_range(minDamage, maxDamage)
+	# make it so its always above 1
+	newBullet.damage = damageAmount * GetHPRatio()
+	if newBullet.damage <= 0:
+		newBullet.damage = 1
+		
 	get_tree().root.add_child(newBullet)
 	newBullet.global_position = global_position
 
 
-# try to consume resources from national stockpile
+# maintenance consumption
 func _on_supply_timer_timeout():
 	if isPlayerUnit:
 		Game.playerNation.AddSupplyOrder(SupplyOrder.new(self, unitData.supplyConsumptionType, unitData.supplyConsumptionAmount))
+		supplyTimer.start(unitData.supplyConsumptionBaseTime + (global_position.x - Game.playerNation.hq.global_position.x) / 100)
 
 
 func _exit_tree():
 	Game.MakeDeathEffect(global_position)
 	
+
+func _on_maintenance_timer_timeout():
+	ReceiveHit(unitData.maintenanceAmount)
+
+
+func GetHPRatio() -> float:
+	return hitPoints / unitData.hitPoints
