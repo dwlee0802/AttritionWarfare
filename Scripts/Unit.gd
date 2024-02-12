@@ -6,7 +6,7 @@ static var damagePopup = preload("res://Scenes/damage_popup.tscn")
 static var bulletScene = preload("res://Scenes/projectile.tscn")
 
 var supplyPriorityLevel: int = 0
-var hitPoints: int = 100
+var hitPoints: float = 100
 @onready var hitPointBar: ProgressBar = $HPProgressBar
 @export var speed : int
 @export var isPlayerUnit: bool = true
@@ -30,6 +30,9 @@ func _ready():
 	
 
 func _process(delta):
+	# healing
+	AddHP(delta)
+	
 	hitPointBar.value = hitPoints
 
 
@@ -117,6 +120,12 @@ func ReceiveHit(amount):
 		print("dead!")
 		queue_free()
 
+
+func AddHP(amount):
+	hitPoints += amount
+	if hitPoints > unitData.hitPoints:
+		hitPoints = unitData.hitPoints
+		
 
 func MakeDamagePopup(text, color = Color.RED):
 	var newPopup = damagePopup.instantiate()
