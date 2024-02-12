@@ -5,7 +5,8 @@ static var damagePopup = preload("res://Scenes/damage_popup.tscn")
 
 static var bulletScene = preload("res://Scenes/projectile.tscn")
 
-var supplyPriorityLevel: int = 0
+var supplyPriorityLevel: int = 2
+
 var hitPoints: float = 100
 @onready var hitPointBar: ProgressBar = $HPProgressBar
 @export var speed : int
@@ -66,7 +67,6 @@ func SetStats(data: UnitData):
 	
 func _physics_process(delta):
 	var results = attackArea.get_overlapping_bodies()
-	
 	if OrderTab.orderDict[unitData.unitType] != Enums.OrderType.Retreat and len(results) > 0:
 		attackTarget = FindClosest(results)
 		if attackTimer.is_stopped():
@@ -117,7 +117,6 @@ func ReceiveHit(amount):
 	MakeDamagePopup(str(amount))
 	hitAnimationPlayer.play("hit_animation")
 	if hitPoints < 0:
-		print("dead!")
 		queue_free()
 
 
@@ -158,7 +157,7 @@ func _on_attack_timer_timeout():
 # try to consume resources from national stockpile
 func _on_supply_timer_timeout():
 	if isPlayerUnit:
-		pass
+		Game.playerNation.AddSupplyOrder(SupplyOrder.new(self, unitData.supplyConsumptionType, unitData.supplyConsumptionAmount))
 
 
 func _exit_tree():

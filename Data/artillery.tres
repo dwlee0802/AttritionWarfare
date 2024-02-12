@@ -15,3 +15,5 @@ speed = 50
 splashDamage = true
 splashRange = 100
 indirectFire = true
+supplyConsumptionType = 4
+supplyConsumptionAmount = 1

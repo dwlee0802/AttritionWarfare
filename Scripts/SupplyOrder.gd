@@ -2,7 +2,7 @@ class_name SupplyOrder
 
 # who submitted this supply order
 # supply priority is included here
-var origin: Industry
+var origin
 
 # what is being requested
 var goodType: Enums.GoodType = Enums.GoodType.None

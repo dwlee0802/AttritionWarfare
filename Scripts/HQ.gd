@@ -14,8 +14,8 @@ var armoredData: UnitData = load("res://Data/armored.tres")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if autoSpawn:
-		SpawnUnit(0)
-		SpawnUnit(1)
+		$SpawnTimer.start()
+		$SpawnTimer2.start()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

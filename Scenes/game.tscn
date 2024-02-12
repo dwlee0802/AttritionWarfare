@@ -587,6 +587,7 @@ shortcut = SubResource("Shortcut_pio1f")
 text = "Select Marker"
 
 [node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/Infantry"]
+layout_mode = 0
 offset_left = 204.0
 offset_top = -4.0
 offset_right = 286.0
@@ -596,6 +597,7 @@ button_group = ExtResource("8_kimbi")
 text = "Offensive"
 
 [node name="DefensiveButton" type="Button" parent="OrderTab/MarkerControl/Infantry"]
+layout_mode = 0
 offset_left = 300.0
 offset_top = -4.0
 offset_right = 385.0
@@ -606,6 +608,7 @@ button_group = ExtResource("8_kimbi")
 text = "Defensive"
 
 [node name="RetreatButton" type="Button" parent="OrderTab/MarkerControl/Infantry"]
+layout_mode = 0
 offset_left = 396.0
 offset_top = -5.0
 offset_right = 481.0
@@ -634,6 +637,7 @@ shortcut = SubResource("Shortcut_iakw8")
 text = "Select Marker"
 
 [node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/Artillery"]
+layout_mode = 0
 offset_left = 203.0
 offset_top = -3.0
 offset_right = 285.0
@@ -643,6 +647,7 @@ button_group = ExtResource("9_l64jy")
 text = "Offensive"
 
 [node name="DefensiveButton" type="Button" parent="OrderTab/MarkerControl/Artillery"]
+layout_mode = 0
 offset_left = 299.0
 offset_top = -3.0
 offset_right = 384.0
@@ -653,6 +658,7 @@ button_group = ExtResource("9_l64jy")
 text = "Defensive"
 
 [node name="RetreatButton" type="Button" parent="OrderTab/MarkerControl/Artillery"]
+layout_mode = 0
 offset_left = 395.0
 offset_top = -4.0
 offset_right = 480.0
@@ -681,6 +687,7 @@ shortcut = SubResource("Shortcut_ib1jv")
 text = "Select Marker"
 
 [node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/Armored"]
+layout_mode = 0
 offset_left = 202.0
 offset_top = -3.0
 offset_right = 284.0
@@ -690,6 +697,7 @@ button_group = ExtResource("10_v5opw")
 text = "Offensive"
 
 [node name="DefensiveButton" type="Button" parent="OrderTab/MarkerControl/Armored"]
+layout_mode = 0
 offset_left = 298.0
 offset_top = -3.0
 offset_right = 383.0
@@ -700,6 +708,7 @@ button_group = ExtResource("10_v5opw")
 text = "Defensive"
 
 [node name="RetreatButton" type="Button" parent="OrderTab/MarkerControl/Armored"]
+layout_mode = 0
 offset_left = 394.0
 offset_top = -4.0
 offset_right = 479.0
@@ -728,6 +737,7 @@ shortcut = SubResource("Shortcut_ercos")
 text = "Select Marker"
 
 [node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/AntiTank"]
+layout_mode = 0
 offset_left = 202.0
 offset_top = -3.0
 offset_right = 284.0
@@ -737,6 +747,7 @@ button_group = ExtResource("11_tirxr")
 text = "Offensive"
 
 [node name="DefensiveButton" type="Button" parent="OrderTab/MarkerControl/AntiTank"]
+layout_mode = 0
 offset_left = 298.0
 offset_top = -3.0
 offset_right = 383.0
@@ -747,6 +758,7 @@ button_group = ExtResource("11_tirxr")
 text = "Defensive"
 
 [node name="RetreatButton" type="Button" parent="OrderTab/MarkerControl/AntiTank"]
+layout_mode = 0
 offset_left = 394.0
 offset_top = -4.0
 offset_right = 479.0
@@ -810,6 +822,7 @@ offset_bottom = 106.0
 theme_override_font_sizes/font_size = 12
 text = "1 Gun"
 horizontal_alignment = 1
+autowrap_mode = 1
 
 [node name="CooldownLabel" type="Label" parent="OrderTab/SpawnTab/InfantrySpawnButton"]
 layout_mode = 0
@@ -987,7 +1000,7 @@ script = ExtResource("5_2rvh2")
 level = 1
 industrySector = 2
 productionType = 3
-productionAmount = 10
+productionAmount = 1
 ingredientType0 = 2
 ingredientType0_Amount = 2
 
@@ -1046,13 +1059,20 @@ shape = SubResource("RectangleShape2D_4wbwj")
 [node name="Sprite2D" type="Sprite2D" parent="World/PlayerHQ"]
 texture = SubResource("PlaceholderTexture2D_r7yqw")
 
+[node name="SpawnTimer" type="Timer" parent="World/PlayerHQ"]
+process_callback = 0
+wait_time = 2.0
+
+[node name="SpawnTimer2" type="Timer" parent="World/PlayerHQ"]
+process_callback = 0
+wait_time = 10.0
+
 [node name="EnemyHQ" type="StaticBody2D" parent="World"]
 position = Vector2(783, -37)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ajpi1")
 isPlayerHQ = false
-autoSpawn = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/EnemyHQ"]
 shape = SubResource("RectangleShape2D_4wbwj")
@@ -1063,12 +1083,10 @@ texture = SubResource("PlaceholderTexture2D_r7yqw")
 [node name="SpawnTimer" type="Timer" parent="World/EnemyHQ"]
 process_callback = 0
 wait_time = 2.0
-autostart = true
 
 [node name="SpawnTimer2" type="Timer" parent="World/EnemyHQ"]
 process_callback = 0
 wait_time = 10.0
-autostart = true
 
 [node name="Ground" type="StaticBody2D" parent="World"]
 position = Vector2(-874, 15)
@@ -1236,5 +1254,7 @@ texture = ExtResource("8_5i8bs")
 [connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/OffensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [3, 0]]
 [connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/DefensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [3, 1]]
 [connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/RetreatButton" to="OrderTab" method="_on_order_button_pressed" binds= [3, 2]]
+[connection signal="timeout" from="World/PlayerHQ/SpawnTimer" to="World/PlayerHQ" method="SpawnUnit" binds= [0]]
+[connection signal="timeout" from="World/PlayerHQ/SpawnTimer2" to="World/PlayerHQ" method="SpawnUnit" binds= [1]]
 [connection signal="timeout" from="World/EnemyHQ/SpawnTimer" to="World/EnemyHQ" method="SpawnUnit" binds= [0]]
 [connection signal="timeout" from="World/EnemyHQ/SpawnTimer2" to="World/EnemyHQ" method="SpawnUnit" binds= [1]]

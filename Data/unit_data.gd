@@ -19,3 +19,4 @@ class_name UnitData
 @export var indirectFire: bool = false
 
 @export var supplyConsumptionType: Enums.GoodType = Enums.GoodType.None
+@export var supplyConsumptionAmount: int = 0
