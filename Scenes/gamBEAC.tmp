@@ -1,0 +1,1262 @@
+[gd_scene load_steps=31 format=3 uid="uid://bvyo1sjvno0yx"]
+
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_haicd"]
+[ext_resource type="Script" path="res://Scripts/IndustryTab.gd" id="2_acc5o"]
+[ext_resource type="PackedScene" uid="uid://bn5ogomcqlvd1" path="res://Scenes/IndustryPanel.tscn" id="3_kbdac"]
+[ext_resource type="Script" path="res://Scripts/LogisticsTab.gd" id="4_6dx34"]
+[ext_resource type="Script" path="res://Scripts/Nation.gd" id="4_kokw5"]
+[ext_resource type="Script" path="res://Scripts/Industry.gd" id="5_2rvh2"]
+[ext_resource type="Script" path="res://Scripts/HQ.gd" id="5_ajpi1"]
+[ext_resource type="Script" path="res://Scripts/Stock.gd" id="5_lrjik"]
+[ext_resource type="Script" path="res://Scripts/OrderTab.gd" id="6_ulhe2"]
+[ext_resource type="ButtonGroup" uid="uid://c7l5vsk0ni74e" path="res://marker_button_group.tres" id="7_s52m0"]
+[ext_resource type="Texture2D" uid="uid://b3tukx4fv5uhk" path="res://Art/36x36_white_square.png" id="8_5i8bs"]
+[ext_resource type="ButtonGroup" uid="uid://c3u3xvvkxi4i8" path="res://infantry_order_button_group.tres" id="8_kimbi"]
+[ext_resource type="Script" path="res://Scripts/SpawnButton.gd" id="9_k6hm2"]
+[ext_resource type="ButtonGroup" uid="uid://wj5dpb8njxdy" path="res://artillery_order_button_group.tres" id="9_l64jy"]
+[ext_resource type="ButtonGroup" uid="uid://6mx1hky7l8wr" path="res://armored_order_button_group.tres" id="10_v5opw"]
+[ext_resource type="ButtonGroup" uid="uid://cw040k3tugkfl" path="res://antitank_order_button_group.tres" id="11_tirxr"]
+[ext_resource type="Texture2D" uid="uid://davaigtjle0l3" path="res://Art/offense_marker.png" id="12_o5a4t"]
+[ext_resource type="Script" path="res://Scenes/CommandMarker.gd" id="12_ut6k3"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_2uyt1"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_pio1f"]
+events = [SubResource("InputEventKey_2uyt1")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_wmgr1"]
+device = -1
+keycode = 50
+unicode = 50
+
+[sub_resource type="Shortcut" id="Shortcut_iakw8"]
+events = [SubResource("InputEventKey_wmgr1")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_e0jhn"]
+device = -1
+keycode = 51
+unicode = 51
+
+[sub_resource type="Shortcut" id="Shortcut_ib1jv"]
+events = [SubResource("InputEventKey_e0jhn")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_e0g0s"]
+device = -1
+keycode = 52
+unicode = 52
+
+[sub_resource type="Shortcut" id="Shortcut_ercos"]
+events = [SubResource("InputEventKey_e0g0s")]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wbwj"]
+size = Vector2(50, 49)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_r7yqw"]
+size = Vector2(50, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tbgo0"]
+size = Vector2(1809, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6yqvg"]
+size = Vector2(29, 47)
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_haicd")
+
+[node name="IndustryTab" type="Label" parent="."]
+layout_mode = 0
+offset_right = 86.0
+offset_bottom = 40.0
+text = "Industry"
+script = ExtResource("2_acc5o")
+
+[node name="BasicIndustry" type="Control" parent="IndustryTab"]
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 84.0
+offset_right = 41.0
+offset_bottom = 124.0
+
+[node name="Label" type="Label" parent="IndustryTab/BasicIndustry"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Basic"
+
+[node name="IndustryPanel" parent="IndustryTab/BasicIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+offset_top = 23.0
+offset_bottom = 168.0
+industry = NodePath("../../../PlayerNation/Industry/Coal Mines")
+
+[node name="IndustryPanel2" parent="IndustryTab/BasicIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+offset_left = 172.0
+offset_top = 23.0
+offset_right = 343.0
+offset_bottom = 168.0
+industry = NodePath("../../../PlayerNation/Industry/Iron Mines")
+
+[node name="ProcessedIndustry" type="Control" parent="IndustryTab"]
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 222.0
+offset_right = 41.0
+offset_bottom = 262.0
+
+[node name="Label" type="Label" parent="IndustryTab/ProcessedIndustry"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Processed"
+
+[node name="IndustryPanel" parent="IndustryTab/ProcessedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+offset_top = 25.0
+offset_bottom = 170.0
+industry = NodePath("../../../PlayerNation/Industry/Steel Mill")
+
+[node name="ManufacturedIndustry" type="Control" parent="IndustryTab"]
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 358.0
+offset_right = 41.0
+offset_bottom = 398.0
+
+[node name="Label" type="Label" parent="IndustryTab/ManufacturedIndustry"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Manufactured"
+
+[node name="IndustryPanel" parent="IndustryTab/ManufacturedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+offset_left = 1.0
+offset_top = 25.0
+offset_right = 172.0
+offset_bottom = 170.0
+industry = NodePath("../../../PlayerNation/Industry/Gun Factory")
+
+[node name="IndustryPanel2" parent="IndustryTab/ManufacturedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+offset_left = 173.0
+offset_top = 25.0
+offset_right = 344.0
+offset_bottom = 170.0
+industry = NodePath("../../../PlayerNation/Industry/Cannon Factory")
+
+[node name="IndustryPanel3" parent="IndustryTab/ManufacturedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+offset_left = 344.0
+offset_top = 25.0
+offset_right = 515.0
+offset_bottom = 170.0
+industry = NodePath("../../../PlayerNation/Industry/Tank Factory")
+
+[node name="IndustryPanel4" parent="IndustryTab/ManufacturedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+offset_left = 516.0
+offset_top = 26.0
+offset_right = 687.0
+offset_bottom = 171.0
+industry = NodePath("../../../PlayerNation/Industry/Ammo Factory")
+
+[node name="ResourceStockLabel" type="Label" parent="IndustryTab"]
+layout_mode = 0
+offset_top = 50.0
+offset_right = 118.0
+offset_bottom = 73.0
+text = "Revenue: 0"
+
+[node name="LogisticsTab" type="Label" parent="."]
+layout_mode = 0
+offset_left = 801.0
+offset_top = 81.0
+offset_right = 1483.0
+offset_bottom = 296.0
+text = "Logistics          Amount               Stockpile                             Consumption     Max"
+script = ExtResource("4_6dx34")
+
+[node name="CoalStock" type="Label" parent="LogisticsTab"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 31.0
+offset_right = 41.0
+offset_bottom = 54.0
+text = "Coal"
+script = ExtResource("5_lrjik")
+
+[node name="ProgressBar" type="ProgressBar" parent="LogisticsTab/CoalStock"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = -2.0
+offset_right = 339.0
+offset_bottom = 25.0
+
+[node name="ExpandButton" type="Button" parent="LogisticsTab/CoalStock"]
+layout_mode = 0
+offset_left = 347.0
+offset_top = -4.0
+offset_right = 413.0
+offset_bottom = 27.0
+text = "Expand"
+
+[node name="AmountLabel" type="Label" parent="LogisticsTab/CoalStock"]
+layout_mode = 0
+offset_left = 121.0
+offset_right = 161.0
+offset_bottom = 23.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConsumptionLabel" type="Label" parent="LogisticsTab/CoalStock"]
+layout_mode = 0
+offset_left = 452.0
+offset_top = -1.0
+offset_right = 498.0
+offset_bottom = 22.0
+text = "0/min"
+
+[node name="MaxConsumptionLabel" type="Label" parent="LogisticsTab/CoalStock"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = -2.0
+offset_right = 586.0
+offset_bottom = 21.0
+text = "0/min"
+
+[node name="IronStock" type="Label" parent="LogisticsTab"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 60.0
+offset_right = 42.0
+offset_bottom = 83.0
+text = "Iron"
+script = ExtResource("5_lrjik")
+type = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="LogisticsTab/IronStock"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = -2.0
+offset_right = 339.0
+offset_bottom = 25.0
+
+[node name="ExpandButton" type="Button" parent="LogisticsTab/IronStock"]
+layout_mode = 0
+offset_left = 346.0
+offset_top = -4.0
+offset_right = 412.0
+offset_bottom = 27.0
+text = "Expand"
+
+[node name="AmountLabel" type="Label" parent="LogisticsTab/IronStock"]
+layout_mode = 0
+offset_left = 121.0
+offset_right = 161.0
+offset_bottom = 23.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConsumptionLabel" type="Label" parent="LogisticsTab/IronStock"]
+layout_mode = 0
+offset_left = 452.0
+offset_top = -1.0
+offset_right = 498.0
+offset_bottom = 22.0
+text = "0/min"
+
+[node name="MaxConsumptionLabel" type="Label" parent="LogisticsTab/IronStock"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = -2.0
+offset_right = 586.0
+offset_bottom = 21.0
+text = "0/min"
+
+[node name="SteelStock" type="Label" parent="LogisticsTab"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 90.0
+offset_right = 42.0
+offset_bottom = 113.0
+text = "Steel"
+script = ExtResource("5_lrjik")
+type = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="LogisticsTab/SteelStock"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = -2.0
+offset_right = 339.0
+offset_bottom = 25.0
+
+[node name="ExpandButton" type="Button" parent="LogisticsTab/SteelStock"]
+layout_mode = 0
+offset_left = 346.0
+offset_top = -4.0
+offset_right = 412.0
+offset_bottom = 27.0
+text = "Expand"
+
+[node name="AmountLabel" type="Label" parent="LogisticsTab/SteelStock"]
+layout_mode = 0
+offset_left = 121.0
+offset_right = 161.0
+offset_bottom = 23.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConsumptionLabel" type="Label" parent="LogisticsTab/SteelStock"]
+layout_mode = 0
+offset_left = 452.0
+offset_top = -1.0
+offset_right = 498.0
+offset_bottom = 22.0
+text = "0/min"
+
+[node name="MaxConsumptionLabel" type="Label" parent="LogisticsTab/SteelStock"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = -2.0
+offset_right = 586.0
+offset_bottom = 21.0
+text = "0/min"
+
+[node name="GunStock" type="Label" parent="LogisticsTab"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 118.0
+offset_right = 41.0
+offset_bottom = 141.0
+text = "Gun"
+script = ExtResource("5_lrjik")
+type = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="LogisticsTab/GunStock"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = -2.0
+offset_right = 339.0
+offset_bottom = 25.0
+
+[node name="ExpandButton" type="Button" parent="LogisticsTab/GunStock"]
+layout_mode = 0
+offset_left = 347.0
+offset_top = -4.0
+offset_right = 413.0
+offset_bottom = 27.0
+text = "Expand"
+
+[node name="AmountLabel" type="Label" parent="LogisticsTab/GunStock"]
+layout_mode = 0
+offset_left = 121.0
+offset_right = 161.0
+offset_bottom = 23.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConsumptionLabel" type="Label" parent="LogisticsTab/GunStock"]
+layout_mode = 0
+offset_left = 452.0
+offset_top = -1.0
+offset_right = 498.0
+offset_bottom = 22.0
+text = "0/min"
+
+[node name="MaxConsumptionLabel" type="Label" parent="LogisticsTab/GunStock"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = -2.0
+offset_right = 586.0
+offset_bottom = 21.0
+text = "0/min"
+
+[node name="CannonStock" type="Label" parent="LogisticsTab"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 147.0
+offset_right = 61.0
+offset_bottom = 170.0
+text = "Cannon
+"
+script = ExtResource("5_lrjik")
+type = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="LogisticsTab/CannonStock"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = -2.0
+offset_right = 339.0
+offset_bottom = 25.0
+
+[node name="ExpandButton" type="Button" parent="LogisticsTab/CannonStock"]
+layout_mode = 0
+offset_left = 347.0
+offset_top = -4.0
+offset_right = 413.0
+offset_bottom = 27.0
+text = "Expand"
+
+[node name="AmountLabel" type="Label" parent="LogisticsTab/CannonStock"]
+layout_mode = 0
+offset_left = 121.0
+offset_right = 161.0
+offset_bottom = 23.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConsumptionLabel" type="Label" parent="LogisticsTab/CannonStock"]
+layout_mode = 0
+offset_left = 452.0
+offset_top = -1.0
+offset_right = 498.0
+offset_bottom = 22.0
+text = "0/min"
+
+[node name="MaxConsumptionLabel" type="Label" parent="LogisticsTab/CannonStock"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = -2.0
+offset_right = 586.0
+offset_bottom = 21.0
+text = "0/min"
+
+[node name="EngineStock" type="Label" parent="LogisticsTab"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 177.0
+offset_right = 81.0
+offset_bottom = 200.0
+text = "Engine"
+script = ExtResource("5_lrjik")
+type = 5
+
+[node name="ProgressBar" type="ProgressBar" parent="LogisticsTab/EngineStock"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = -2.0
+offset_right = 339.0
+offset_bottom = 25.0
+
+[node name="ExpandButton" type="Button" parent="LogisticsTab/EngineStock"]
+layout_mode = 0
+offset_left = 347.0
+offset_top = -4.0
+offset_right = 413.0
+offset_bottom = 27.0
+text = "Expand"
+
+[node name="AmountLabel" type="Label" parent="LogisticsTab/EngineStock"]
+layout_mode = 0
+offset_left = 121.0
+offset_right = 161.0
+offset_bottom = 23.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConsumptionLabel" type="Label" parent="LogisticsTab/EngineStock"]
+layout_mode = 0
+offset_left = 452.0
+offset_top = -1.0
+offset_right = 498.0
+offset_bottom = 22.0
+text = "0/min"
+
+[node name="MaxConsumptionLabel" type="Label" parent="LogisticsTab/EngineStock"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = -2.0
+offset_right = 586.0
+offset_bottom = 21.0
+text = "0/min"
+
+[node name="AmmoStock" type="Label" parent="LogisticsTab"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 206.0
+offset_right = 81.0
+offset_bottom = 229.0
+text = "Ammo"
+script = ExtResource("5_lrjik")
+type = 6
+
+[node name="ProgressBar" type="ProgressBar" parent="LogisticsTab/AmmoStock"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = -2.0
+offset_right = 339.0
+offset_bottom = 25.0
+
+[node name="ExpandButton" type="Button" parent="LogisticsTab/AmmoStock"]
+layout_mode = 0
+offset_left = 347.0
+offset_top = -4.0
+offset_right = 413.0
+offset_bottom = 27.0
+text = "Expand"
+
+[node name="AmountLabel" type="Label" parent="LogisticsTab/AmmoStock"]
+layout_mode = 0
+offset_left = 121.0
+offset_right = 161.0
+offset_bottom = 23.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConsumptionLabel" type="Label" parent="LogisticsTab/AmmoStock"]
+layout_mode = 0
+offset_left = 452.0
+offset_top = -1.0
+offset_right = 498.0
+offset_bottom = 22.0
+text = "0/min"
+
+[node name="MaxConsumptionLabel" type="Label" parent="LogisticsTab/AmmoStock"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = -2.0
+offset_right = 586.0
+offset_bottom = 21.0
+text = "0/min"
+
+[node name="OrderTab" type="Label" parent="."]
+layout_mode = 0
+offset_left = 800.0
+offset_top = 360.0
+offset_right = 846.0
+offset_bottom = 383.0
+text = "Order"
+script = ExtResource("6_ulhe2")
+
+[node name="OffensiveButton" type="Button" parent="OrderTab"]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 1.0
+offset_right = 283.0
+offset_bottom = 32.0
+text = "Offensive"
+
+[node name="DefensiveButton" type="Button" parent="OrderTab"]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 1.0
+offset_right = 382.0
+offset_bottom = 32.0
+text = "Defensive"
+
+[node name="RetreatButton" type="Button" parent="OrderTab"]
+layout_mode = 0
+offset_left = 393.0
+offset_right = 478.0
+offset_bottom = 31.0
+text = "Retreat"
+
+[node name="MarkerControl" type="Control" parent="OrderTab"]
+anchors_preset = 0
+offset_left = -3.0
+offset_top = 43.0
+offset_right = 37.0
+offset_bottom = 83.0
+
+[node name="Infantry" type="Label" parent="OrderTab/MarkerControl"]
+layout_mode = 0
+offset_right = 63.0
+offset_bottom = 23.0
+text = "Infantry"
+
+[node name="MarkerSelect" type="Button" parent="OrderTab/MarkerControl/Infantry"]
+layout_mode = 0
+offset_left = 77.0
+offset_top = -4.0
+offset_right = 192.0
+offset_bottom = 27.0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("7_s52m0")
+shortcut = SubResource("Shortcut_pio1f")
+text = "Select Marker"
+
+[node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/Infantry"]
+layout_mode = 0
+offset_left = 204.0
+offset_top = -4.0
+offset_right = 286.0
+offset_bottom = 27.0
+toggle_mode = true
+button_group = ExtResource("8_kimbi")
+text = "Offensive"
+
+[node name="DefensiveButton" type="Button" parent="OrderTab/MarkerControl/Infantry"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = -4.0
+offset_right = 385.0
+offset_bottom = 27.0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("8_kimbi")
+text = "Defensive"
+
+[node name="RetreatButton" type="Button" parent="OrderTab/MarkerControl/Infantry"]
+layout_mode = 0
+offset_left = 396.0
+offset_top = -5.0
+offset_right = 481.0
+offset_bottom = 26.0
+toggle_mode = true
+button_group = ExtResource("8_kimbi")
+text = "Retreat"
+
+[node name="Artillery" type="Label" parent="OrderTab/MarkerControl"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 38.0
+offset_right = 64.0
+offset_bottom = 61.0
+text = "Artillery"
+
+[node name="MarkerSelect" type="Button" parent="OrderTab/MarkerControl/Artillery"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = -3.0
+offset_right = 191.0
+offset_bottom = 28.0
+toggle_mode = true
+button_group = ExtResource("7_s52m0")
+shortcut = SubResource("Shortcut_iakw8")
+text = "Select Marker"
+
+[node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/Artillery"]
+layout_mode = 0
+offset_left = 203.0
+offset_top = -3.0
+offset_right = 285.0
+offset_bottom = 28.0
+toggle_mode = true
+button_group = ExtResource("9_l64jy")
+text = "Offensive"
+
+[node name="DefensiveButton" type="Button" parent="OrderTab/MarkerControl/Artillery"]
+layout_mode = 0
+offset_left = 299.0
+offset_top = -3.0
+offset_right = 384.0
+offset_bottom = 28.0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("9_l64jy")
+text = "Defensive"
+
+[node name="RetreatButton" type="Button" parent="OrderTab/MarkerControl/Artillery"]
+layout_mode = 0
+offset_left = 395.0
+offset_top = -4.0
+offset_right = 480.0
+offset_bottom = 27.0
+toggle_mode = true
+button_group = ExtResource("9_l64jy")
+text = "Retreat"
+
+[node name="Armored" type="Label" parent="OrderTab/MarkerControl"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 75.0
+offset_right = 65.0
+offset_bottom = 98.0
+text = "Armored"
+
+[node name="MarkerSelect" type="Button" parent="OrderTab/MarkerControl/Armored"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = -3.0
+offset_right = 190.0
+offset_bottom = 28.0
+toggle_mode = true
+button_group = ExtResource("7_s52m0")
+shortcut = SubResource("Shortcut_ib1jv")
+text = "Select Marker"
+
+[node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/Armored"]
+layout_mode = 0
+offset_left = 202.0
+offset_top = -3.0
+offset_right = 284.0
+offset_bottom = 28.0
+toggle_mode = true
+button_group = ExtResource("10_v5opw")
+text = "Offensive"
+
+[node name="DefensiveButton" type="Button" parent="OrderTab/MarkerControl/Armored"]
+layout_mode = 0
+offset_left = 298.0
+offset_top = -3.0
+offset_right = 383.0
+offset_bottom = 28.0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("10_v5opw")
+text = "Defensive"
+
+[node name="RetreatButton" type="Button" parent="OrderTab/MarkerControl/Armored"]
+layout_mode = 0
+offset_left = 394.0
+offset_top = -4.0
+offset_right = 479.0
+offset_bottom = 27.0
+toggle_mode = true
+button_group = ExtResource("10_v5opw")
+text = "Retreat"
+
+[node name="AntiTank" type="Label" parent="OrderTab/MarkerControl"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 111.0
+offset_right = 72.0
+offset_bottom = 134.0
+text = "AntiTank"
+
+[node name="MarkerSelect" type="Button" parent="OrderTab/MarkerControl/AntiTank"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = -3.0
+offset_right = 190.0
+offset_bottom = 28.0
+toggle_mode = true
+button_group = ExtResource("7_s52m0")
+shortcut = SubResource("Shortcut_ercos")
+text = "Select Marker"
+
+[node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/AntiTank"]
+layout_mode = 0
+offset_left = 202.0
+offset_top = -3.0
+offset_right = 284.0
+offset_bottom = 28.0
+toggle_mode = true
+button_group = ExtResource("11_tirxr")
+text = "Offensive"
+
+[node name="DefensiveButton" type="Button" parent="OrderTab/MarkerControl/AntiTank"]
+layout_mode = 0
+offset_left = 298.0
+offset_top = -3.0
+offset_right = 383.0
+offset_bottom = 28.0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("11_tirxr")
+text = "Defensive"
+
+[node name="RetreatButton" type="Button" parent="OrderTab/MarkerControl/AntiTank"]
+layout_mode = 0
+offset_left = 394.0
+offset_top = -4.0
+offset_right = 479.0
+offset_bottom = 27.0
+toggle_mode = true
+button_group = ExtResource("11_tirxr")
+text = "Retreat"
+
+[node name="SpawnTab" type="Label" parent="OrderTab"]
+layout_mode = 0
+offset_top = 210.0
+offset_right = 412.0
+offset_bottom = 286.0
+text = "Units"
+
+[node name="InfantrySpawnButton" type="TextureButton" parent="OrderTab/SpawnTab"]
+self_modulate = Color(0.231373, 0.356863, 0, 1)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 36.0
+offset_right = 41.0
+offset_bottom = 76.0
+tooltip_text = "Left-Click: Add 1
+Right-Click: Remove 1
+Shift-Click: Add 5
+Shift-Right-Click: Remove 5
+Ctrl-Click: Set to Inf."
+button_mask = 3
+texture_normal = ExtResource("8_5i8bs")
+stretch_mode = 0
+script = ExtResource("9_k6hm2")
+ingredientType_1 = 3
+ingredientAmount_1 = 10
+
+[node name="CooldownShadow" type="TextureRect" parent="OrderTab/SpawnTab/InfantrySpawnButton"]
+self_modulate = Color(0, 0, 0, 0.384314)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("8_5i8bs")
+expand_mode = 1
+
+[node name="SpawnTimer" type="Timer" parent="OrderTab/SpawnTab/InfantrySpawnButton"]
+process_callback = 0
+one_shot = true
+
+[node name="QueuedAmount" type="Label" parent="OrderTab/SpawnTab/InfantrySpawnButton"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 18.0
+theme_override_font_sizes/font_size = 12
+text = "0"
+
+[node name="CostLabel" type="Label" parent="OrderTab/SpawnTab/InfantrySpawnButton"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = 58.0
+offset_right = 48.0
+offset_bottom = 106.0
+theme_override_font_sizes/font_size = 12
+text = "1 Gun"
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="CooldownLabel" type="Label" parent="OrderTab/SpawnTab/InfantrySpawnButton"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 38.0
+offset_right = 48.0
+offset_bottom = 61.0
+theme_override_font_sizes/font_size = 12
+text = "CD: 4s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArtillerySpawnButton" type="TextureButton" parent="OrderTab/SpawnTab"]
+self_modulate = Color(0.643137, 0, 0, 1)
+layout_mode = 0
+offset_left = 56.0
+offset_top = 36.0
+offset_right = 96.0
+offset_bottom = 76.0
+tooltip_text = "Left-Click: Add 1
+Right-Click: Remove 1
+Shift-Click: Add 5
+Shift-Right-Click: Remove 5
+Ctrl-Click: Set to Inf."
+texture_normal = ExtResource("8_5i8bs")
+stretch_mode = 0
+script = ExtResource("9_k6hm2")
+unitType = 1
+ingredientType_1 = 4
+ingredientAmount_1 = 1
+spawnCooldown = 6.0
+
+[node name="CooldownShadow" type="TextureRect" parent="OrderTab/SpawnTab/ArtillerySpawnButton"]
+self_modulate = Color(0, 0, 0, 0.384314)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("8_5i8bs")
+expand_mode = 1
+
+[node name="SpawnTimer" type="Timer" parent="OrderTab/SpawnTab/ArtillerySpawnButton"]
+process_callback = 0
+one_shot = true
+
+[node name="QueuedAmount" type="Label" parent="OrderTab/SpawnTab/ArtillerySpawnButton"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 18.0
+theme_override_font_sizes/font_size = 12
+text = "0"
+
+[node name="CostLabel" type="Label" parent="OrderTab/SpawnTab/ArtillerySpawnButton"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = 58.0
+offset_right = 48.0
+offset_bottom = 106.0
+theme_override_font_sizes/font_size = 12
+text = "1 Gun"
+horizontal_alignment = 1
+
+[node name="CooldownLabel" type="Label" parent="OrderTab/SpawnTab/ArtillerySpawnButton"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 38.0
+offset_right = 48.0
+offset_bottom = 61.0
+theme_override_font_sizes/font_size = 12
+text = "CD: 4s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArmorSpawnButton" type="TextureButton" parent="OrderTab/SpawnTab"]
+self_modulate = Color(0.235294, 0.235294, 0.235294, 1)
+layout_mode = 0
+offset_left = 112.0
+offset_top = 36.0
+offset_right = 152.0
+offset_bottom = 76.0
+tooltip_text = "Left-Click: Add 1
+Right-Click: Remove 1
+Shift-Click: Add 5
+Shift-Right-Click: Remove 5
+Ctrl-Click: Set to Inf."
+texture_normal = ExtResource("8_5i8bs")
+stretch_mode = 0
+script = ExtResource("9_k6hm2")
+unitType = 2
+ingredientType_1 = 5
+ingredientAmount_1 = 1
+spawnCooldown = 8.0
+
+[node name="CooldownShadow" type="TextureRect" parent="OrderTab/SpawnTab/ArmorSpawnButton"]
+self_modulate = Color(0, 0, 0, 0.384314)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("8_5i8bs")
+expand_mode = 1
+
+[node name="SpawnTimer" type="Timer" parent="OrderTab/SpawnTab/ArmorSpawnButton"]
+process_callback = 0
+one_shot = true
+
+[node name="QueuedAmount" type="Label" parent="OrderTab/SpawnTab/ArmorSpawnButton"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 18.0
+theme_override_font_sizes/font_size = 12
+text = "0"
+
+[node name="CostLabel" type="Label" parent="OrderTab/SpawnTab/ArmorSpawnButton"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = 58.0
+offset_right = 48.0
+offset_bottom = 106.0
+theme_override_font_sizes/font_size = 12
+text = "1 Gun"
+horizontal_alignment = 1
+
+[node name="CooldownLabel" type="Label" parent="OrderTab/SpawnTab/ArmorSpawnButton"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 38.0
+offset_right = 48.0
+offset_bottom = 61.0
+theme_override_font_sizes/font_size = 12
+text = "CD: 4s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerNation" type="Node" parent="." node_paths=PackedStringArray("hq")]
+script = ExtResource("4_kokw5")
+hq = NodePath("../World/PlayerHQ")
+
+[node name="Industry" type="Node" parent="PlayerNation"]
+
+[node name="Coal Mines" type="Node" parent="PlayerNation/Industry"]
+script = ExtResource("5_2rvh2")
+level = 1
+productionType = 0
+productionAmount = 3
+
+[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Coal Mines"]
+one_shot = true
+
+[node name="Iron Mines" type="Node" parent="PlayerNation/Industry"]
+script = ExtResource("5_2rvh2")
+level = 1
+productionType = 1
+productionAmount = 2
+
+[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Iron Mines"]
+one_shot = true
+
+[node name="Steel Mill" type="Node" parent="PlayerNation/Industry"]
+script = ExtResource("5_2rvh2")
+level = 1
+industrySector = 1
+productionType = 2
+productionAmount = 1
+ingredientType0 = 0
+ingredientType0_Amount = 2
+ingredientType1 = 1
+ingredientType1_Amount = 1
+
+[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Steel Mill"]
+one_shot = true
+
+[node name="Gun Factory" type="Node" parent="PlayerNation/Industry"]
+script = ExtResource("5_2rvh2")
+level = 1
+industrySector = 2
+productionType = 3
+productionAmount = 10
+ingredientType0 = 2
+ingredientType0_Amount = 2
+
+[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Gun Factory"]
+one_shot = true
+
+[node name="Cannon Factory" type="Node" parent="PlayerNation/Industry"]
+script = ExtResource("5_2rvh2")
+level = 1
+industrySector = 2
+productionType = 4
+productionAmount = 1
+ingredientType0 = 2
+ingredientType0_Amount = 1
+
+[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Cannon Factory"]
+one_shot = true
+
+[node name="Tank Factory" type="Node" parent="PlayerNation/Industry"]
+script = ExtResource("5_2rvh2")
+level = 1
+industrySector = 2
+productionType = 5
+productionAmount = 1
+ingredientType0 = 2
+ingredientType0_Amount = 1
+ingredientType1 = 4
+ingredientType1_Amount = 1
+
+[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Tank Factory"]
+one_shot = true
+
+[node name="Ammo Factory" type="Node" parent="PlayerNation/Industry"]
+script = ExtResource("5_2rvh2")
+level = 1
+industrySector = 2
+productionType = 6
+productionAmount = 10
+ingredientType0 = 2
+ingredientType0_Amount = 1
+
+[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Ammo Factory"]
+one_shot = true
+
+[node name="World" type="Node2D" parent="."]
+position = Vector2(790, 825)
+
+[node name="PlayerHQ" type="StaticBody2D" parent="World"]
+position = Vector2(-764, -38)
+collision_mask = 0
+script = ExtResource("5_ajpi1")
+autoSpawn = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PlayerHQ"]
+shape = SubResource("RectangleShape2D_4wbwj")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/PlayerHQ"]
+texture = SubResource("PlaceholderTexture2D_r7yqw")
+
+[node name="SpawnTimer" type="Timer" parent="World/PlayerHQ"]
+process_callback = 0
+wait_time = 2.0
+
+[node name="SpawnTimer2" type="Timer" parent="World/PlayerHQ"]
+process_callback = 0
+wait_time = 10.0
+
+[node name="EnemyHQ" type="StaticBody2D" parent="World"]
+position = Vector2(783, -37)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("5_ajpi1")
+isPlayerHQ = false
+autoSpawn = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/EnemyHQ"]
+shape = SubResource("RectangleShape2D_4wbwj")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/EnemyHQ"]
+texture = SubResource("PlaceholderTexture2D_r7yqw")
+
+[node name="SpawnTimer" type="Timer" parent="World/EnemyHQ"]
+process_callback = 0
+wait_time = 2.0
+
+[node name="SpawnTimer2" type="Timer" parent="World/EnemyHQ"]
+process_callback = 0
+wait_time = 10.0
+
+[node name="Ground" type="StaticBody2D" parent="World"]
+position = Vector2(-874, 15)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Ground"]
+position = Vector2(894.5, 38)
+shape = SubResource("RectangleShape2D_tbgo0")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Ground"]
+self_modulate = Color(0.137255, 0.137255, 0.137255, 1)
+z_index = -10
+position = Vector2(890, 29)
+scale = Vector2(50.4444, 3.94444)
+texture = ExtResource("8_5i8bs")
+
+[node name="CommandMarkers" type="Node2D" parent="World"]
+
+[node name="InfantryMarker" type="CharacterBody2D" parent="World/CommandMarkers"]
+z_index = 10
+position = Vector2(-391, -168)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("12_ut6k3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/CommandMarkers/InfantryMarker"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_6yqvg")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/InfantryMarker"]
+z_index = 10
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_o5a4t")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/InfantryMarker/Sprite2D"]
+position = Vector2(4, -28)
+scale = Vector2(1.33333, 1)
+texture = ExtResource("8_5i8bs")
+
+[node name="HighlightSprite" type="Sprite2D" parent="World/CommandMarkers/InfantryMarker"]
+z_index = 9
+position = Vector2(-12.5, 9.53674e-07)
+scale = Vector2(0.194445, 1.38889)
+texture = ExtResource("8_5i8bs")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/InfantryMarker/HighlightSprite"]
+position = Vector2(66.8569, -10.08)
+scale = Vector2(4.42856, 0.440002)
+texture = ExtResource("8_5i8bs")
+
+[node name="ArtilleryMarker" type="CharacterBody2D" parent="World/CommandMarkers"]
+position = Vector2(-152, -171)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("12_ut6k3")
+type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/CommandMarkers/ArtilleryMarker"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_6yqvg")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArtilleryMarker"]
+z_index = 10
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_o5a4t")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArtilleryMarker/Sprite2D"]
+position = Vector2(4, -28)
+scale = Vector2(1.33333, 1)
+texture = ExtResource("8_5i8bs")
+
+[node name="HighlightSprite" type="Sprite2D" parent="World/CommandMarkers/ArtilleryMarker"]
+z_index = 9
+position = Vector2(-12.5, 9.53674e-07)
+scale = Vector2(0.194445, 1.38889)
+texture = ExtResource("8_5i8bs")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArtilleryMarker/HighlightSprite"]
+position = Vector2(66.8569, -10.08)
+scale = Vector2(4.42856, 0.440002)
+texture = ExtResource("8_5i8bs")
+
+[node name="ArmorMarker" type="CharacterBody2D" parent="World/CommandMarkers"]
+position = Vector2(-309, -172)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("12_ut6k3")
+type = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/CommandMarkers/ArmorMarker"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_6yqvg")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArmorMarker"]
+z_index = 10
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_o5a4t")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArmorMarker/Sprite2D"]
+position = Vector2(4, -28)
+scale = Vector2(1.33333, 1)
+texture = ExtResource("8_5i8bs")
+
+[node name="HighlightSprite" type="Sprite2D" parent="World/CommandMarkers/ArmorMarker"]
+z_index = 9
+position = Vector2(-12.5, 9.53674e-07)
+scale = Vector2(0.194445, 1.38889)
+texture = ExtResource("8_5i8bs")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArmorMarker/HighlightSprite"]
+position = Vector2(66.8569, -10.08)
+scale = Vector2(4.42856, 0.440002)
+texture = ExtResource("8_5i8bs")
+
+[node name="AntiTankMarker" type="CharacterBody2D" parent="World/CommandMarkers"]
+z_index = 10
+position = Vector2(-234, -172)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("12_ut6k3")
+type = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/CommandMarkers/AntiTankMarker"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_6yqvg")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/AntiTankMarker"]
+z_index = 10
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_o5a4t")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/AntiTankMarker/Sprite2D"]
+position = Vector2(4, -28)
+scale = Vector2(1.33333, 1)
+texture = ExtResource("8_5i8bs")
+
+[node name="HighlightSprite" type="Sprite2D" parent="World/CommandMarkers/AntiTankMarker"]
+z_index = 9
+position = Vector2(-12.5, 9.53674e-07)
+scale = Vector2(0.194445, 1.38889)
+texture = ExtResource("8_5i8bs")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/AntiTankMarker/HighlightSprite"]
+position = Vector2(66.8569, -10.08)
+scale = Vector2(4.42856, 0.440002)
+texture = ExtResource("8_5i8bs")
+
+[connection signal="pressed" from="OrderTab/OffensiveButton" to="OrderTab" method="_on_set_all_button_pressed" binds= [0]]
+[connection signal="pressed" from="OrderTab/DefensiveButton" to="OrderTab" method="_on_set_all_button_pressed" binds= [1]]
+[connection signal="pressed" from="OrderTab/RetreatButton" to="OrderTab" method="_on_set_all_button_pressed" binds= [2]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Infantry/MarkerSelect" to="OrderTab" method="_on_marker_select_pressed" binds= [0]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Infantry/OffensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [0, 0]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Infantry/DefensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [0, 1]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Infantry/RetreatButton" to="OrderTab" method="_on_order_button_pressed" binds= [0, 2]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Artillery/MarkerSelect" to="OrderTab" method="_on_marker_select_pressed" binds= [1]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Artillery/OffensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [1, 0]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Artillery/DefensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [1, 1]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Artillery/RetreatButton" to="OrderTab" method="_on_order_button_pressed" binds= [1, 2]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Armored/MarkerSelect" to="OrderTab" method="_on_marker_select_pressed" binds= [2]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Armored/OffensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [2, 0]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Armored/DefensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [2, 1]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Armored/RetreatButton" to="OrderTab" method="_on_order_button_pressed" binds= [2, 2]]
+[connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/MarkerSelect" to="OrderTab" method="_on_marker_select_pressed" binds= [3]]
+[connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/OffensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [3, 0]]
+[connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/DefensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [3, 1]]
+[connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/RetreatButton" to="OrderTab" method="_on_order_button_pressed" binds= [3, 2]]
+[connection signal="timeout" from="World/PlayerHQ/SpawnTimer" to="World/PlayerHQ" method="SpawnUnit" binds= [0]]
+[connection signal="timeout" from="World/PlayerHQ/SpawnTimer2" to="World/PlayerHQ" method="SpawnUnit" binds= [1]]
+[connection signal="timeout" from="World/EnemyHQ/SpawnTimer" to="World/EnemyHQ" method="SpawnUnit" binds= [0]]
+[connection signal="timeout" from="World/EnemyHQ/SpawnTimer2" to="World/EnemyHQ" method="SpawnUnit" binds= [1]]

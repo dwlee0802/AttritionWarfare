@@ -135,6 +135,7 @@ func ReceiveHit(amount, pene = 0):
 		hitPoints -= amount
 		Game.MakeDamagePopup(str(amount), global_position, Color.RED)
 		hitAnimationPlayer.play("hit_animation")
+		ChangeEntrenchment(-1)
 	else:
 		Game.MakeDamagePopup("MISS", global_position, Color.RED)
 		
