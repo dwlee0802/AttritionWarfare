@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cs4m7ujm8tafu"]
 
-[ext_resource type="Script" path="res://MapTile.gd" id="1_3vcob"]
+[ext_resource type="Script" path="res://Scripts/MapTile.gd" id="1_3vcob"]
 [ext_resource type="Texture2D" uid="uid://b3tukx4fv5uhk" path="res://Art/36x36_white_square.png" id="2_8t0tf"]
 
 [node name="MapTile" type="Node2D"]
