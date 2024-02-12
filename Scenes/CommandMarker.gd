@@ -11,6 +11,8 @@ static var locationDict = {
 @export var isAllCommand: bool = false
 @export var type: Enums.UnitType = Enums.UnitType.Infantry
 
+@onready var highlightSprite: Sprite2D = $HighlightSprite
+
 
 func _ready():
 	if isAllCommand:
@@ -21,6 +23,8 @@ func _ready():
 		$Sprite2D/Sprite2D.self_modulate = Color.DARK_RED
 	elif type == Enums.UnitType.Armored:
 		$Sprite2D/Sprite2D.self_modulate = Color.DIM_GRAY
+	elif type == Enums.UnitType.Antitank:
+		$Sprite2D/Sprite2D.self_modulate = Color.DARK_ORANGE
 		
 		
 func _physics_process(delta):
@@ -34,3 +38,5 @@ func _physics_process(delta):
 		CommandMarker.location = global_position.x
 	else:
 		locationDict[type] = global_position.x
+	
+	highlightSprite.visible = (OrderTab.selectedType == type)

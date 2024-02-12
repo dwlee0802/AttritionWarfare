@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bvyo1sjvno0yx"]
+[gd_scene load_steps=31 format=3 uid="uid://bvyo1sjvno0yx"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_haicd"]
 [ext_resource type="Script" path="res://Scripts/IndustryTab.gd" id="2_acc5o"]
@@ -18,6 +18,38 @@
 [ext_resource type="ButtonGroup" uid="uid://cw040k3tugkfl" path="res://antitank_order_button_group.tres" id="11_tirxr"]
 [ext_resource type="Texture2D" uid="uid://davaigtjle0l3" path="res://Art/offense_marker.png" id="12_o5a4t"]
 [ext_resource type="Script" path="res://Scenes/CommandMarker.gd" id="12_ut6k3"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_2uyt1"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_pio1f"]
+events = [SubResource("InputEventKey_2uyt1")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_wmgr1"]
+device = -1
+keycode = 50
+unicode = 50
+
+[sub_resource type="Shortcut" id="Shortcut_iakw8"]
+events = [SubResource("InputEventKey_wmgr1")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_e0jhn"]
+device = -1
+keycode = 51
+unicode = 51
+
+[sub_resource type="Shortcut" id="Shortcut_ib1jv"]
+events = [SubResource("InputEventKey_e0jhn")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_e0g0s"]
+device = -1
+keycode = 52
+unicode = 52
+
+[sub_resource type="Shortcut" id="Shortcut_ercos"]
+events = [SubResource("InputEventKey_e0g0s")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wbwj"]
 size = Vector2(50, 49)
@@ -549,7 +581,9 @@ offset_top = -4.0
 offset_right = 192.0
 offset_bottom = 27.0
 toggle_mode = true
+button_pressed = true
 button_group = ExtResource("7_s52m0")
+shortcut = SubResource("Shortcut_pio1f")
 text = "Select Marker"
 
 [node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/Infantry"]
@@ -558,7 +592,6 @@ offset_top = -4.0
 offset_right = 286.0
 offset_bottom = 27.0
 toggle_mode = true
-button_pressed = true
 button_group = ExtResource("8_kimbi")
 text = "Offensive"
 
@@ -568,6 +601,7 @@ offset_top = -4.0
 offset_right = 385.0
 offset_bottom = 27.0
 toggle_mode = true
+button_pressed = true
 button_group = ExtResource("8_kimbi")
 text = "Defensive"
 
@@ -596,6 +630,7 @@ offset_right = 191.0
 offset_bottom = 28.0
 toggle_mode = true
 button_group = ExtResource("7_s52m0")
+shortcut = SubResource("Shortcut_iakw8")
 text = "Select Marker"
 
 [node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/Artillery"]
@@ -604,7 +639,6 @@ offset_top = -3.0
 offset_right = 285.0
 offset_bottom = 28.0
 toggle_mode = true
-button_pressed = true
 button_group = ExtResource("9_l64jy")
 text = "Offensive"
 
@@ -614,6 +648,7 @@ offset_top = -3.0
 offset_right = 384.0
 offset_bottom = 28.0
 toggle_mode = true
+button_pressed = true
 button_group = ExtResource("9_l64jy")
 text = "Defensive"
 
@@ -642,6 +677,7 @@ offset_right = 190.0
 offset_bottom = 28.0
 toggle_mode = true
 button_group = ExtResource("7_s52m0")
+shortcut = SubResource("Shortcut_ib1jv")
 text = "Select Marker"
 
 [node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/Armored"]
@@ -650,7 +686,6 @@ offset_top = -3.0
 offset_right = 284.0
 offset_bottom = 28.0
 toggle_mode = true
-button_pressed = true
 button_group = ExtResource("10_v5opw")
 text = "Offensive"
 
@@ -660,6 +695,7 @@ offset_top = -3.0
 offset_right = 383.0
 offset_bottom = 28.0
 toggle_mode = true
+button_pressed = true
 button_group = ExtResource("10_v5opw")
 text = "Defensive"
 
@@ -688,6 +724,7 @@ offset_right = 190.0
 offset_bottom = 28.0
 toggle_mode = true
 button_group = ExtResource("7_s52m0")
+shortcut = SubResource("Shortcut_ercos")
 text = "Select Marker"
 
 [node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/AntiTank"]
@@ -696,7 +733,6 @@ offset_top = -3.0
 offset_right = 284.0
 offset_bottom = 28.0
 toggle_mode = true
-button_pressed = true
 button_group = ExtResource("11_tirxr")
 text = "Offensive"
 
@@ -706,6 +742,7 @@ offset_top = -3.0
 offset_right = 383.0
 offset_bottom = 28.0
 toggle_mode = true
+button_pressed = true
 button_group = ExtResource("11_tirxr")
 text = "Defensive"
 
@@ -1052,7 +1089,8 @@ texture = ExtResource("8_5i8bs")
 [node name="CommandMarkers" type="Node2D" parent="World"]
 
 [node name="InfantryMarker" type="CharacterBody2D" parent="World/CommandMarkers"]
-position = Vector2(-332, -151)
+z_index = 10
+position = Vector2(-391, -168)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("12_ut6k3")
@@ -1062,6 +1100,7 @@ position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_6yqvg")
 
 [node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/InfantryMarker"]
+z_index = 10
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("12_o5a4t")
 
@@ -1070,8 +1109,19 @@ position = Vector2(4, -28)
 scale = Vector2(1.33333, 1)
 texture = ExtResource("8_5i8bs")
 
+[node name="HighlightSprite" type="Sprite2D" parent="World/CommandMarkers/InfantryMarker"]
+z_index = 9
+position = Vector2(-12.5, 9.53674e-07)
+scale = Vector2(0.194445, 1.38889)
+texture = ExtResource("8_5i8bs")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/InfantryMarker/HighlightSprite"]
+position = Vector2(66.8569, -10.08)
+scale = Vector2(4.42856, 0.440002)
+texture = ExtResource("8_5i8bs")
+
 [node name="ArtilleryMarker" type="CharacterBody2D" parent="World/CommandMarkers"]
-position = Vector2(-93, -154)
+position = Vector2(-152, -171)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("12_ut6k3")
@@ -1082,6 +1132,7 @@ position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_6yqvg")
 
 [node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArtilleryMarker"]
+z_index = 10
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("12_o5a4t")
 
@@ -1090,8 +1141,19 @@ position = Vector2(4, -28)
 scale = Vector2(1.33333, 1)
 texture = ExtResource("8_5i8bs")
 
+[node name="HighlightSprite" type="Sprite2D" parent="World/CommandMarkers/ArtilleryMarker"]
+z_index = 9
+position = Vector2(-12.5, 9.53674e-07)
+scale = Vector2(0.194445, 1.38889)
+texture = ExtResource("8_5i8bs")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArtilleryMarker/HighlightSprite"]
+position = Vector2(66.8569, -10.08)
+scale = Vector2(4.42856, 0.440002)
+texture = ExtResource("8_5i8bs")
+
 [node name="ArmorMarker" type="CharacterBody2D" parent="World/CommandMarkers"]
-position = Vector2(-250, -155)
+position = Vector2(-309, -172)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("12_ut6k3")
@@ -1102,12 +1164,57 @@ position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_6yqvg")
 
 [node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArmorMarker"]
+z_index = 10
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("12_o5a4t")
 
 [node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArmorMarker/Sprite2D"]
 position = Vector2(4, -28)
 scale = Vector2(1.33333, 1)
+texture = ExtResource("8_5i8bs")
+
+[node name="HighlightSprite" type="Sprite2D" parent="World/CommandMarkers/ArmorMarker"]
+z_index = 9
+position = Vector2(-12.5, 9.53674e-07)
+scale = Vector2(0.194445, 1.38889)
+texture = ExtResource("8_5i8bs")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArmorMarker/HighlightSprite"]
+position = Vector2(66.8569, -10.08)
+scale = Vector2(4.42856, 0.440002)
+texture = ExtResource("8_5i8bs")
+
+[node name="AntiTankMarker" type="CharacterBody2D" parent="World/CommandMarkers"]
+z_index = 10
+position = Vector2(-234, -172)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("12_ut6k3")
+type = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/CommandMarkers/AntiTankMarker"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_6yqvg")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/AntiTankMarker"]
+z_index = 10
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_o5a4t")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/AntiTankMarker/Sprite2D"]
+position = Vector2(4, -28)
+scale = Vector2(1.33333, 1)
+texture = ExtResource("8_5i8bs")
+
+[node name="HighlightSprite" type="Sprite2D" parent="World/CommandMarkers/AntiTankMarker"]
+z_index = 9
+position = Vector2(-12.5, 9.53674e-07)
+scale = Vector2(0.194445, 1.38889)
+texture = ExtResource("8_5i8bs")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/AntiTankMarker/HighlightSprite"]
+position = Vector2(66.8569, -10.08)
+scale = Vector2(4.42856, 0.440002)
 texture = ExtResource("8_5i8bs")
 
 [connection signal="pressed" from="OrderTab/OffensiveButton" to="OrderTab" method="_on_set_all_button_pressed" binds= [0]]
