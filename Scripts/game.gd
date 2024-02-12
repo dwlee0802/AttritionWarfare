@@ -5,6 +5,8 @@ static var playerNation: Nation
 
 static var deathEffect = preload("res://Scenes/death_effect.tscn")
 
+static var damagePopup = preload("res://Scenes/damage_popup.tscn")
+
 static var gameInstance: Game
 
 
@@ -23,3 +25,11 @@ static func MakeDeathEffect(where):
 	var newEff = deathEffect.instantiate()
 	newEff.global_position = where
 	gameInstance.add_child(newEff)
+
+
+static func MakeDamagePopup(text, where, color = Color.RED):
+	var newPopup = damagePopup.instantiate()
+	newPopup.get_node("Label").text = text
+	newPopup.modulate = color
+	newPopup.global_position = where
+	gameInstance.add_child(newPopup)

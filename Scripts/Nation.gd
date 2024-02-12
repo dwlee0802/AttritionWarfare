@@ -53,6 +53,8 @@ func ProcessSupplyOrders():
 				
 			var averageAmount: float = resources[type] / len(supplyOrders[type][MAX_PRIORITY_LEVEL - level - 1])
 			for order: SupplyOrder in supplyOrders[type][MAX_PRIORITY_LEVEL - level - 1]:
+				if !is_instance_valid(order.origin):
+					continue
 				if averageAmount > order.amount:
 					order.origin.AddIngredient(type, order.amount)
 					resources[type] -= order.amount

@@ -37,7 +37,9 @@ func _ready():
 			$IngredientIcons/Label3.text = Enums.GoodTypeToString(industry.ingredientType2)
 		else:
 			$IngredientIcons/Label3.visible = false
-
+		
+		industry.good_produced.connect(MakeProductionPopup)
+		
 
 func _process(delta):
 	if industry != null:
@@ -94,3 +96,7 @@ func _on_change_priority_button_pressed(extra_arg_0):
 			return
 		else:
 			industry.supplyPriorityLevel -= 1
+
+
+func MakeProductionPopup():
+	Game.MakeDamagePopup(Enums.GoodTypeToString(industry.productionType) + " +" + str(industry.productionAmount), global_position, Color.GREEN)

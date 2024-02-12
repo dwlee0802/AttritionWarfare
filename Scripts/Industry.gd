@@ -37,6 +37,7 @@ var ingredientType2_available: bool = false
 
 var allIngredientsAvailable:bool = false
 
+signal good_produced
 
 
 # Called when the node enters the scene tree for the first time.
@@ -86,6 +87,8 @@ func Production():
 	ingredientType0_Received = false
 	ingredientType1_Received = false
 	ingredientType2_Received = false
+	
+	good_produced.emit()
 	
 	
 # Checks if ingredients are sufficient to produce good

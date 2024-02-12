@@ -114,7 +114,7 @@ func FindClosest(units):
 		
 func ReceiveHit(amount):
 	hitPoints -= amount
-	MakeDamagePopup(str(amount))
+	Game.MakeDamagePopup(str(amount), global_position, Color.RED)
 	hitAnimationPlayer.play("hit_animation")
 	if hitPoints < 0:
 		queue_free()
