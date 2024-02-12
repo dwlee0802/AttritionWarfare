@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_dyum4")
 unitType = 2
-hitPoints = 200
-attackRange = 250
+hitPoints = 300
+attackRange = 300
 minAttackRange = 0
 minDamage = 20
 maxDamage = 40
@@ -15,3 +15,4 @@ speed = 70
 splashDamage = false
 splashRange = 100
 indirectFire = false
+supplyConsumptionType = 11

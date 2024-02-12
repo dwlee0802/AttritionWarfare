@@ -22,18 +22,14 @@ var queuedAmount: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Set cost label
-	var costText = ""
-	if ingredientType_1 != Enums.GoodType.None:
-		costText += Enums.GoodTypeToString(ingredientType_1) + " " + str(ingredientAmount_1)
-	if ingredientType_2 != Enums.GoodType.None:
-		costText += "\n" + Enums.GoodTypeToString(ingredientType_2) + " " + str(ingredientAmount_2)
-	costLabel.text = costText
+	UpdateIngredientAmount()
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	queuedAmountLabel.text = str(queuedAmount)
 	UpdateCooldownShadow(spawnTimer.time_left / spawnTimer.wait_time)
+	cooldownLabel.text = str(spawnCooldown) + "s"
 	
 	if queuedAmount > 0 and spawnTimer.time_left <= 0:
 		if !Game.playerNation.CheckResourceAvailable(ingredientType_1, ingredientAmount_1):
@@ -61,3 +57,13 @@ func _pressed():
 func UpdateCooldownShadow(percent):
 	cooldownShadow.size = Vector2(buttonSize, buttonSize * percent)
 	cooldownShadow.position = Vector2(0, buttonSize -  buttonSize * percent)
+
+
+func UpdateIngredientAmount():
+	# Set cost label
+	var costText = ""
+	if ingredientType_1 != Enums.GoodType.None:
+		costText += Enums.GoodTypeToString(ingredientType_1) + " " + str(ingredientAmount_1)
+	if ingredientType_2 != Enums.GoodType.None:
+		costText += "\n" + Enums.GoodTypeToString(ingredientType_2) + " " + str(ingredientAmount_2)
+	costLabel.text = costText

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bvyo1sjvno0yx"]
+[gd_scene load_steps=23 format=3 uid="uid://bvyo1sjvno0yx"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_haicd"]
 [ext_resource type="Script" path="res://Scripts/IndustryTab.gd" id="2_acc5o"]
@@ -9,9 +9,13 @@
 [ext_resource type="Script" path="res://Scripts/HQ.gd" id="5_ajpi1"]
 [ext_resource type="Script" path="res://Scripts/Stock.gd" id="5_lrjik"]
 [ext_resource type="Script" path="res://Scripts/OrderTab.gd" id="6_ulhe2"]
-[ext_resource type="ButtonGroup" uid="uid://d1uus8mywvv68" path="res://order_button_group.tres" id="6_wm73h"]
+[ext_resource type="ButtonGroup" uid="uid://c7l5vsk0ni74e" path="res://marker_button_group.tres" id="7_s52m0"]
 [ext_resource type="Texture2D" uid="uid://b3tukx4fv5uhk" path="res://Art/36x36_white_square.png" id="8_5i8bs"]
+[ext_resource type="ButtonGroup" uid="uid://c3u3xvvkxi4i8" path="res://infantry_order_button_group.tres" id="8_kimbi"]
 [ext_resource type="Script" path="res://Scripts/SpawnButton.gd" id="9_k6hm2"]
+[ext_resource type="ButtonGroup" uid="uid://wj5dpb8njxdy" path="res://artillery_order_button_group.tres" id="9_l64jy"]
+[ext_resource type="ButtonGroup" uid="uid://6mx1hky7l8wr" path="res://armored_order_button_group.tres" id="10_v5opw"]
+[ext_resource type="ButtonGroup" uid="uid://cw040k3tugkfl" path="res://antitank_order_button_group.tres" id="11_tirxr"]
 [ext_resource type="Texture2D" uid="uid://davaigtjle0l3" path="res://Art/offense_marker.png" id="12_o5a4t"]
 [ext_resource type="Script" path="res://Scenes/CommandMarker.gd" id="12_ut6k3"]
 
@@ -495,49 +499,230 @@ text = "0/min"
 
 [node name="OrderTab" type="Label" parent="."]
 layout_mode = 0
-offset_left = 805.0
-offset_top = 380.0
-offset_right = 851.0
-offset_bottom = 403.0
+offset_left = 800.0
+offset_top = 360.0
+offset_right = 846.0
+offset_bottom = 383.0
 text = "Order"
 script = ExtResource("6_ulhe2")
 
 [node name="OffensiveButton" type="Button" parent="OrderTab"]
 layout_mode = 0
-offset_left = -2.0
-offset_top = 35.0
-offset_right = 80.0
-offset_bottom = 66.0
-toggle_mode = true
-button_pressed = true
-button_group = ExtResource("6_wm73h")
+offset_left = 201.0
+offset_top = 1.0
+offset_right = 283.0
+offset_bottom = 32.0
 text = "Offensive"
 
 [node name="DefensiveButton" type="Button" parent="OrderTab"]
 layout_mode = 0
-offset_left = 94.0
-offset_top = 35.0
-offset_right = 179.0
-offset_bottom = 66.0
-toggle_mode = true
-button_group = ExtResource("6_wm73h")
+offset_left = 297.0
+offset_top = 1.0
+offset_right = 382.0
+offset_bottom = 32.0
 text = "Defensive"
 
 [node name="RetreatButton" type="Button" parent="OrderTab"]
 layout_mode = 0
-offset_left = 190.0
-offset_top = 34.0
-offset_right = 275.0
-offset_bottom = 65.0
+offset_left = 393.0
+offset_right = 478.0
+offset_bottom = 31.0
+text = "Retreat"
+
+[node name="MarkerControl" type="Control" parent="OrderTab"]
+anchors_preset = 0
+offset_left = -3.0
+offset_top = 43.0
+offset_right = 37.0
+offset_bottom = 83.0
+
+[node name="Infantry" type="Label" parent="OrderTab/MarkerControl"]
+layout_mode = 0
+offset_right = 63.0
+offset_bottom = 23.0
+text = "Infantry"
+
+[node name="MarkerSelect" type="Button" parent="OrderTab/MarkerControl/Infantry"]
+layout_mode = 0
+offset_left = 77.0
+offset_top = -4.0
+offset_right = 192.0
+offset_bottom = 27.0
 toggle_mode = true
-button_group = ExtResource("6_wm73h")
+button_group = ExtResource("7_s52m0")
+text = "Select Marker"
+
+[node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/Infantry"]
+offset_left = 204.0
+offset_top = -4.0
+offset_right = 286.0
+offset_bottom = 27.0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("8_kimbi")
+text = "Offensive"
+
+[node name="DefensiveButton" type="Button" parent="OrderTab/MarkerControl/Infantry"]
+offset_left = 300.0
+offset_top = -4.0
+offset_right = 385.0
+offset_bottom = 27.0
+toggle_mode = true
+button_group = ExtResource("8_kimbi")
+text = "Defensive"
+
+[node name="RetreatButton" type="Button" parent="OrderTab/MarkerControl/Infantry"]
+offset_left = 396.0
+offset_top = -5.0
+offset_right = 481.0
+offset_bottom = 26.0
+toggle_mode = true
+button_group = ExtResource("8_kimbi")
+text = "Retreat"
+
+[node name="Artillery" type="Label" parent="OrderTab/MarkerControl"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 38.0
+offset_right = 64.0
+offset_bottom = 61.0
+text = "Artillery"
+
+[node name="MarkerSelect" type="Button" parent="OrderTab/MarkerControl/Artillery"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = -3.0
+offset_right = 191.0
+offset_bottom = 28.0
+toggle_mode = true
+button_group = ExtResource("7_s52m0")
+text = "Select Marker"
+
+[node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/Artillery"]
+offset_left = 203.0
+offset_top = -3.0
+offset_right = 285.0
+offset_bottom = 28.0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("9_l64jy")
+text = "Offensive"
+
+[node name="DefensiveButton" type="Button" parent="OrderTab/MarkerControl/Artillery"]
+offset_left = 299.0
+offset_top = -3.0
+offset_right = 384.0
+offset_bottom = 28.0
+toggle_mode = true
+button_group = ExtResource("9_l64jy")
+text = "Defensive"
+
+[node name="RetreatButton" type="Button" parent="OrderTab/MarkerControl/Artillery"]
+offset_left = 395.0
+offset_top = -4.0
+offset_right = 480.0
+offset_bottom = 27.0
+toggle_mode = true
+button_group = ExtResource("9_l64jy")
+text = "Retreat"
+
+[node name="Armored" type="Label" parent="OrderTab/MarkerControl"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 75.0
+offset_right = 65.0
+offset_bottom = 98.0
+text = "Armored"
+
+[node name="MarkerSelect" type="Button" parent="OrderTab/MarkerControl/Armored"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = -3.0
+offset_right = 190.0
+offset_bottom = 28.0
+toggle_mode = true
+button_group = ExtResource("7_s52m0")
+text = "Select Marker"
+
+[node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/Armored"]
+offset_left = 202.0
+offset_top = -3.0
+offset_right = 284.0
+offset_bottom = 28.0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("10_v5opw")
+text = "Offensive"
+
+[node name="DefensiveButton" type="Button" parent="OrderTab/MarkerControl/Armored"]
+offset_left = 298.0
+offset_top = -3.0
+offset_right = 383.0
+offset_bottom = 28.0
+toggle_mode = true
+button_group = ExtResource("10_v5opw")
+text = "Defensive"
+
+[node name="RetreatButton" type="Button" parent="OrderTab/MarkerControl/Armored"]
+offset_left = 394.0
+offset_top = -4.0
+offset_right = 479.0
+offset_bottom = 27.0
+toggle_mode = true
+button_group = ExtResource("10_v5opw")
+text = "Retreat"
+
+[node name="AntiTank" type="Label" parent="OrderTab/MarkerControl"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 111.0
+offset_right = 72.0
+offset_bottom = 134.0
+text = "AntiTank"
+
+[node name="MarkerSelect" type="Button" parent="OrderTab/MarkerControl/AntiTank"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = -3.0
+offset_right = 190.0
+offset_bottom = 28.0
+toggle_mode = true
+button_group = ExtResource("7_s52m0")
+text = "Select Marker"
+
+[node name="OffensiveButton" type="Button" parent="OrderTab/MarkerControl/AntiTank"]
+offset_left = 202.0
+offset_top = -3.0
+offset_right = 284.0
+offset_bottom = 28.0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("11_tirxr")
+text = "Offensive"
+
+[node name="DefensiveButton" type="Button" parent="OrderTab/MarkerControl/AntiTank"]
+offset_left = 298.0
+offset_top = -3.0
+offset_right = 383.0
+offset_bottom = 28.0
+toggle_mode = true
+button_group = ExtResource("11_tirxr")
+text = "Defensive"
+
+[node name="RetreatButton" type="Button" parent="OrderTab/MarkerControl/AntiTank"]
+offset_left = 394.0
+offset_top = -4.0
+offset_right = 479.0
+offset_bottom = 27.0
+toggle_mode = true
+button_group = ExtResource("11_tirxr")
 text = "Retreat"
 
 [node name="SpawnTab" type="Label" parent="OrderTab"]
 layout_mode = 0
-offset_top = 84.0
+offset_top = 210.0
 offset_right = 412.0
-offset_bottom = 160.0
+offset_bottom = 286.0
 text = "Units"
 
 [node name="InfantrySpawnButton" type="TextureButton" parent="OrderTab/SpawnTab"]
@@ -864,22 +1049,85 @@ position = Vector2(890, 29)
 scale = Vector2(50.4444, 3.94444)
 texture = ExtResource("8_5i8bs")
 
-[node name="CommandMarker" type="CharacterBody2D" parent="World"]
-position = Vector2(0, -150)
-collision_layer = 4
+[node name="CommandMarkers" type="Node2D" parent="World"]
+
+[node name="InfantryMarker" type="CharacterBody2D" parent="World/CommandMarkers"]
+position = Vector2(-332, -151)
+collision_layer = 0
 collision_mask = 4
 script = ExtResource("12_ut6k3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/CommandMarker"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/CommandMarkers/InfantryMarker"]
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_6yqvg")
 
-[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarker"]
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/InfantryMarker"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("12_o5a4t")
 
-[connection signal="pressed" from="OrderTab/OffensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [0]]
-[connection signal="pressed" from="OrderTab/DefensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [1]]
-[connection signal="pressed" from="OrderTab/RetreatButton" to="OrderTab" method="_on_order_button_pressed" binds= [2]]
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/InfantryMarker/Sprite2D"]
+position = Vector2(4, -28)
+scale = Vector2(1.33333, 1)
+texture = ExtResource("8_5i8bs")
+
+[node name="ArtilleryMarker" type="CharacterBody2D" parent="World/CommandMarkers"]
+position = Vector2(-93, -154)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("12_ut6k3")
+type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/CommandMarkers/ArtilleryMarker"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_6yqvg")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArtilleryMarker"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_o5a4t")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArtilleryMarker/Sprite2D"]
+position = Vector2(4, -28)
+scale = Vector2(1.33333, 1)
+texture = ExtResource("8_5i8bs")
+
+[node name="ArmorMarker" type="CharacterBody2D" parent="World/CommandMarkers"]
+position = Vector2(-250, -155)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("12_ut6k3")
+type = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/CommandMarkers/ArmorMarker"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_6yqvg")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArmorMarker"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_o5a4t")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/CommandMarkers/ArmorMarker/Sprite2D"]
+position = Vector2(4, -28)
+scale = Vector2(1.33333, 1)
+texture = ExtResource("8_5i8bs")
+
+[connection signal="pressed" from="OrderTab/OffensiveButton" to="OrderTab" method="_on_set_all_button_pressed" binds= [0]]
+[connection signal="pressed" from="OrderTab/DefensiveButton" to="OrderTab" method="_on_set_all_button_pressed" binds= [1]]
+[connection signal="pressed" from="OrderTab/RetreatButton" to="OrderTab" method="_on_set_all_button_pressed" binds= [2]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Infantry/MarkerSelect" to="OrderTab" method="_on_marker_select_pressed" binds= [0]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Infantry/OffensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [0, 0]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Infantry/DefensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [0, 1]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Infantry/RetreatButton" to="OrderTab" method="_on_order_button_pressed" binds= [0, 2]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Artillery/MarkerSelect" to="OrderTab" method="_on_marker_select_pressed" binds= [1]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Artillery/OffensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [1, 0]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Artillery/DefensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [1, 1]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Artillery/RetreatButton" to="OrderTab" method="_on_order_button_pressed" binds= [1, 2]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Armored/MarkerSelect" to="OrderTab" method="_on_marker_select_pressed" binds= [2]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Armored/OffensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [2, 0]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Armored/DefensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [2, 1]]
+[connection signal="pressed" from="OrderTab/MarkerControl/Armored/RetreatButton" to="OrderTab" method="_on_order_button_pressed" binds= [2, 2]]
+[connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/MarkerSelect" to="OrderTab" method="_on_marker_select_pressed" binds= [3]]
+[connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/OffensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [3, 0]]
+[connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/DefensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [3, 1]]
+[connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/RetreatButton" to="OrderTab" method="_on_order_button_pressed" binds= [3, 2]]
 [connection signal="timeout" from="World/EnemyHQ/SpawnTimer" to="World/EnemyHQ" method="SpawnUnit" binds= [0]]
 [connection signal="timeout" from="World/EnemyHQ/SpawnTimer2" to="World/EnemyHQ" method="SpawnUnit" binds= [1]]

@@ -67,7 +67,7 @@ func SetStats(data: UnitData):
 func _physics_process(delta):
 	var results = attackArea.get_overlapping_bodies()
 	
-	if len(results) > 0:
+	if OrderTab.orderDict[unitData.unitType] != Enums.OrderType.Retreat and len(results) > 0:
 		attackTarget = FindClosest(results)
 		if attackTimer.is_stopped():
 			attackTimer.start(attackSpeed)
@@ -80,12 +80,12 @@ func _physics_process(delta):
 			velocity *= -1
 		else:
 			# garrison at command marker
-			if OrderTab.order == Enums.OrderType.Defensive:
+			if OrderTab.orderDict[unitData.unitType] == Enums.OrderType.Defensive:
 				# if in front of marker, go back
-				if global_position.x >= CommandMarker.location:
+				if global_position.x >= CommandMarker.locationDict[unitData.unitType]:
 					velocity *= -1
-			# go back regardless of marker position
-			if OrderTab.order == Enums.OrderType.Retreat:
+			# go back regardless of marker positionf
+			if OrderTab.orderDict[unitData.unitType] == Enums.OrderType.Retreat:
 				if global_position.x > Game.playerNation.hq.global_position.x:
 					velocity *= -1
 				else:
