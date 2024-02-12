@@ -27,6 +27,10 @@ var unitData: UnitData
 
 @onready var supplyTimer = $SupplyTimer
 
+var entrenchment: float = 0
+var maxEntrenchment: float = 25
+@onready var entrenchmentBar: ProgressBar = $EntrenchmentBar
+
 
 func _ready():
 	attackArea.get_node("CollisionShape2D").shape.size = Vector2(attackRange, 20)
@@ -36,6 +40,8 @@ func _ready():
 
 func _process(delta):
 	hitPointBar.value = hitPoints
+	entrenchmentBar.max_value = maxEntrenchment
+	entrenchmentBar.value = entrenchment
 
 
 func SetPlayerUnit(val):
@@ -85,6 +91,9 @@ func _physics_process(delta):
 				# if in front of marker, go back
 				if global_position.x >= CommandMarker.locationDict[unitData.unitType]:
 					velocity *= -1
+				elif abs(global_position.x - CommandMarker.locationDict[unitData.unitType]) < 1:
+					ChangeEntrenchment(delta)
+					return
 			# go back regardless of marker positionf
 			if OrderTab.orderDict[unitData.unitType] == Enums.OrderType.Retreat:
 				if global_position.x > Game.playerNation.hq.global_position.x:
@@ -93,7 +102,8 @@ func _physics_process(delta):
 					return
 			
 		move_and_slide()
-		
+		ChangeEntrenchment(-delta)
+
 
 func FindClosest(units):
 	if len(units) == 0:
@@ -115,7 +125,7 @@ func FindClosest(units):
 		
 func ReceiveHit(amount, pene = 0):
 	# check if defense succeeded
-	var effDefense = defense - pene
+	var effDefense = defense - pene + entrenchment
 	if effDefense < 0:
 		effDefense = 0
 	if effDefense > 100:
@@ -141,6 +151,14 @@ func AddHP(amount):
 		hitPoints = unitData.hitPoints
 		
 
+func ChangeEntrenchment(amount):
+	entrenchment += amount
+	if entrenchment < 0:
+		entrenchment = 0
+	if entrenchment > maxEntrenchment:
+		entrenchment = maxEntrenchment
+	
+	
 func MakeDamagePopup(text, color = Color.RED):
 	var newPopup = damagePopup.instantiate()
 	newPopup.get_node("Label").text = text
