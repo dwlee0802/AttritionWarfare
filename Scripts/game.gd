@@ -2,6 +2,7 @@ extends Control
 class_name Game
 
 static var playerNation: Nation
+static var enemyNation: Nation
 
 static var deathEffect = preload("res://Scenes/death_effect.tscn")
 
@@ -13,6 +14,7 @@ static var gameInstance: Game
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.playerNation = $PlayerNation
+	self.enemyNation = $EnemyNation
 	self.gameInstance = self
 	
 	

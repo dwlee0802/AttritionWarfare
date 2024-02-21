@@ -32,11 +32,16 @@ var entrenchment: float = 0
 var maxEntrenchment: float = 25
 @onready var entrenchmentBar: ProgressBar = $EntrenchmentBar
 
+# movement related variables
+var target_position: float
+static var POSITION_ERROR = 5
+
 
 func _ready():
 	attackArea.get_node("CollisionShape2D").shape.size = Vector2(attackRange, 20)
 	SetPlayerUnit(isPlayerUnit)
 	hitPointBar.max_value = hitPoints
+	target_position = global_position.x
 	
 
 func _process(delta):
@@ -82,30 +87,19 @@ func _physics_process(delta):
 		if attackTimer.is_stopped():
 			attackTimer.start(1/ attackSpeed)
 	else:
+		# stop attack timer
 		if !attackTimer.is_stopped():
 			attackTimer.stop()
-			
-		velocity = Vector2.RIGHT * speed
-		if !isPlayerUnit:
-			velocity *= -1
+		
+		UpdateTargetPosition()
+		
+		if UpdateVelocity():
+			print(target_position)
+			ChangeEntrenchment(delta)
 		else:
-			# garrison at command marker
-			if OrderTab.orderDict[unitData.unitType] == Enums.OrderType.Defensive:
-				# if in front of marker, go back
-				if global_position.x >= CommandMarker.locationDict[unitData.unitType]:
-					velocity *= -1
-				elif abs(global_position.x - CommandMarker.locationDict[unitData.unitType]) < 1:
-					ChangeEntrenchment(delta)
-					return
-			# go back regardless of marker positionf
-			if OrderTab.orderDict[unitData.unitType] == Enums.OrderType.Retreat:
-				if global_position.x > Game.playerNation.hq.global_position.x:
-					velocity *= -1
-				else:
-					return
+			ChangeEntrenchment(-delta)
 			
 		move_and_slide()
-		ChangeEntrenchment(-delta)
 
 
 func FindClosest(units):
@@ -213,3 +207,32 @@ func _on_maintenance_timer_timeout():
 
 func GetHPRatio() -> float:
 	return hitPoints / unitData.hitPoints
+	
+	
+func UpdateTargetPosition():
+	if isPlayerUnit:
+		if OrderTab.orderDict[unitData.unitType] == Enums.OrderType.Retreat:
+			target_position = Game.playerNation.hq.global_position.x
+		
+		if OrderTab.orderDict[unitData.unitType] == Enums.OrderType.Offensive:
+			target_position = Game.enemyNation.hq.global_position.x
+		
+		if OrderTab.orderDict[unitData.unitType] == Enums.OrderType.Defensive:
+			target_position = CommandMarker.locationDict[unitData.unitType]
+	else:
+		target_position = Game.playerNation.hq.global_position.x
+
+
+# returns true if at target position and vice versa
+func UpdateVelocity() -> bool:
+	if abs(target_position - global_position.x) < POSITION_ERROR:
+		velocity = Vector2.ZERO
+		return true
+	else:
+		if target_position > global_position.x:
+			velocity = Vector2.RIGHT
+		else:
+			velocity = Vector2.LEFT
+	
+	velocity *= speed
+	return false
