@@ -65,3 +65,11 @@ text = "[fill]inf: 0[/fill]
 "
 scroll_active = false
 autowrap_mode = 1
+
+[node name="DebugLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = -26.0
+offset_right = 51.0
+offset_bottom = -3.0
+theme_override_font_sizes/font_size = 10

@@ -4,11 +4,16 @@ class_name Block
 @onready var detectionArea: Area2D = $DetectionArea/Area2D
 
 var curCombatWidth: int = 0
-var maxCombatWidth: int = 10
+var maxCombatWidth: int = 1
 
 @onready var contentsLabel: RichTextLabel = $ContentsLabel
 
 var insideUnits
+
+var nextBlock: Block
+var prevBlock: Block
+
+@onready var debugLabel: Label = $DebugLabel
 
 
 # Called when the node enters the scene tree for the first time.
@@ -20,6 +25,7 @@ func _ready():
 func _process(delta):
 	insideUnits = GetUnitsInside()
 	UpdateContentsLabel()
+	debugLabel.text = str(global_position)
 
 
 func UpdateContentsLabel():
@@ -49,11 +55,27 @@ func UpdateContentsLabel():
 func GetUnitsInside():
 	var results = detectionArea.get_overlapping_bodies()
 	var output = []
+	curCombatWidth = 0
 	for unit in results:
 		if unit is Unit:
 			if unit.global_position.x >= global_position.x and unit.global_position.x < global_position.x + size.x:
 				output.append(unit)
-	
-	curCombatWidth = len(output)
+				curCombatWidth += 1
+				unit.currentBlock = self
 	
 	return output
+
+
+func isFull() -> bool:
+	if curCombatWidth < maxCombatWidth:
+		return false
+	else:
+		return true
+
+
+func GivePermission():
+	if curCombatWidth + 1 <= maxCombatWidth:
+		curCombatWidth += 1
+		return true
+	else:
+		return false

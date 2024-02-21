@@ -36,6 +36,10 @@ var maxEntrenchment: float = 25
 var target_position: float
 static var POSITION_ERROR = 5
 
+var currentBlock: Block
+
+@onready var debugLabel: Label = $DebugLabel
+
 
 func _ready():
 	attackArea.get_node("CollisionShape2D").shape.size = Vector2(attackRange, 20)
@@ -48,7 +52,13 @@ func _process(delta):
 	hitPointBar.value = hitPoints
 	entrenchmentBar.max_value = maxEntrenchment
 	entrenchmentBar.value = entrenchment
-
+	
+	# update debug label
+	if currentBlock != null:
+		debugLabel.text = str(currentBlock.global_position)
+	else:
+		debugLabel.text = "NULL"
+	
 
 func SetPlayerUnit(val):
 	isPlayerUnit = val
@@ -94,11 +104,10 @@ func _physics_process(delta):
 		UpdateTargetPosition()
 		
 		if UpdateVelocity():
-			print(target_position)
 			ChangeEntrenchment(delta)
 		else:
 			ChangeEntrenchment(-delta)
-			
+		
 		move_and_slide()
 
 
@@ -225,14 +234,29 @@ func UpdateTargetPosition():
 
 # returns true if at target position and vice versa
 func UpdateVelocity() -> bool:
+	if currentBlock == null:
+		velocity = Vector2.ZERO
+		return true
+		
 	if abs(target_position - global_position.x) < POSITION_ERROR:
 		velocity = Vector2.ZERO
 		return true
 	else:
 		if target_position > global_position.x:
 			velocity = Vector2.RIGHT
+			if currentBlock.nextBlock == null or currentBlock.nextBlock.isFull():
+				velocity = Vector2.ZERO
+			if currentBlock.nextBlock.GivePermission():
+				velocity = Vector2.RIGHT
+			else:
+				velocity = Vector2.ZERO
 		else:
-			velocity = Vector2.LEFT
+			if currentBlock.prevBlock == null or currentBlock.prevBlock.isFull():
+				velocity = Vector2.ZERO
+			if currentBlock.prevBlock.GivePermission():
+				velocity = Vector2.LEFT
+			else:
+				velocity = Vector2.ZERO
 	
 	velocity *= speed
 	return false

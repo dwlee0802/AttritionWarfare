@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bvyo1sjvno0yx"]
+[gd_scene load_steps=31 format=3 uid="uid://bvyo1sjvno0yx"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_haicd"]
 [ext_resource type="Script" path="res://Scripts/IndustryTab.gd" id="2_acc5o"]
@@ -18,6 +18,7 @@
 [ext_resource type="ButtonGroup" uid="uid://cw040k3tugkfl" path="res://Misc/antitank_order_button_group.tres" id="11_tirxr"]
 [ext_resource type="Script" path="res://Scenes/World.gd" id="16_g4x6a"]
 [ext_resource type="PackedScene" uid="uid://vpwwfpyp3c50" path="res://command_marker.tscn" id="17_uqvni"]
+[ext_resource type="Script" path="res://Scenes/Ground.gd" id="18_c33n3"]
 [ext_resource type="PackedScene" uid="uid://ps851n03q6ik" path="res://Scenes/block.tscn" id="19_n67nq"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_2uyt1"]
@@ -1209,6 +1210,7 @@ offset_right = 400.0
 grow_horizontal = 2
 theme_override_constants/separation = 0
 alignment = 1
+script = ExtResource("18_c33n3")
 
 [node name="Block" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2

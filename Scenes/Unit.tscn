@@ -93,6 +93,17 @@ libraries = {
 "": SubResource("AnimationLibrary_3yuxa")
 }
 
+[node name="DebugLabel" type="Label" parent="."]
+z_index = 100
+offset_left = -52.0
+offset_top = -41.0
+offset_right = 58.0
+offset_bottom = -18.0
+theme_override_font_sizes/font_size = 10
+text = "asdfasdfasdfasasdfasd"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="MaintenanceTimer" to="." method="_on_maintenance_timer_timeout"]
 [connection signal="timeout" from="SupplyTimer" to="." method="_on_supply_timer_timeout"]
