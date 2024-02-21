@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ps851n03q6ik"]
+[gd_scene load_steps=5 format=3 uid="uid://ps851n03q6ik"]
 
 [ext_resource type="Texture2D" uid="uid://05ao5cmniruu" path="res://Art/ground_tile.png" id="1_hn2pu"]
 [ext_resource type="Script" path="res://Scripts/Block.gd" id="2_568kp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyq7r"]
 size = Vector2(64, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sc64g"]
+size = Vector2(64, 20)
 
 [node name="Block" type="TextureRect"]
 texture_filter = 1
@@ -15,7 +18,6 @@ texture = ExtResource("1_hn2pu")
 script = ExtResource("2_568kp")
 
 [node name="DetectionArea" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -32,6 +34,14 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea/Area2D"]
 position = Vector2(0, -40.5)
 shape = SubResource("RectangleShape2D_yyq7r")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="DetectionArea"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea/StaticBody2D"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_sc64g")
 
 [node name="ContentsLabel" type="RichTextLabel" parent="."]
 texture_filter = 1

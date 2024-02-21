@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b8ahm4dogxoy5"]
 
 [ext_resource type="Script" path="res://Scripts/Unit.gd" id="1_y5a62"]
-[ext_resource type="Texture2D" uid="uid://b3tukx4fv5uhk" path="res://Art/36x36_white_square.png" id="2_41h6n"]
+[ext_resource type="Texture2D" uid="uid://bweni00tvg2ju" path="res://Art/32x32_white_square.png" id="2_41h6n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kovw2"]
 size = Vector2(32, 32)
@@ -38,10 +38,12 @@ isPlayerUnit = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 process_mode = 1
+z_index = 5
 texture = ExtResource("2_41h6n")
 
 [node name="HitAnimation" type="Sprite2D" parent="."]
 process_mode = 1
+process_priority = 7
 visible = false
 z_index = 1
 texture = ExtResource("2_41h6n")
@@ -61,6 +63,7 @@ process_callback = 0
 
 [node name="HPProgressBar" type="ProgressBar" parent="."]
 self_modulate = Color(0, 0.905882, 0, 1)
+z_index = 15
 offset_left = -20.0
 offset_top = 23.0
 offset_right = 21.0
@@ -70,6 +73,7 @@ show_percentage = false
 
 [node name="EntrenchmentBar" type="ProgressBar" parent="."]
 self_modulate = Color(0.941176, 0.458824, 0, 1)
+z_index = 15
 offset_left = -20.0
 offset_top = 30.0
 offset_right = 21.0
