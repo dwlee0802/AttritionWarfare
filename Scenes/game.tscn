@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bvyo1sjvno0yx"]
+[gd_scene load_steps=30 format=3 uid="uid://bvyo1sjvno0yx"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_haicd"]
 [ext_resource type="Script" path="res://Scripts/IndustryTab.gd" id="2_acc5o"]
@@ -16,6 +16,7 @@
 [ext_resource type="ButtonGroup" uid="uid://wj5dpb8njxdy" path="res://Misc/artillery_order_button_group.tres" id="9_l64jy"]
 [ext_resource type="ButtonGroup" uid="uid://6mx1hky7l8wr" path="res://Misc/armored_order_button_group.tres" id="10_v5opw"]
 [ext_resource type="ButtonGroup" uid="uid://cw040k3tugkfl" path="res://Misc/antitank_order_button_group.tres" id="11_tirxr"]
+[ext_resource type="Script" path="res://Scenes/World.gd" id="16_g4x6a"]
 [ext_resource type="PackedScene" uid="uid://vpwwfpyp3c50" path="res://command_marker.tscn" id="17_uqvni"]
 [ext_resource type="PackedScene" uid="uid://ps851n03q6ik" path="res://Scenes/block.tscn" id="19_n67nq"]
 
@@ -1047,6 +1048,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("16_g4x6a")
 
 [node name="PlayerHQ" type="StaticBody2D" parent="World"]
 position = Vector2(59, 752)
@@ -1116,7 +1118,7 @@ anchors_preset = -1
 anchor_top = 0.8
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 500.0
+offset_right = 400.0
 grow_horizontal = 2
 theme_override_constants/separation = 0
 alignment = 1
