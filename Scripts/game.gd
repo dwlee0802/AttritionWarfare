@@ -22,6 +22,9 @@ func _process(_delta):
 
 
 static func MakeDeathEffect(where):
+	if gameInstance == null:
+		return
+		
 	var newEff = deathEffect.instantiate()
 	newEff.global_position = where
 	gameInstance.add_child(newEff)

@@ -1,9 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b7gsqt4cmfvy8"]
 
 [ext_resource type="Script" path="res://Scripts/Unit.gd" id="1_fnf0i"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_brevo"]
-size = Vector2(32, 32)
+[ext_resource type="Texture2D" uid="uid://bweni00tvg2ju" path="res://Art/32x32_white_square.png" id="2_w5od5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kovw2"]
 size = Vector2(32, 32)
@@ -16,12 +14,15 @@ collision_mask = 0
 script = ExtResource("1_fnf0i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("PlaceholderTexture2D_brevo")
+self_modulate = Color(0.619608, 0, 0, 1)
+texture = ExtResource("2_w5od5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_kovw2")
 
 [node name="AttackArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 

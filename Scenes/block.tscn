@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://ps851n03q6ik"]
+
+[ext_resource type="Texture2D" uid="uid://05ao5cmniruu" path="res://Art/ground_tile.png" id="1_hn2pu"]
+[ext_resource type="Script" path="res://Scripts/Block.gd" id="2_568kp"]
+[ext_resource type="PackedScene" uid="uid://b8ahm4dogxoy5" path="res://Scenes/Unit.tscn" id="3_3y26a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyq7r"]
+size = Vector2(64, 47)
+
+[node name="Block" type="TextureRect"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 128)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_hn2pu")
+script = ExtResource("2_568kp")
+
+[node name="DetectionArea" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Area2D" type="Area2D" parent="DetectionArea"]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea/Area2D"]
+position = Vector2(0, -40.5)
+shape = SubResource("RectangleShape2D_yyq7r")
+
+[node name="ContentsLabel" type="RichTextLabel" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.4
+anchor_right = 0.9
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_separation = -2
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[fill]inf: 0[/fill]
+[fill]arty: 0[/fill]
+[fill]armor: 0[/fill]
+[fill]AT: 0[/fill]
+[fill]Total: 0/9[/fill]
+
+"
+scroll_active = false
+autowrap_mode = 1
+
+[node name="Unit" parent="." instance=ExtResource("3_3y26a")]
+position = Vector2(32, 6)
+speed = 0
+isPlayerUnit = true
+
+[node name="Unit2" parent="." instance=ExtResource("3_3y26a")]
+position = Vector2(32, 6)
+speed = 0
+isPlayerUnit = true
+
+[node name="Unit3" parent="." instance=ExtResource("3_3y26a")]
+position = Vector2(32, 6)
+speed = 0
+isPlayerUnit = true

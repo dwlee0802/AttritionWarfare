@@ -21,7 +21,8 @@ var damageAmount: int = 20
 var attackSpeed: float = 1
 @onready var attackTimer: Timer = $AttackTimer
 var defense: int = 0
-var unitData: UnitData
+
+@export var unitData: UnitData
 
 @onready var hitAnimationPlayer = $HitAnimationPlayer
 
@@ -74,6 +75,9 @@ func SetStats(data: UnitData):
 	
 func _physics_process(delta):
 	var results = attackArea.get_overlapping_bodies()
+	if unitData == null:
+		return
+		
 	if OrderTab.orderDict[unitData.unitType] != Enums.OrderType.Retreat and len(results) > 0:
 		attackTarget = FindClosest(results)
 		if attackTimer.is_stopped():
@@ -194,7 +198,7 @@ func _on_attack_timer_timeout():
 
 # maintenance consumption
 func _on_supply_timer_timeout():
-	if isPlayerUnit:
+	if unitData != null and isPlayerUnit:
 		Game.playerNation.AddSupplyOrder(SupplyOrder.new(self, unitData.supplyConsumptionType, unitData.supplyConsumptionAmount))
 		supplyTimer.start(unitData.supplyConsumptionBaseTime + (global_position.x - Game.playerNation.hq.global_position.x) / 100)
 
@@ -204,7 +208,8 @@ func _exit_tree():
 	
 
 func _on_maintenance_timer_timeout():
-	ReceiveHit(unitData.maintenanceAmount)
+	if unitData != null:
+		ReceiveHit(unitData.maintenanceAmount)
 
 
 func GetHPRatio() -> float:
