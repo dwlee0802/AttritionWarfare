@@ -18,6 +18,7 @@
 [ext_resource type="ButtonGroup" uid="uid://cw040k3tugkfl" path="res://Misc/antitank_order_button_group.tres" id="11_tirxr"]
 [ext_resource type="Texture2D" uid="uid://davaigtjle0l3" path="res://Art/offense_marker.png" id="12_o5a4t"]
 [ext_resource type="Script" path="res://Scenes/CommandMarker.gd" id="12_ut6k3"]
+[ext_resource type="PackedScene" uid="uid://ps851n03q6ik" path="res://Scenes/block.tscn" id="19_n67nq"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_2uyt1"]
 device = -1
@@ -56,9 +57,6 @@ size = Vector2(50, 49)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_r7yqw"]
 size = Vector2(50, 50)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tbgo0"]
-size = Vector2(1809, 130)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6yqvg"]
 size = Vector2(29, 47)
@@ -1045,11 +1043,17 @@ ingredientType0_Amount = 1
 [node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Ammo Factory"]
 one_shot = true
 
-[node name="World" type="Node2D" parent="."]
-position = Vector2(790, 825)
+[node name="World" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="PlayerHQ" type="StaticBody2D" parent="World"]
-position = Vector2(-764, -38)
+position = Vector2(276, 650)
 collision_mask = 0
 script = ExtResource("5_ajpi1")
 autoSpawn = true
@@ -1069,7 +1073,7 @@ process_callback = 0
 wait_time = 10.0
 
 [node name="EnemyHQ" type="StaticBody2D" parent="World"]
-position = Vector2(783, -37)
+position = Vector2(623, 641)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ajpi1")
@@ -1089,22 +1093,6 @@ wait_time = 2.0
 [node name="SpawnTimer2" type="Timer" parent="World/EnemyHQ"]
 process_callback = 0
 wait_time = 10.0
-
-[node name="Ground" type="StaticBody2D" parent="World"]
-position = Vector2(-874, 15)
-collision_layer = 4
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Ground"]
-position = Vector2(894.5, 38)
-shape = SubResource("RectangleShape2D_tbgo0")
-
-[node name="Sprite2D" type="Sprite2D" parent="World/Ground"]
-self_modulate = Color(0.137255, 0.137255, 0.137255, 1)
-z_index = -10
-position = Vector2(890, 29)
-scale = Vector2(50.4444, 3.94444)
-texture = ExtResource("8_5i8bs")
 
 [node name="CommandMarkers" type="Node2D" parent="World"]
 
@@ -1236,6 +1224,113 @@ texture = ExtResource("8_5i8bs")
 position = Vector2(66.8569, -10.08)
 scale = Vector2(4.42856, 0.440002)
 texture = ExtResource("8_5i8bs")
+
+[node name="Ground" type="HBoxContainer" parent="World"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 500.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Block" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block2" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block3" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block4" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block5" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block6" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block7" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block8" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block9" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block10" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block11" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block12" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block13" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block14" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block15" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block16" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block17" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block18" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block19" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block20" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block21" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block22" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block23" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block24" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block25" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block26" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block27" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block28" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block29" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block30" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block31" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
+
+[node name="Block32" parent="World/Ground" instance=ExtResource("19_n67nq")]
+layout_mode = 2
 
 [connection signal="pressed" from="OrderTab/OffensiveButton" to="OrderTab" method="_on_set_all_button_pressed" binds= [0]]
 [connection signal="pressed" from="OrderTab/DefensiveButton" to="OrderTab" method="_on_set_all_button_pressed" binds= [1]]

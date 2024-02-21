@@ -75,8 +75,6 @@ func SetStats(data: UnitData):
 	
 func _physics_process(delta):
 	var results = attackArea.get_overlapping_bodies()
-	if unitData == null:
-		return
 		
 	if OrderTab.orderDict[unitData.unitType] != Enums.OrderType.Retreat and len(results) > 0:
 		attackTarget = FindClosest(results)
