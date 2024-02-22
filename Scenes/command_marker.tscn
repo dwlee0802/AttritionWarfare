@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://vpwwfpyp3c50"]
 
-[ext_resource type="Script" path="res://Scenes/CommandMarker.gd" id="1_cqfnn"]
+[ext_resource type="Script" path="res://Scripts/CommandMarker.gd" id="1_cqfnn"]
 [ext_resource type="Texture2D" uid="uid://davaigtjle0l3" path="res://Art/offense_marker.png" id="2_4fgqu"]
 [ext_resource type="Texture2D" uid="uid://bweni00tvg2ju" path="res://Art/32x32_white_square.png" id="3_2ae52"]
 

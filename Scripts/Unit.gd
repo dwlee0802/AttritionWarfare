@@ -34,9 +34,10 @@ var maxEntrenchment: float = 25
 
 # movement related variables
 var target_position: float
-static var POSITION_ERROR = 5
+static var POSITION_ERROR = 10
 
 var currentBlock: Block
+var hasPermission: bool = false
 
 @onready var debugLabel: Label = $DebugLabel
 var debugStatus: String = ""
@@ -56,6 +57,8 @@ func _process(delta):
 	
 	# update debug label
 	debugLabel.text = debugStatus
+	if currentBlock != null:
+		debugLabel.text += "\n" + str(currentBlock.global_position)
 	
 
 func SetPlayerUnit(val):
@@ -100,8 +103,9 @@ func _physics_process(delta):
 			attackTimer.stop()
 		
 		UpdateTargetPosition()
+		UpdateVelocity()
 		
-		if UpdateVelocity():
+		if velocity == Vector2.ZERO:
 			ChangeEntrenchment(delta)
 		else:
 			ChangeEntrenchment(-delta)
@@ -239,11 +243,14 @@ func UpdateVelocity() -> bool:
 	# stop moving if we are at target position
 	if abs(target_position - global_position.x) < POSITION_ERROR:
 		velocity = Vector2.ZERO
-		debugStatus = "At target location"
+		debugStatus = "At target location" + "\n permission: " + str(hasPermission)
 		return true
 	else:
 		# first, check if we are at current block's center
 		# move to it if not at it
+		# second, check to see if we have permission to move into next block
+		# if we do, go
+		# if we dont, stop but keep checking
 		# we are at the right side of current block
 		#if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
 			#velocity = Vector2.RIGHT
@@ -251,63 +258,79 @@ func UpdateVelocity() -> bool:
 		#elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
 			#velocity = Vector2.LEFT
 		if true:
+			# finish moving to center of current block
 			if AtCurrent():
 				velocity = Vector2.ZERO
 				
-				# check to see if you can move on
-				if currentBlock.nextBlock != null and currentBlock.nextBlock.GivePermission():
-					velocity = Vector2.RIGHT * speed
-					debugStatus = "have permission"
-					currentBlock.nextBlock.tempCombatWidth += 1
-			else:
-				# keep moving if not at current block
-				if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
-					velocity = Vector2.RIGHT * speed
-				elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
-					velocity = Vector2.LEFT * speed
-				return false
-				
-			# check to see if next block is clear only after we finish going to current block
-			# need to go right. target position is to the right of current position.
-			if target_position > global_position.x:
-				velocity = Vector2.RIGHT
-				if currentBlock.nextBlock == null:
-					# keep moving if not at current block
-					if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
-						velocity = Vector2.RIGHT
-					elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
-						velocity = Vector2.LEFT
-					else:
-						velocity = Vector2.ZERO
-				else:
-					if currentBlock.nextBlock.GivePermission():
+				# check to see if we have permission to go on
+				if currentBlock.nextBlock != null:
+					if hasPermission:
+						# dont ask for permission since we have it
 						velocity = Vector2.RIGHT
 						debugStatus = "have permission"
 					else:
-						# keep moving if not at current block
 						debugStatus = "no permission"
-						debugStatus += " moving to current"
-						if abs(global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2) > POSITION_ERROR:
-							#velocity = Vector2.RIGHT
-							velocity = Vector2.ZERO
-						else:
-							debugStatus = "next block blocked"
-							velocity = Vector2.ZERO
 						
-			# target position is to the left of current position
+						# dont try to get permission if current block is 
+						hasPermission = currentBlock.nextBlock.GivePermission()
+						# no longer occupying current block's combat width
+						if hasPermission:
+							currentBlock.curCombatWidth -= 1
 			else:
-				velocity = Vector2.LEFT
-				if currentBlock.prevBlock == null or not currentBlock.prevBlock.GivePermission():
-					# keep moving if not at current block
-					if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
-						velocity = Vector2.RIGHT
-					elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
-						velocity = Vector2.LEFT
-					else:
-						velocity = Vector2.ZERO
+				if hasPermission:
+					debugStatus = "moving on"
 				else:
+					debugStatus = "moving to self"
+				# keep moving if not at current block
+				if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
+					velocity = Vector2.RIGHT
+				elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
 					velocity = Vector2.LEFT
-	
+				
+				# reset permission status 
+				#hasPermission = false
+				#
+			## check to see if next block is clear only after we finish going to current block
+			## need to go right. target position is to the right of current position.
+			#if target_position > global_position.x:
+				#velocity = Vector2.RIGHT
+				#if currentBlock.nextBlock == null:
+					## keep moving if not at current block
+					#if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
+						#velocity = Vector2.RIGHT
+					#elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
+						#velocity = Vector2.LEFT
+					#else:
+						#velocity = Vector2.ZERO
+				#else:
+					#if currentBlock.nextBlock.GivePermission():
+						#velocity = Vector2.RIGHT
+						#debugStatus = "have permission"
+					#else:
+						## keep moving if not at current block
+						#debugStatus = "no permission"
+						#debugStatus += " moving to current"
+						#if abs(global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2) > POSITION_ERROR:
+							##velocity = Vector2.RIGHT
+							#velocity = Vector2.ZERO
+						#else:
+							#debugStatus = "next block blocked"
+							#velocity = Vector2.ZERO
+						#
+			## target position is to the left of current position
+			#else:
+				#velocity = Vector2.LEFT
+				#if currentBlock.prevBlock == null or not currentBlock.prevBlock.GivePermission():
+					## keep moving if not at current block
+					#if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
+						#velocity = Vector2.RIGHT
+					#elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
+						#velocity = Vector2.LEFT
+					#else:
+						#velocity = Vector2.ZERO
+				#else:
+					#velocity = Vector2.LEFT
+	#
 	velocity *= speed
 	return false
 

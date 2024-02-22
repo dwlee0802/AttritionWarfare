@@ -32,7 +32,11 @@ func _physics_process(delta):
 		global_position = get_global_mouse_position()
 	else:
 		velocity = Vector2(0, 20)
-		move_and_collide(velocity)
+		var collision = move_and_collide(velocity)
+		if collision != null:
+			var block = collision.get_collider()
+			global_position = Vector2(block.global_position.x, global_position.y)
+		
 	
 	if isAllCommand:
 		CommandMarker.location = global_position.x
