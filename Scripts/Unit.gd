@@ -39,6 +39,7 @@ static var POSITION_ERROR = 5
 var currentBlock: Block
 
 @onready var debugLabel: Label = $DebugLabel
+var debugStatus: String = ""
 
 
 func _ready():
@@ -54,10 +55,7 @@ func _process(delta):
 	entrenchmentBar.value = entrenchment
 	
 	# update debug label
-	if currentBlock != null:
-		debugLabel.text = str(currentBlock.global_position)
-	else:
-		debugLabel.text = "NULL"
+	debugLabel.text = debugStatus
 	
 
 func SetPlayerUnit(val):
@@ -237,26 +235,84 @@ func UpdateVelocity() -> bool:
 	if currentBlock == null:
 		velocity = Vector2.ZERO
 		return true
-		
+	
+	# stop moving if we are at target position
 	if abs(target_position - global_position.x) < POSITION_ERROR:
 		velocity = Vector2.ZERO
+		debugStatus = "At target location"
 		return true
 	else:
-		if target_position > global_position.x:
-			velocity = Vector2.RIGHT
-			if currentBlock.nextBlock == null or currentBlock.nextBlock.isFull():
+		# first, check if we are at current block's center
+		# move to it if not at it
+		# we are at the right side of current block
+		#if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
+			#velocity = Vector2.RIGHT
+		## left side of current block
+		#elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
+			#velocity = Vector2.LEFT
+		if true:
+			if AtCurrent():
 				velocity = Vector2.ZERO
-			if currentBlock.nextBlock.GivePermission():
+				
+				# check to see if you can move on
+				if currentBlock.nextBlock != null and currentBlock.nextBlock.GivePermission():
+					velocity = Vector2.RIGHT * speed
+					debugStatus = "have permission"
+					currentBlock.nextBlock.tempCombatWidth += 1
+			else:
+				# keep moving if not at current block
+				if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
+					velocity = Vector2.RIGHT * speed
+				elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
+					velocity = Vector2.LEFT * speed
+				return false
+				
+			# check to see if next block is clear only after we finish going to current block
+			# need to go right. target position is to the right of current position.
+			if target_position > global_position.x:
 				velocity = Vector2.RIGHT
+				if currentBlock.nextBlock == null:
+					# keep moving if not at current block
+					if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
+						velocity = Vector2.RIGHT
+					elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
+						velocity = Vector2.LEFT
+					else:
+						velocity = Vector2.ZERO
+				else:
+					if currentBlock.nextBlock.GivePermission():
+						velocity = Vector2.RIGHT
+						debugStatus = "have permission"
+					else:
+						# keep moving if not at current block
+						debugStatus = "no permission"
+						debugStatus += " moving to current"
+						if abs(global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2) > POSITION_ERROR:
+							#velocity = Vector2.RIGHT
+							velocity = Vector2.ZERO
+						else:
+							debugStatus = "next block blocked"
+							velocity = Vector2.ZERO
+						
+			# target position is to the left of current position
 			else:
-				velocity = Vector2.ZERO
-		else:
-			if currentBlock.prevBlock == null or currentBlock.prevBlock.isFull():
-				velocity = Vector2.ZERO
-			if currentBlock.prevBlock.GivePermission():
 				velocity = Vector2.LEFT
-			else:
-				velocity = Vector2.ZERO
+				if currentBlock.prevBlock == null or not currentBlock.prevBlock.GivePermission():
+					# keep moving if not at current block
+					if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
+						velocity = Vector2.RIGHT
+					elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
+						velocity = Vector2.LEFT
+					else:
+						velocity = Vector2.ZERO
+				else:
+					velocity = Vector2.LEFT
 	
 	velocity *= speed
+	return false
+
+
+func AtCurrent():
+	if abs(global_position.x - currentBlock.global_position.x - currentBlock.size.x / 2) < POSITION_ERROR:
+		return true
 	return false

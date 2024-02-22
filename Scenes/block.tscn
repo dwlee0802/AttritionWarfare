@@ -67,6 +67,7 @@ scroll_active = false
 autowrap_mode = 1
 
 [node name="DebugLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 11.0
 offset_top = -26.0
