@@ -21,6 +21,7 @@ var prevBlock: Block
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	maxCombatWidth = 100
+	CheckIfCapital()
 	pass # Replace with function body.
 
 
@@ -65,25 +66,17 @@ func GetUnitsInside():
 		if unit is Unit:
 			if unit.global_position.x > global_position.x and unit.global_position.x < global_position.x + size.x:
 				output.append(unit)
-				if unit.currentBlock != self:
-					unit.currentBlock = self
-					#unit.hasPermission = false
 	
 	return output
 
 
-func CheckIfCapital() -> bool:
+func CheckIfCapital():
 	var results = detectionArea.get_overlapping_bodies()
 	var output = []
 	for unit in results:
-		if unit is Unit:
-			if unit.global_position.x >= global_position.x and unit.global_position.x < global_position.x + size.x:
-				output.append(unit)
-				if unit.currentBlock != self:
-					unit.currentBlock = self
-					unit.hasPermission = false
-	
-	return output
+		if unit is HQ:
+			ignoreCombatWidth = true
+			unit.currentBlock = self
 
 
 func isFull() -> bool:

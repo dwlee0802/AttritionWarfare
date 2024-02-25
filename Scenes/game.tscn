@@ -1141,11 +1141,12 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("16_g4x6a")
 
-[node name="PlayerHQ" type="StaticBody2D" parent="World"]
+[node name="PlayerHQ" type="StaticBody2D" parent="World" node_paths=PackedStringArray("currentBlock")]
 position = Vector2(72, 755)
 collision_mask = 0
 script = ExtResource("5_ajpi1")
 autoSpawn = true
+currentBlock = NodePath("../Ground/Block2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/PlayerHQ"]
 shape = SubResource("RectangleShape2D_4wbwj")
@@ -1156,6 +1157,7 @@ texture = SubResource("PlaceholderTexture2D_r7yqw")
 
 [node name="SpawnTimer" type="Timer" parent="World/PlayerHQ"]
 process_callback = 0
+one_shot = true
 
 [node name="SpawnTimer2" type="Timer" parent="World/PlayerHQ"]
 process_callback = 0

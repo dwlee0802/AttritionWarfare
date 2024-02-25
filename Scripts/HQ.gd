@@ -10,6 +10,8 @@ var armoredData: UnitData = load("res://Data/armored.tres")
 
 @export var autoSpawn: bool = false
 
+@export var currentBlock: Block
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,3 +38,4 @@ func SpawnUnit(unitType):
 	add_child(newUnit)
 	newUnit.global_position = global_position
 	newUnit.SetPlayerUnit(isPlayerHQ)
+	newUnit.currentBlock = currentBlock

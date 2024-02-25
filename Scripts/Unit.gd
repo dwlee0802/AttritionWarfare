@@ -38,6 +38,7 @@ static var POSITION_ERROR = 10
 
 var currentBlock: Block
 var hasPermission: bool = false
+var hasVisitedCurrentBlock: bool = false
 
 @onready var debugLabel: Label = $DebugLabel
 var debugStatus: String = ""
@@ -60,6 +61,9 @@ func _process(delta):
 	if currentBlock != null:
 		debugLabel.text += "\n" + str(currentBlock.global_position)
 	
+	print("haspermission: " + str(hasPermission))
+	print("hasVisitedCurrentBlock: " + str(hasVisitedCurrentBlock))
+	print(str(velocity))
 
 func SetPlayerUnit(val):
 	isPlayerUnit = val
@@ -247,8 +251,8 @@ func UpdateVelocity() -> bool:
 		debugStatus = "At target location" + "\n permission: " + str(hasPermission)
 		return true
 	else:
-		# finish moving to center of current block
-		if AtCurrent():
+		# since we have visited consider going to next block
+		if hasVisitedCurrentBlock:
 			velocity = Vector2.ZERO
 			
 			# determine which direction we need to go to
@@ -271,25 +275,27 @@ func UpdateVelocity() -> bool:
 					
 					# dont try to get permission if current block is target
 					hasPermission = nextBlock.GivePermission()
+					
 					# no longer occupying current block's combat width
 					if hasPermission:
 						currentBlock.curCombatWidth -= 1
 						currentBlock = nextBlock
+						hasVisitedCurrentBlock = false
+						
+		# finish moving to center of current block
 		else:
-			# keep moving if not at current block
-			if hasPermission:
-				debugStatus = "moving on"
-				return false
-			else:
-				debugStatus = "moving to self"
+			debugStatus = "moving to self"
 			
-				if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
-					velocity = Vector2.RIGHT
-				elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
-					velocity = Vector2.LEFT
-				
-	velocity *= speed
-	return false
+			if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
+				velocity = Vector2.RIGHT
+			elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
+				velocity = Vector2.LEFT
+			
+			hasVisitedCurrentBlock = AtCurrent()
+			hasPermission = false
+			
+		velocity *= speed
+		return false
 
 
 # unit should move to current block when it can't go to any other blocks
