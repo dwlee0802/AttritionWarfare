@@ -528,7 +528,6 @@ offset_bottom = 21.0
 text = "0/min"
 
 [node name="OrderTab" type="Label" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 800.0
 offset_top = 360.0
@@ -1143,7 +1142,7 @@ mouse_filter = 2
 script = ExtResource("16_g4x6a")
 
 [node name="PlayerHQ" type="StaticBody2D" parent="World"]
-position = Vector2(59, 752)
+position = Vector2(72, 755)
 collision_mask = 0
 script = ExtResource("5_ajpi1")
 autoSpawn = true
@@ -1164,7 +1163,7 @@ wait_time = 10.0
 
 [node name="EnemyHQ" type="StaticBody2D" parent="World"]
 z_index = 3
-position = Vector2(1530, 752)
+position = Vector2(1545, 751)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ajpi1")
@@ -1219,6 +1218,7 @@ layout_mode = 2
 
 [node name="Block2" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
+ignoreCombatWidth = true
 
 [node name="Block3" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2

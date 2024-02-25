@@ -3,6 +3,7 @@ class_name Block
 
 @onready var detectionArea: Area2D = $DetectionArea/Area2D
 
+@export var ignoreCombatWidth: bool = false
 var curCombatWidth: int = 0
 var maxCombatWidth: int = 1
 var tempCombatWidth: int = 0
@@ -19,7 +20,7 @@ var prevBlock: Block
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	maxCombatWidth = randi_range(1,5)
+	maxCombatWidth = 100
 	pass # Replace with function body.
 
 
@@ -49,15 +50,29 @@ func UpdateContentsLabel():
 	for key in countDict.keys():
 		output += "[fill]" + Enums.UnitTypeToAbbString(key) + ": " + str(countDict[key]) + "[/fill]\n"
 	
-	if len(countDict.keys()) != 0:
+	if !ignoreCombatWidth:
 		output += "[fill]Total: "+ str(curCombatWidth) + "/" + str(maxCombatWidth) + "[/fill]\n"
 	
 	contentsLabel.text = output
-
+	
 
 # units are considered 'on' this block only if their position is equal or greater than self's width
 # specifically, unit's position should be inside [self.global_position, self.global_position + size.x)
 func GetUnitsInside():
+	var results = detectionArea.get_overlapping_bodies()
+	var output = []
+	for unit in results:
+		if unit is Unit:
+			if unit.global_position.x > global_position.x and unit.global_position.x < global_position.x + size.x:
+				output.append(unit)
+				if unit.currentBlock != self:
+					unit.currentBlock = self
+					#unit.hasPermission = false
+	
+	return output
+
+
+func CheckIfCapital() -> bool:
 	var results = detectionArea.get_overlapping_bodies()
 	var output = []
 	for unit in results:
@@ -81,6 +96,9 @@ func isFull() -> bool:
 # tells the caller if there is enough space in self
 # should be only called once per unit
 func GivePermission():
+	if ignoreCombatWidth:
+		return true
+		
 	if curCombatWidth + 1 <= maxCombatWidth:
 		curCombatWidth += 1
 		return true
