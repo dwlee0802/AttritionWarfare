@@ -149,6 +149,7 @@ func ReceiveHit(amount, pene = 0):
 		Game.MakeDamagePopup("MISS", global_position, Color.RED)
 		
 	if hitPoints < 0:
+		currentBlock.curCombatWidth -= 1
 		queue_free()
 
 
@@ -247,7 +248,6 @@ func UpdateVelocity() -> bool:
 	if !hasVisitedCurrentBlock:
 		# if not, go there
 		# we are at the right of cur
-		print(str(global_position.x) + " to " + str(currentBlock.centerPosition))
 		if global_position.x > currentBlock.centerPosition:
 			velocity = Vector2.LEFT * speed
 		# left

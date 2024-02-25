@@ -94,6 +94,7 @@ libraries = {
 }
 
 [node name="DebugLabel" type="Label" parent="."]
+visible = false
 z_index = 100
 offset_left = -52.0
 offset_top = -41.0

@@ -1162,13 +1162,15 @@ process_callback = 0
 process_callback = 0
 wait_time = 10.0
 
-[node name="EnemyHQ" type="StaticBody2D" parent="World"]
+[node name="EnemyHQ" type="StaticBody2D" parent="World" node_paths=PackedStringArray("currentBlock")]
 z_index = 3
 position = Vector2(1545, 751)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ajpi1")
 isPlayerHQ = false
+autoSpawn = true
+currentBlock = NodePath("../Ground/Block25")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/EnemyHQ"]
 shape = SubResource("RectangleShape2D_4wbwj")
@@ -1289,6 +1291,7 @@ layout_mode = 2
 
 [node name="Block25" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
+ignoreCombatWidth = true
 
 [node name="Block26" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
