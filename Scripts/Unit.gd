@@ -34,7 +34,7 @@ var maxEntrenchment: float = 25
 
 # movement related variables
 var target_position: float
-static var POSITION_ERROR = 10
+static var POSITION_ERROR = 5
 
 var currentBlock: Block
 var hasPermission: bool = false
@@ -59,11 +59,8 @@ func _process(delta):
 	# update debug label
 	debugLabel.text = debugStatus
 	if currentBlock != null:
-		debugLabel.text += "\n" + str(currentBlock.global_position)
+		debugLabel.text += "\ncur: " + str(currentBlock.global_position)
 	
-	print("haspermission: " + str(hasPermission))
-	print("hasVisitedCurrentBlock: " + str(hasVisitedCurrentBlock))
-	print(str(velocity))
 
 func SetPlayerUnit(val):
 	isPlayerUnit = val
@@ -243,59 +240,54 @@ func UpdateTargetPosition():
 func UpdateVelocity() -> bool:
 	if currentBlock == null:
 		velocity = Vector2.ZERO
-		return true
-	
-	# stop moving if we are at target position
-	if abs(target_position - global_position.x) < POSITION_ERROR:
+		debugStatus = "ERROR! No current block."
+		return false
+		
+	# check if we visited current block at least once
+	if !hasVisitedCurrentBlock:
+		# if not, go there
+		# we are at the right of cur
+		print(str(global_position.x) + " to " + str(currentBlock.centerPosition))
+		if global_position.x > currentBlock.centerPosition:
+			velocity = Vector2.LEFT * speed
+		# left
+		else:
+			velocity = Vector2.RIGHT * speed
+		
+		hasVisitedCurrentBlock = AtCurrent()
+		debugStatus = "moving to current"
+	# check if we are at our target position
+	elif abs(target_position - global_position.x) < POSITION_ERROR:
 		velocity = Vector2.ZERO
 		debugStatus = "At target location" + "\n permission: " + str(hasPermission)
 		return true
+	# check if we have permission to move to next block
 	else:
-		# since we have visited consider going to next block
-		if hasVisitedCurrentBlock:
+		# determine nextblock based on target location
+		var nextBlock: Block = currentBlock.nextBlock
+		var dir = Vector2.RIGHT
+		
+		if target_position < global_position.x:
+			nextBlock = currentBlock.prevBlock
+			dir = Vector2.LEFT
+		
+		if nextBlock == null:
 			velocity = Vector2.ZERO
+			debugStatus = "no path"
+			return false
 			
-			# determine which direction we need to go to
-			var nextBlock: Block = currentBlock.nextBlock
-			var dir = Vector2.RIGHT
-			
-			# need to go left <-
-			if target_position < global_position.x:
-				nextBlock = currentBlock.prevBlock
-				dir = Vector2.LEFT
-			
-			# check to see if we have permission to go on
-			if nextBlock != null:
-				if hasPermission:
-					# dont ask for permission since we have it
-					velocity = dir
-					debugStatus = "have permission"
-				else:
-					debugStatus = "no permission"
-					
-					# dont try to get permission if current block is target
-					hasPermission = nextBlock.GivePermission()
-					
-					# no longer occupying current block's combat width
-					if hasPermission:
-						currentBlock.curCombatWidth -= 1
-						currentBlock = nextBlock
-						hasVisitedCurrentBlock = false
-						
-		# finish moving to center of current block
-		else:
-			debugStatus = "moving to self"
-			
-			if global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > POSITION_ERROR:
-				velocity = Vector2.RIGHT
-			elif global_position.x - currentBlock.global_position.x + currentBlock.size.x / 2 > -POSITION_ERROR:
-				velocity = Vector2.LEFT
-			
-			hasVisitedCurrentBlock = AtCurrent()
+		if hasPermission:
+			currentBlock.curCombatWidth -= 1
+			currentBlock = nextBlock
+			hasVisitedCurrentBlock = false
 			hasPermission = false
-			
-		velocity *= speed
-		return false
+			debugStatus = "have permission"
+		else:
+			velocity = Vector2.ZERO
+			debugStatus = "no permission"
+			hasPermission = nextBlock.GivePermission()
+		
+	return false
 
 
 # unit should move to current block when it can't go to any other blocks

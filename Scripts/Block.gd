@@ -3,6 +3,8 @@ class_name Block
 
 @onready var detectionArea: Area2D = $DetectionArea/Area2D
 
+var centerPosition
+
 @export var ignoreCombatWidth: bool = false
 var curCombatWidth: int = 0
 var maxCombatWidth: int = 1
@@ -20,13 +22,13 @@ var prevBlock: Block
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	maxCombatWidth = 100
+	maxCombatWidth = randi_range(1, 9)
 	CheckIfCapital()
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	centerPosition = detectionArea.global_position.x
 	insideUnits = GetUnitsInside()
 	UpdateContentsLabel()
 	debugLabel.text = str(global_position)

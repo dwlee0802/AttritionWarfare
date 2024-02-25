@@ -19,12 +19,13 @@ shape = SubResource("RectangleShape2D_6yqvg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 10
+texture_filter = 1
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_4fgqu")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(4, -28)
-scale = Vector2(1.33333, 1)
+scale = Vector2(1.5, 1.125)
 texture = ExtResource("3_2ae52")
 
 [node name="HighlightSprite" type="Sprite2D" parent="."]
