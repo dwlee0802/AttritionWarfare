@@ -252,7 +252,7 @@ func UpdateVelocity() -> bool:
 		debugStatus = "ERROR! No current block."
 		return false
 	elif currentSlot == null:
-		currentSlot = currentBlock.GetEmptySlot()
+		currentSlot = currentBlock.GetEmptySlot(global_position)
 		velocity = Vector2.ZERO
 		debugStatus = "ERROR! No current slot."
 		return false
@@ -279,7 +279,7 @@ func UpdateVelocity() -> bool:
 				debugStatus = "no path"
 				return false
 			else:
-				var nextSlot = nextBlock.GetEmptySlot()
+				var nextSlot = nextBlock.GetEmptySlot(global_position)
 				
 				if nextSlot != null:
 					currentSlot.isOccupied = false

@@ -109,12 +109,25 @@ func GivePermission():
 	else:
 		return false
 		
-		
-func GetEmptySlot():
-	slots.shuffle()
+
+# return the one that is closest to pos
+func GetEmptySlot(pos: Vector2):
+	var output: BlockSlot = null
+	var smallestDist = 0
 	for slot: BlockSlot in slots:
 		if !slot.isOccupied:
-			slot.isOccupied = true
-			return slot
+			if output == null:
+				output = slot
+				smallestDist = slot.GetCenterPosition().distance_to(pos)
+			else:
+				# check dist
+				var newDist = slot.GetCenterPosition().distance_to(pos)
+				if smallestDist > newDist:
+					smallestDist = newDist
+					output = slot
 	
-	return null
+	if output != null:
+		output.isOccupied = true
+		return output
+	else:
+		return null

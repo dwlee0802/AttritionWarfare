@@ -39,4 +39,4 @@ func SpawnUnit(unitType):
 	newUnit.global_position = global_position
 	newUnit.SetPlayerUnit(isPlayerHQ)
 	newUnit.currentBlock = currentBlock
-	newUnit.currentSlot = currentBlock.GetEmptySlot()
+	newUnit.currentSlot = currentBlock.GetEmptySlot(newUnit.global_position)
