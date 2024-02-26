@@ -1,23 +1,41 @@
 [gd_scene load_steps=5 format=3 uid="uid://ps851n03q6ik"]
 
-[ext_resource type="Texture2D" uid="uid://05ao5cmniruu" path="res://Art/ground_tile.png" id="1_hn2pu"]
 [ext_resource type="Script" path="res://Scripts/Block.gd" id="2_568kp"]
+[ext_resource type="Texture2D" uid="uid://bweni00tvg2ju" path="res://Art/32x32_white_square.png" id="2_dmnni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mp6jl"]
-size = Vector2(64, 47)
+size = Vector2(64, 371)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vl3xw"]
 size = Vector2(64, 20)
 
-[node name="Block" type="TextureRect"]
+[node name="Block" type="Control"]
 texture_filter = 1
-custom_minimum_size = Vector2(64, 128)
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("1_hn2pu")
+custom_minimum_size = Vector2(64, 450)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 500.0
 script = ExtResource("2_568kp")
 
-[node name="DetectionArea" type="Control" parent="."]
+[node name="GroundTexture" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="SurfaceTexture" type="TextureRect" parent="GroundTexture"]
+self_modulate = Color(0.266667, 0.141176, 0, 1)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_dmnni")
+expand_mode = 4
+
+[node name="DetectionArea" type="Control" parent="GroundTexture/SurfaceTexture"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -27,29 +45,45 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Area2D" type="Area2D" parent="DetectionArea"]
+[node name="Area2D" type="Area2D" parent="GroundTexture/SurfaceTexture/DetectionArea"]
 collision_layer = 4
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea/Area2D"]
-position = Vector2(0, -40.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundTexture/SurfaceTexture/DetectionArea/Area2D"]
 shape = SubResource("RectangleShape2D_mp6jl")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="DetectionArea"]
+[node name="StaticBody2D" type="StaticBody2D" parent="GroundTexture/SurfaceTexture/DetectionArea"]
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea/StaticBody2D"]
-position = Vector2(0, -7)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundTexture/SurfaceTexture/DetectionArea/StaticBody2D"]
+position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_vl3xw")
+debug_color = Color(0.984314, 0, 0.345098, 0.419608)
 
-[node name="ContentsLabel" type="RichTextLabel" parent="."]
-texture_filter = 1
+[node name="SlotContainer" type="VBoxContainer" parent="GroundTexture/SurfaceTexture"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.4
-anchor_right = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+alignment = 1
+
+[node name="SideTexture" type="TextureRect" parent="GroundTexture"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(64, 128)
+layout_mode = 2
+texture = ExtResource("2_dmnni")
+
+[node name="ContentsLabel" type="RichTextLabel" parent="GroundTexture/SideTexture"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -67,9 +101,8 @@ scroll_active = false
 autowrap_mode = 1
 
 [node name="DebugLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 11.0
-offset_top = -26.0
-offset_right = 51.0
-offset_bottom = -3.0
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = -1
+offset_top = -20.0
 theme_override_font_sizes/font_size = 10

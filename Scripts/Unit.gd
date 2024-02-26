@@ -37,8 +37,10 @@ var target_position: float
 static var POSITION_ERROR = 5
 
 var currentBlock: Block
+var currentSlot: BlockSlot
+@onready var destinationLine = $Line2D
 var hasPermission: bool = false
-var hasVisitedCurrentBlock: bool = false
+var hasVisitedCurrentBlock: bool = true
 
 @onready var debugLabel: Label = $DebugLabel
 var debugStatus: String = ""
@@ -60,6 +62,11 @@ func _process(delta):
 	debugLabel.text = debugStatus
 	if currentBlock != null:
 		debugLabel.text += "\ncur: " + str(currentBlock.global_position)
+	
+		if currentSlot != null:
+			destinationLine.set_point_position(1, currentSlot.GetCenterPosition() - global_position)
+		else:
+			destinationLine.visible = false
 	
 
 func SetPlayerUnit(val):
@@ -150,6 +157,7 @@ func ReceiveHit(amount, pene = 0):
 		
 	if hitPoints < 0:
 		currentBlock.curCombatWidth -= 1
+		currentSlot.isOccupied = false
 		queue_free()
 
 
@@ -243,55 +251,59 @@ func UpdateVelocity() -> bool:
 		velocity = Vector2.ZERO
 		debugStatus = "ERROR! No current block."
 		return false
-		
-	# check if we visited current block at least once
-	if !hasVisitedCurrentBlock:
-		# if not, go there
-		# we are at the right of cur
-		if global_position.x > currentBlock.centerPosition:
-			velocity = Vector2.LEFT * speed
-		# left
-		else:
-			velocity = Vector2.RIGHT * speed
-		
-		hasVisitedCurrentBlock = AtCurrent()
-		debugStatus = "moving to current"
-	# check if we are at our target position
-	elif abs(target_position - global_position.x) < POSITION_ERROR:
+	elif currentSlot == null:
+		currentSlot = currentBlock.GetEmptySlot()
 		velocity = Vector2.ZERO
-		debugStatus = "At target location" + "\n permission: " + str(hasPermission)
-		return true
-	# check if we have permission to move to next block
+		debugStatus = "ERROR! No current slot."
+		return false
+		
+	if !hasVisitedCurrentBlock:
+		# go there
+		velocity = global_position.direction_to(currentSlot.GetCenterPosition()).normalized() * speed
+		debugStatus = "moving to current"
+		hasVisitedCurrentBlock = AtCurrent()
+		return false
 	else:
-		# determine nextblock based on target location
-		var nextBlock: Block = currentBlock.nextBlock
-		var dir = Vector2.RIGHT
-		
-		if target_position < global_position.x:
-			nextBlock = currentBlock.prevBlock
-			dir = Vector2.LEFT
-		
-		if nextBlock == null:
+		if AtTarget():
 			velocity = Vector2.ZERO
-			debugStatus = "no path"
-			return false
-			
-		if hasPermission:
-			currentBlock.curCombatWidth -= 1
-			currentBlock = nextBlock
-			hasVisitedCurrentBlock = false
-			hasPermission = false
-			debugStatus = "have permission"
+			debugStatus = "At target location" + "\n permission: " + str(hasPermission)
+			return true
 		else:
-			velocity = Vector2.ZERO
-			debugStatus = "no permission"
-			hasPermission = nextBlock.GivePermission()
+			var nextBlock: Block = currentBlock.nextBlock
 		
+			if target_position < global_position.x:
+				nextBlock = currentBlock.prevBlock
+			
+			if nextBlock == null:
+				velocity = Vector2.ZERO
+				debugStatus = "no path"
+				return false
+			else:
+				var nextSlot = nextBlock.GetEmptySlot()
+				
+				if nextSlot != null:
+					currentSlot.isOccupied = false
+					hasVisitedCurrentBlock = false
+					debugStatus = "have permission"
+					currentSlot = nextSlot
+					currentBlock = nextBlock
+					velocity = global_position.direction_to(currentSlot.GetCenterPosition()).normalized() * speed
+					return false
+				else:
+					# no space do nothing
+					debugStatus = "no space"
+					velocity = Vector2.ZERO
+					return false
+				
 	return false
 
 
 # unit should move to current block when it can't go to any other blocks
 func AtCurrent():
-	if abs(global_position.x - currentBlock.global_position.x - currentBlock.size.x / 2) < POSITION_ERROR:
+	if abs(currentSlot.GetCenterPosition().distance_to(global_position)) < POSITION_ERROR:
 		return true
 	return false
+
+
+func AtTarget():
+	return abs(target_position - global_position.x) < POSITION_ERROR

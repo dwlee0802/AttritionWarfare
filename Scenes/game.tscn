@@ -1142,11 +1142,11 @@ mouse_filter = 2
 script = ExtResource("16_g4x6a")
 
 [node name="PlayerHQ" type="StaticBody2D" parent="World" node_paths=PackedStringArray("currentBlock")]
-position = Vector2(200, 755)
+position = Vector2(34, 611)
 collision_mask = 0
 script = ExtResource("5_ajpi1")
 autoSpawn = true
-currentBlock = NodePath("../Ground/Block4")
+currentBlock = NodePath("../Ground/Block")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/PlayerHQ"]
 shape = SubResource("RectangleShape2D_4wbwj")
@@ -1164,12 +1164,11 @@ wait_time = 10.0
 
 [node name="EnemyHQ" type="StaticBody2D" parent="World" node_paths=PackedStringArray("currentBlock")]
 z_index = 3
-position = Vector2(1545, 751)
+position = Vector2(1569, 609)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ajpi1")
 isPlayerHQ = false
-autoSpawn = true
 currentBlock = NodePath("../Ground/Block25")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/EnemyHQ"]
@@ -1187,7 +1186,7 @@ process_callback = 0
 wait_time = 10.0
 
 [node name="CommandMarkers" type="Node2D" parent="World"]
-position = Vector2(544, 612)
+position = Vector2(542, 553)
 
 [node name="InfantryMarker" parent="World/CommandMarkers" instance=ExtResource("17_uqvni")]
 position = Vector2(184, -3)
@@ -1206,12 +1205,12 @@ type = 3
 
 [node name="Ground" type="HBoxContainer" parent="World"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.8
-anchor_right = 1.0
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-offset_right = 400.0
-grow_horizontal = 2
+offset_top = -450.0
+offset_right = 2048.0
+grow_vertical = 0
 theme_override_constants/separation = 0
 alignment = 1
 script = ExtResource("18_c33n3")

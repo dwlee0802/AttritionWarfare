@@ -1,7 +1,7 @@
-extends TextureRect
+extends Control
 class_name Block
 
-@onready var detectionArea: Area2D = $DetectionArea/Area2D
+@onready var detectionArea: Area2D = $GroundTexture/SurfaceTexture/DetectionArea/Area2D
 
 var centerPosition
 
@@ -10,7 +10,7 @@ var curCombatWidth: int = 0
 var maxCombatWidth: int = 1
 var tempCombatWidth: int = 0
 
-@onready var contentsLabel: RichTextLabel = $ContentsLabel
+@onready var contentsLabel: RichTextLabel = $GroundTexture/SideTexture/ContentsLabel
 
 var insideUnits = []
 
@@ -19,12 +19,21 @@ var prevBlock: Block
 
 @onready var debugLabel: Label = $DebugLabel
 
+@onready var slotContainer = $GroundTexture/SurfaceTexture/SlotContainer
+var slotScene = load("res://Scenes/block_slot.tscn")
+var slots = []
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	maxCombatWidth = randi_range(1, 9)
 	CheckIfCapital()
-
+	
+	for i in range(maxCombatWidth):
+		var newSlot = slotScene.instantiate()
+		slots.append(newSlot)
+		slotContainer.add_child(newSlot)
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -99,3 +108,13 @@ func GivePermission():
 		return true
 	else:
 		return false
+		
+		
+func GetEmptySlot():
+	slots.shuffle()
+	for slot: BlockSlot in slots:
+		if !slot.isOccupied:
+			slot.isOccupied = true
+			return slot
+	
+	return null

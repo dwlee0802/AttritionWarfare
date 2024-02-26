@@ -39,6 +39,12 @@ process_mode = 1
 z_index = 5
 texture = ExtResource("2_41h6n")
 
+[node name="Line2D" type="Line2D" parent="."]
+z_index = 100
+points = PackedVector2Array(0, 0, 100, 100)
+width = 4.0
+default_color = Color(0, 0.643137, 0.266667, 1)
+
 [node name="HitAnimation" type="Sprite2D" parent="."]
 process_mode = 1
 process_priority = 7
@@ -94,7 +100,6 @@ libraries = {
 }
 
 [node name="DebugLabel" type="Label" parent="."]
-visible = false
 z_index = 100
 offset_left = -52.0
 offset_top = -41.0

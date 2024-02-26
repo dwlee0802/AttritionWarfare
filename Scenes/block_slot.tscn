@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://q25le565nrs7"]
+
+[ext_resource type="Texture2D" uid="uid://bweni00tvg2ju" path="res://Art/32x32_white_square.png" id="1_880b7"]
+[ext_resource type="Script" path="res://Scenes/block_slot.gd" id="2_l3jwk"]
+
+[node name="BlockSlot" type="TextureRect"]
+self_modulate = Color(0, 0, 0, 0.203922)
+custom_minimum_size = Vector2(32, 32)
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 4
+texture = ExtResource("1_880b7")
+script = ExtResource("2_l3jwk")
+
+[node name="DebugLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 10
+text = "asdf"
