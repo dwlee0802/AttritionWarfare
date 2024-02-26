@@ -1315,6 +1315,7 @@ layout_mode = 2
 
 [node name="IndustryEditor" parent="." instance=ExtResource("21_250fa")]
 process_priority = 1
+visible = false
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0

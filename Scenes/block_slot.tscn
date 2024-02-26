@@ -13,6 +13,7 @@ texture = ExtResource("1_880b7")
 script = ExtResource("2_l3jwk")
 
 [node name="DebugLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0

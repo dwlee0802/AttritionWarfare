@@ -80,11 +80,13 @@ texture = ExtResource("2_dmnni")
 
 [node name="ContentsLabel" type="RichTextLabel" parent="GroundTexture/SideTexture"]
 texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(40, 60)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/line_separation = -2
@@ -101,6 +103,7 @@ scroll_active = false
 autowrap_mode = 1
 
 [node name="DebugLabel" type="Label" parent="."]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = -1
