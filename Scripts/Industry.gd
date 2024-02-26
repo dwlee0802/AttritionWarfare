@@ -39,7 +39,10 @@ var allIngredientsAvailable:bool = false
 
 signal good_produced
 
+# how much bonus this gives to its neighbors
 var bonusAmount: float = 0.1
+# how much this got
+var receivedBonusAmount: float = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -65,7 +68,7 @@ func _process(delta):
 		# check if there is enough ingredients in self's stockpile
 		# if enough ingredients, produce good
 		if allIngredientsAvailable:
-			productionTimer.start(baseProductionTime / level)
+			productionTimer.start(baseProductionTime / level * (1 - receivedBonusAmount))
 		else:
 			# if not enough ingredients, place supply orders to Nation
 			if ingredientType0 != Enums.GoodType.None:

@@ -169,7 +169,6 @@ offset_bottom = 73.0
 text = "Revenue: 0"
 
 [node name="LogisticsTab" type="Label" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 801.0
 offset_top = 81.0
@@ -1316,14 +1315,15 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="IndustryEditor" parent="." instance=ExtResource("21_250fa")]
+process_priority = 1
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 895.0
-offset_top = 98.0
-offset_right = 1549.0
-offset_bottom = 570.0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 657.0
+offset_bottom = 539.0
 grow_horizontal = 1
 grow_vertical = 1
 

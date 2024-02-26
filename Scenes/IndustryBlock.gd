@@ -29,7 +29,9 @@ func _process(delta):
 	UpdateProgressShade(industry.productionTimer.time_left / industry.productionTimer.wait_time)
 	UpdateLevel()
 	UpdateIngredientAmount()
-
+	UpdateGoodType()
+	ApplyBonus()
+	
 
 func UpdateProgressShade(ratio):
 	progressShade.anchor_bottom = ratio
@@ -46,7 +48,7 @@ func UpdateGoodType():
 	if industry == null:
 		return
 		
-	tempGoodLabel.text = Enums.GoodTypeToString(industry.productionType)
+	tempGoodLabel.text = Enums.GoodTypeToString(industry.productionType) + " (" + str(int(industry.productionTimer.time_left * 10) * 0.1) + "s)"
 
 
 # change the ingredient icons to show ingredient type
@@ -110,3 +112,9 @@ func make_drag_preview() -> TextureRect:
 	t.add_child(icon)
 	
 	return t
+
+
+func ApplyBonus():
+	var parent = get_parent()
+	if parent is IndustrySlot:
+		industry.receivedBonusAmount = parent.bonus_speed

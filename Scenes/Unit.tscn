@@ -42,7 +42,8 @@ texture = ExtResource("2_41h6n")
 [node name="HitAnimation" type="Sprite2D" parent="."]
 process_mode = 1
 process_priority = 7
-z_index = 1
+visible = false
+z_index = 6
 texture = ExtResource("2_41h6n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
