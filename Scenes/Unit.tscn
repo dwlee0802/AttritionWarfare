@@ -42,7 +42,6 @@ texture = ExtResource("2_41h6n")
 [node name="HitAnimation" type="Sprite2D" parent="."]
 process_mode = 1
 process_priority = 7
-visible = false
 z_index = 1
 texture = ExtResource("2_41h6n")
 

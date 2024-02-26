@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bvyo1sjvno0yx"]
+[gd_scene load_steps=33 format=3 uid="uid://bvyo1sjvno0yx"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_haicd"]
 [ext_resource type="Script" path="res://Scripts/IndustryTab.gd" id="2_acc5o"]
@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://vpwwfpyp3c50" path="res://Scenes/command_marker.tscn" id="17_uqvni"]
 [ext_resource type="Script" path="res://Scenes/Ground.gd" id="18_c33n3"]
 [ext_resource type="PackedScene" uid="uid://ps851n03q6ik" path="res://Scenes/block.tscn" id="19_n67nq"]
+[ext_resource type="PackedScene" uid="uid://dklvtdgerxe54" path="res://Scenes/industry_block.tscn" id="21_0xl6p"]
+[ext_resource type="PackedScene" uid="uid://b8dplhrs8j080" path="res://Scenes/industry_editor.tscn" id="21_250fa"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_2uyt1"]
 device = -1
@@ -69,7 +71,6 @@ grow_vertical = 2
 script = ExtResource("1_haicd")
 
 [node name="IndustryTab" type="Label" parent="."]
-visible = false
 layout_mode = 0
 offset_right = 86.0
 offset_bottom = 40.0
@@ -1314,6 +1315,46 @@ layout_mode = 2
 [node name="Block32" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
 
+[node name="IndustryEditor" parent="." instance=ExtResource("21_250fa")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 895.0
+offset_top = 98.0
+offset_right = 1549.0
+offset_bottom = 570.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="IndustryBlock" parent="IndustryEditor/Editor/Deck" index="0" node_paths=PackedStringArray("industry") instance=ExtResource("21_0xl6p")]
+layout_mode = 2
+industry = NodePath("../../../../PlayerNation/Industry/Coal Mines")
+
+[node name="IndustryBlock2" parent="IndustryEditor/Editor/Deck" index="1" node_paths=PackedStringArray("industry") instance=ExtResource("21_0xl6p")]
+layout_mode = 2
+industry = NodePath("../../../../PlayerNation/Industry/Iron Mines")
+
+[node name="IndustryBlock3" parent="IndustryEditor/Editor/Deck" index="2" node_paths=PackedStringArray("industry") instance=ExtResource("21_0xl6p")]
+layout_mode = 2
+industry = NodePath("../../../../PlayerNation/Industry/Steel Mill")
+
+[node name="IndustryBlock4" parent="IndustryEditor/Editor/Deck" index="3" node_paths=PackedStringArray("industry") instance=ExtResource("21_0xl6p")]
+layout_mode = 2
+industry = NodePath("../../../../PlayerNation/Industry/Gun Factory")
+
+[node name="IndustryBlock5" parent="IndustryEditor/Editor/Deck" index="4" node_paths=PackedStringArray("industry") instance=ExtResource("21_0xl6p")]
+layout_mode = 2
+industry = NodePath("../../../../PlayerNation/Industry/Cannon Factory")
+
+[node name="IndustryBlock6" parent="IndustryEditor/Editor/Deck" index="5" node_paths=PackedStringArray("industry") instance=ExtResource("21_0xl6p")]
+layout_mode = 2
+industry = NodePath("../../../../PlayerNation/Industry/Tank Factory")
+
+[node name="IndustryBlock7" parent="IndustryEditor/Editor/Deck" index="6" node_paths=PackedStringArray("industry") instance=ExtResource("21_0xl6p")]
+layout_mode = 2
+industry = NodePath("../../../../PlayerNation/Industry/Ammo Factory")
+
 [connection signal="pressed" from="OrderTab/OffensiveButton" to="OrderTab" method="_on_set_all_button_pressed" binds= [0]]
 [connection signal="pressed" from="OrderTab/DefensiveButton" to="OrderTab" method="_on_set_all_button_pressed" binds= [1]]
 [connection signal="pressed" from="OrderTab/RetreatButton" to="OrderTab" method="_on_set_all_button_pressed" binds= [2]]
@@ -1337,3 +1378,5 @@ layout_mode = 2
 [connection signal="timeout" from="World/PlayerHQ/SpawnTimer2" to="World/PlayerHQ" method="SpawnUnit" binds= [1]]
 [connection signal="timeout" from="World/EnemyHQ/SpawnTimer" to="World/EnemyHQ" method="SpawnUnit" binds= [0]]
 [connection signal="timeout" from="World/EnemyHQ/SpawnTimer2" to="World/EnemyHQ" method="SpawnUnit" binds= [1]]
+
+[editable path="IndustryEditor"]

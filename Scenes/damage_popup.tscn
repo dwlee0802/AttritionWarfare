@@ -51,6 +51,7 @@ _data = {
 [node name="DamagePopup" type="Marker2D"]
 
 [node name="Label" type="RichTextLabel" parent="."]
+z_index = 50
 texture_filter = 1
 offset_right = 76.0
 offset_bottom = 38.0

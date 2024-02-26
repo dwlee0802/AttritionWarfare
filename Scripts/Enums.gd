@@ -50,3 +50,6 @@ static func UnitTypeToAbbString(num):
 
 
 enum OrderType {Offensive, Defensive, Retreat}
+
+
+enum Direction {Up, Right, Left, Down}

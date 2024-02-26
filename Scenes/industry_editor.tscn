@@ -1,0 +1,177 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8dplhrs8j080"]
+
+[ext_resource type="PackedScene" uid="uid://bi1mpjr28ibja" path="res://Scenes/industry_slot.tscn" id="1_7ogah"]
+[ext_resource type="Script" path="res://Scenes/industry_editor.gd" id="1_38mkh"]
+
+[node name="IndustryEditor" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_38mkh")
+
+[node name="Editor" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Grid" type="HFlowContainer" parent="Editor"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="IndustrySlot" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot2" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot3" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot4" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot5" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot6" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot7" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot8" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot9" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot10" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot11" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot12" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot13" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot14" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot15" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot16" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot17" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot18" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot19" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot20" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot21" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot22" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot23" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot24" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot25" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot26" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot27" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot28" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot29" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot30" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot31" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot32" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot33" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot34" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot35" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot36" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot37" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot38" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot39" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot40" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot41" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot42" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot43" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot44" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot45" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot46" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot47" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot48" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="IndustrySlot49" parent="Editor/Grid" instance=ExtResource("1_7ogah")]
+layout_mode = 2
+
+[node name="Deck" type="HFlowContainer" parent="Editor"]
+custom_minimum_size = Vector2(150, 64)
+layout_mode = 2

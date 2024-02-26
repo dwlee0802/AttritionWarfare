@@ -39,6 +39,8 @@ var allIngredientsAvailable:bool = false
 
 signal good_produced
 
+var bonusAmount: float = 0.1
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
