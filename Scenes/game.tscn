@@ -71,6 +71,7 @@ grow_vertical = 2
 script = ExtResource("1_haicd")
 
 [node name="IndustryTab" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 86.0
 offset_bottom = 40.0
@@ -170,10 +171,10 @@ text = "Revenue: 0"
 
 [node name="LogisticsTab" type="Label" parent="."]
 layout_mode = 0
-offset_left = 801.0
-offset_top = 81.0
-offset_right = 1483.0
-offset_bottom = 296.0
+offset_left = 527.0
+offset_top = 20.0
+offset_right = 1209.0
+offset_bottom = 235.0
 text = "Logistics          Amount               Stockpile                             Consumption     Max"
 script = ExtResource("4_6dx34")
 
@@ -529,10 +530,10 @@ text = "0/min"
 
 [node name="OrderTab" type="Label" parent="."]
 layout_mode = 0
-offset_left = 800.0
-offset_top = 360.0
-offset_right = 846.0
-offset_bottom = 383.0
+offset_left = 22.0
+offset_top = 22.0
+offset_right = 68.0
+offset_bottom = 45.0
 text = "Order"
 script = ExtResource("6_ulhe2")
 
@@ -1157,6 +1158,7 @@ texture = SubResource("PlaceholderTexture2D_r7yqw")
 
 [node name="SpawnTimer" type="Timer" parent="World/PlayerHQ"]
 process_callback = 0
+wait_time = 2.0
 
 [node name="SpawnTimer2" type="Timer" parent="World/PlayerHQ"]
 process_callback = 0

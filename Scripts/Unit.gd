@@ -237,6 +237,7 @@ func _on_attack_timer_timeout():
 			return
 			
 	var newBullet: Projectile = bulletScene.instantiate()
+	
 	newBullet.SetPlayerUnit(isPlayerUnit)
 	
 	newBullet.explosive = unitData.splashDamage
@@ -245,9 +246,12 @@ func _on_attack_timer_timeout():
 	newBullet.damage = damageAmount * GetHPRatio()
 	if newBullet.damage <= 0:
 		newBullet.damage = 1
+	
+	newBullet.global_position = global_position
+	if attackTarget != null:
+		newBullet.SetInitialVelocity(attackTarget.global_position)
 		
 	get_tree().root.add_child(newBullet)
-	newBullet.global_position = global_position
 
 
 # maintenance consumption

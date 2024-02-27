@@ -9,6 +9,12 @@ var piercing: int = 1
 var explosive: bool = false
 @onready var explosionArea = $ExplosionArea
 
+var target_location: Vector2
+
+@export var SPEED: int = 1000
+
+const STOP_DIST: int = 5
+
 
 func _ready():
 	SetPlayerUnit(isPlayer)
@@ -18,18 +24,17 @@ func SetPlayerUnit(val):
 	isPlayer = val
 	
 	if !isPlayer:
-		linear_velocity = Vector2(-800, -200)
 		$Area2D.collision_mask = 1
 		$ExplosionArea.collision_mask = 1
-	else:
-		linear_velocity = Vector2(800, -200)
 
 
-func SetInitialVelocity(vec):
-	linear_velocity = vec
-	
-	if !isPlayer:
-		linear_velocity = vec * Vector2.LEFT
+func _physics_process(delta):
+	if abs(global_position.distance_to(target_location)) < STOP_DIST:
+		queue_free()
+		
+		
+func SetInitialVelocity(loc):
+	linear_velocity = global_position.direction_to(loc).normalized() * SPEED
 	
 	
 func _on_area_2d_body_entered(body):
