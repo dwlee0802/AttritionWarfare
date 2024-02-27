@@ -15,6 +15,8 @@ var target_location: Vector2
 
 const STOP_DIST: int = 5
 
+@onready var sprite: Polygon2D = $Polygon2D
+
 
 func _ready():
 	SetPlayerUnit(isPlayer)
@@ -32,9 +34,12 @@ func _physics_process(delta):
 	if abs(global_position.distance_to(target_location)) < STOP_DIST:
 		queue_free()
 		
+	sprite.rotate(global_position.angle_to_point(target_location))
+	
 		
 func SetInitialVelocity(loc):
 	linear_velocity = global_position.direction_to(loc).normalized() * SPEED
+	target_location = loc
 	
 	
 func _on_area_2d_body_entered(body):
