@@ -8,6 +8,7 @@ unitType = 0
 hitPoints = 100
 attackRange = 200
 minAttackRange = 0
+attackBlockRange = 2
 damageAmount = 10
 attackSpeed = 2.0
 speed = 100

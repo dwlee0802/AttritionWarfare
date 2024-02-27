@@ -75,6 +75,8 @@ func _process(delta):
 		debugLine.set_point_position(1, attackTarget.global_position - global_position)
 	else:
 		debugLine.visible = false
+	
+	#debugLabel.text = str(attackTarget == null)
 
 
 func SetPlayerUnit(val):
@@ -118,8 +120,8 @@ func _physics_process(delta):
 		#if !attackTimer.is_stopped():
 			#attackTimer.stop()
 		#
-		#UpdateTargetPosition()
-		#UpdateVelocity()
+	UpdateTargetPosition()
+	UpdateVelocity()
 		#
 	if velocity == Vector2.ZERO and attackTarget == null:
 		ChangeEntrenchment(delta)
@@ -151,15 +153,29 @@ func FindClosest(units):
 # close ones are prioritized
 func SearchForAttackTarget() -> Unit:
 	var newTarget = null
-	for i in range(unitData.attackBlockRange):
-		var nextBlock = currentBlock.nextBlock
-		if !isPlayerUnit:
-			nextBlock = currentBlock.prevBlock
+	if currentBlock == null:
+		return null
 		
+	var nextBlock
+	if !isPlayerUnit:
+		if currentBlock.prevBlock == null:
+			return null
+		nextBlock = currentBlock.prevBlock
+	else:
+		if currentBlock.nextBlock == null:
+			return null
+		nextBlock = currentBlock.nextBlock
+		
+	for i in range(unitData.attackBlockRange):
 		newTarget = FindClosest(nextBlock.GetUnitsInside(!isPlayerUnit))
 		if newTarget != null:
 			break
-		
+			
+		if !isPlayerUnit:
+			nextBlock = nextBlock.prevBlock
+		else:
+			nextBlock = nextBlock.nextBlock
+			
 	return newTarget
 		
 		
@@ -289,11 +305,11 @@ func UpdateVelocity() -> bool:
 		return false
 	else:
 		attackTarget = SearchForAttackTarget()
-		# add tree divergence to check if we can attack
+		# check if we can attack
 		if attackTarget != null:
+			velocity = Vector2.ZERO
 			if attackTimer.is_stopped():
 				attackTimer.start(1/ attackSpeed)
-				velocity = Vector2.ZERO
 				return false
 		else:
 			if !attackTimer.is_stopped():
