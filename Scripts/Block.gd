@@ -182,5 +182,8 @@ func UpdateIndustryIcon():
 	if industry != null:
 		output += "Lv: " + str(industry.level)
 		output += Enums.GoodTypeToString(industry.productionType)
+	else:
+		tempIndustryLabel.visible = false
+		tempIndustryLabel.get_parent().visible = false
 	
 	tempIndustryLabel.text = output

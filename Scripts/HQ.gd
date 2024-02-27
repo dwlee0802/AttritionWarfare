@@ -23,7 +23,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	print(str(autoSpawn))
 	if autoSpawn:
 		if spawnTimer.is_stopped():
 			spawnTimer.start()
