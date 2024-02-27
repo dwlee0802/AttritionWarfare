@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://q25le565nrs7"]
 
 [ext_resource type="Texture2D" uid="uid://bweni00tvg2ju" path="res://Art/32x32_white_square.png" id="1_880b7"]
-[ext_resource type="Script" path="res://Scenes/block_slot.gd" id="2_l3jwk"]
+[ext_resource type="Script" path="res://Scripts/block_slot.gd" id="2_l3jwk"]
 
 [node name="BlockSlot" type="TextureRect"]
 self_modulate = Color(0, 0, 0, 0.203922)

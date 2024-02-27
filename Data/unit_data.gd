@@ -7,6 +7,9 @@ class_name UnitData
 @export var attackRange: int = 300
 @export var minAttackRange: int = 0
 
+# max number of blocks the unit can look for attack targets
+@export var attackBlockRange: int = 1
+
 @export var damageAmount: int = 10
 # unit is attacks per second
 @export var attackSpeed: float = 2

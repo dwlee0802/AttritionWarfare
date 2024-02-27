@@ -70,13 +70,14 @@ func UpdateContentsLabel():
 
 # units are considered 'on' this block only if their position is equal or greater than self's width
 # specifically, unit's position should be inside [self.global_position, self.global_position + size.x)
-func GetUnitsInside():
+func GetUnitsInside(player: bool = true):
 	var results = detectionArea.get_overlapping_bodies()
 	var output = []
 	for unit in results:
 		if unit is Unit:
 			if unit.global_position.x > global_position.x and unit.global_position.x < global_position.x + size.x:
-				output.append(unit)
+				if unit.isPlayerUnit == player:
+					output.append(unit)
 	
 	return output
 

@@ -44,6 +44,7 @@ var hasVisitedCurrentBlock: bool = true
 
 @onready var debugLabel: Label = $DebugLabel
 var debugStatus: String = ""
+@onready var debugLine: Line2D = $DebugLine
 
 
 func _ready():
@@ -64,10 +65,17 @@ func _process(delta):
 		debugLabel.text += "\ncur: " + str(currentBlock.global_position)
 	
 		if currentSlot != null:
+			destinationLine.visible = true
 			destinationLine.set_point_position(1, currentSlot.GetCenterPosition() - global_position)
 		else:
 			destinationLine.visible = false
 	
+	if attackTarget != null:
+		debugLine.visible = true
+		debugLine.set_point_position(1, attackTarget.global_position - global_position)
+	else:
+		debugLine.visible = false
+
 
 func SetPlayerUnit(val):
 	isPlayerUnit = val
@@ -98,27 +106,27 @@ func SetStats(data: UnitData):
 		
 	
 func _physics_process(delta):
-	var results = attackArea.get_overlapping_bodies()
+	#var results = attackArea.get_overlapping_bodies()
 	
 	# dont try to attack when retreating
-	if OrderTab.orderDict[unitData.unitType] != Enums.OrderType.Retreat and len(results) > 0:
-		attackTarget = FindClosest(results)
-		if attackTimer.is_stopped():
-			attackTimer.start(1/ attackSpeed)
+	
+	#if OrderTab.orderDict[unitData.unitType] != Enums.OrderType.Retreat and attackTarget != null:
+		#if attackTimer.is_stopped():
+			#attackTimer.start(1/ attackSpeed)
+	#else:
+		## stop attack timer
+		#if !attackTimer.is_stopped():
+			#attackTimer.stop()
+		#
+		#UpdateTargetPosition()
+		#UpdateVelocity()
+		#
+	if velocity == Vector2.ZERO and attackTarget == null:
+		ChangeEntrenchment(delta)
 	else:
-		# stop attack timer
-		if !attackTimer.is_stopped():
-			attackTimer.stop()
+		ChangeEntrenchment(-delta)
 		
-		UpdateTargetPosition()
-		UpdateVelocity()
-		
-		if velocity == Vector2.ZERO:
-			ChangeEntrenchment(delta)
-		else:
-			ChangeEntrenchment(-delta)
-		
-		move_and_slide()
+	move_and_slide()
 
 
 func FindClosest(units):
@@ -138,6 +146,22 @@ func FindClosest(units):
 	
 	return output
 	
+
+# tries to receive a unit to attack within its attackBlock Range
+# close ones are prioritized
+func SearchForAttackTarget() -> Unit:
+	var newTarget = null
+	for i in range(unitData.attackBlockRange):
+		var nextBlock = currentBlock.nextBlock
+		if !isPlayerUnit:
+			nextBlock = currentBlock.prevBlock
+		
+		newTarget = FindClosest(nextBlock.GetUnitsInside(!isPlayerUnit))
+		if newTarget != null:
+			break
+		
+	return newTarget
+		
 		
 func ReceiveHit(amount, pene = 0):
 	# check if defense succeeded
@@ -264,36 +288,47 @@ func UpdateVelocity() -> bool:
 		hasVisitedCurrentBlock = AtCurrent()
 		return false
 	else:
-		if AtTarget():
-			velocity = Vector2.ZERO
-			debugStatus = "At target location" + "\n permission: " + str(hasPermission)
-			return true
-		else:
-			var nextBlock: Block = currentBlock.nextBlock
-		
-			if target_position < global_position.x:
-				nextBlock = currentBlock.prevBlock
-			
-			if nextBlock == null:
+		attackTarget = SearchForAttackTarget()
+		# add tree divergence to check if we can attack
+		if attackTarget != null:
+			if attackTimer.is_stopped():
+				attackTimer.start(1/ attackSpeed)
 				velocity = Vector2.ZERO
-				debugStatus = "no path"
 				return false
-			else:
-				var nextSlot = nextBlock.GetEmptySlot(global_position)
+		else:
+			if !attackTimer.is_stopped():
+				attackTimer.stop()
 				
-				if nextSlot != null:
-					currentSlot.isOccupied = false
-					hasVisitedCurrentBlock = false
-					debugStatus = "have permission"
-					currentSlot = nextSlot
-					currentBlock = nextBlock
-					velocity = global_position.direction_to(currentSlot.GetCenterPosition()).normalized() * speed
+			if AtTarget():
+				velocity = Vector2.ZERO
+				debugStatus = "At target location" + "\n permission: " + str(hasPermission)
+				return true
+			else:
+				var nextBlock: Block = currentBlock.nextBlock
+			
+				if target_position < global_position.x:
+					nextBlock = currentBlock.prevBlock
+				
+				if nextBlock == null:
+					velocity = Vector2.ZERO
+					debugStatus = "no path"
 					return false
 				else:
-					# no space do nothing
-					debugStatus = "no space"
-					velocity = Vector2.ZERO
-					return false
+					var nextSlot = nextBlock.GetEmptySlot(global_position)
+					
+					if nextSlot != null:
+						currentSlot.isOccupied = false
+						hasVisitedCurrentBlock = false
+						debugStatus = "have permission"
+						currentSlot = nextSlot
+						currentBlock = nextBlock
+						velocity = global_position.direction_to(currentSlot.GetCenterPosition()).normalized() * speed
+						return false
+					else:
+						# no space do nothing
+						debugStatus = "no space"
+						velocity = Vector2.ZERO
+						return false
 				
 	return false
 

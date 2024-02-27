@@ -18,3 +18,4 @@ func _process(delta):
 
 func GetCenterPosition() -> Vector2:
 	return global_position + size / 2
+
