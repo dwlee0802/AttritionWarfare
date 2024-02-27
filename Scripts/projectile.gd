@@ -30,7 +30,7 @@ func SetPlayerUnit(val):
 		$ExplosionArea.collision_mask = 1
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if abs(global_position.distance_to(target_location)) < STOP_DIST:
 		queue_free()
 		

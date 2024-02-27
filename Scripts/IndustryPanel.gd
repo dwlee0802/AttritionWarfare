@@ -41,7 +41,7 @@ func _ready():
 		industry.good_produced.connect(MakeProductionPopup)
 		
 
-func _process(delta):
+func _process(_delta):
 	if industry != null:
 		nameLabel.text = industry.name
 		levelLabel.text = str(industry.level)

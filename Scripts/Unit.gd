@@ -54,7 +54,7 @@ func _ready():
 	target_position = global_position.x
 	
 
-func _process(delta):
+func _process(_delta):
 	hitPointBar.value = hitPoints
 	entrenchmentBar.max_value = maxEntrenchment
 	entrenchmentBar.value = entrenchment
@@ -226,7 +226,7 @@ func MakeDamagePopup(text, color = Color.RED):
 	newPopup.position = position
 	
 
-func AddIngredient(type, amount):
+func AddIngredient(_type, amount):
 	AddHP(amount)
 	
 	

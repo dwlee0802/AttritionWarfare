@@ -31,7 +31,7 @@ func _ready():
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	queuedAmountLabel.text = str(queuedAmount)
 	UpdateCooldownShadow(spawnTimer.time_left / spawnTimer.wait_time)
 	UpdateIngredientAmount()

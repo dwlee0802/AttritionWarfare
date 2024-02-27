@@ -18,6 +18,44 @@ offset_right = 64.0
 offset_bottom = 500.0
 script = ExtResource("2_568kp")
 
+[node name="CaptureStatus" type="ColorRect" parent="."]
+self_modulate = Color(0.560784, 0.560784, 0.560784, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = -10.0
+grow_horizontal = 2
+
+[node name="IndustryIcon" type="TextureRect" parent="CaptureStatus"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -42.0
+offset_right = 16.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_dmnni")
+
+[node name="TempIndustryLabel" type="Label" parent="CaptureStatus/IndustryIcon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Lv. 1 Coal"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="GroundTexture" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -36,6 +74,7 @@ texture = ExtResource("2_dmnni")
 expand_mode = 4
 
 [node name="DetectionArea" type="Control" parent="GroundTexture/SurfaceTexture"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

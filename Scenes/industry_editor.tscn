@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8dplhrs8j080"]
 
 [ext_resource type="PackedScene" uid="uid://bi1mpjr28ibja" path="res://Scenes/industry_slot.tscn" id="1_7ogah"]
-[ext_resource type="Script" path="res://Scenes/industry_editor.gd" id="1_38mkh"]
+[ext_resource type="Script" path="res://Scripts/industry_editor.gd" id="1_38mkh"]
 
 [node name="IndustryEditor" type="Panel"]
 anchors_preset = 15

@@ -11,6 +11,8 @@ var bonus_speed: float = 0
 # emitted when new block is received
 signal block_changed
 
+var _data
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,7 +20,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	UpdateBonuses()
 
 
@@ -26,6 +28,9 @@ func UpdateBonuses():
 	bonusLabel.text = ""
 	if bonus_speed > 0:
 		bonusLabel.text = "+" + str(int(bonus_speed * 100)) + "%"
+	elif bonus_speed < 0:
+		bonus_speed = 0
+		print("ERROR! Bonus shouldn't be below zero")
 	
 	
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
@@ -54,3 +59,14 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	# add bonus to new parent's neighbors
 	for key in neighborSlots.keys():
 		neighborSlots[key].bonus_speed += data.industry.bonusAmount
+	
+	_data = data
+	
+
+func RemoveBonus():
+	if _data == null:
+		return
+		
+	for key in neighborSlots.keys():
+		neighborSlots[key].bonus_speed -= _data.industry.bonusAmount
+		_data = null

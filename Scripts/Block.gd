@@ -23,6 +23,17 @@ var prevBlock: Block
 var slotScene = load("res://Scenes/block_slot.tscn")
 var slots = []
 
+# industry stuff
+@export var industry: Industry = null
+# when capture state changes from !player to player, add an IB to deck
+# when it changes from player to !player, remove the IB
+var industryBlock: IndustryBlock = null
+
+@onready var captureStatusTexture : ColorRect = $CaptureStatus
+var captureState: Enums.BlockState = Enums.BlockState.Neutral
+
+@onready var tempIndustryLabel = $CaptureStatus/IndustryIcon/TempIndustryLabel
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,7 +47,7 @@ func _ready():
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	centerPosition = detectionArea.global_position.x
 	insideUnits = GetUnitsInside()
 	UpdateContentsLabel()
@@ -44,7 +55,10 @@ func _process(delta):
 	
 	if curCombatWidth < 0:
 		curCombatWidth = 0
-		
+	
+	UpdateCaptureStatus()
+	UpdateIndustryIcon()
+	
 
 func UpdateContentsLabel():
 	var output = ""
@@ -84,7 +98,6 @@ func GetUnitsInside(player: bool = true):
 
 func CheckIfCapital():
 	var results = detectionArea.get_overlapping_bodies()
-	var output = []
 	for unit in results:
 		if unit is HQ:
 			ignoreCombatWidth = true
@@ -132,3 +145,42 @@ func GetEmptySlot(pos: Vector2):
 		return output
 	else:
 		return null
+
+
+# could optimize this further
+# or only call it when necessary
+# future plan: change the capture color according to faction
+func UpdateCaptureStatus():
+	var playerUnits = GetUnitsInside()
+	var enemyUnits = GetUnitsInside(false)
+	
+	if len(playerUnits) > 0:
+		if industry != null:
+			if captureState != Enums.BlockState.Player:
+				# this block was newly captured by player
+				# make IB and add it to deck
+				industryBlock = IndustryEditor.instance.AddIndustryBlock(industry)
+			
+		captureStatusTexture.self_modulate = Color.DEEP_SKY_BLUE
+		captureState = Enums.BlockState.Player
+	elif len(enemyUnits) > 0:
+		if captureState != Enums.BlockState.Enemy:
+			# this block was just lost from player
+			# remove self's IB from deck or editor
+			if industryBlock != null:
+				if industryBlock.get_parent() is BlockSlot:
+					industryBlock.get_parent().RemoveBonus()
+				
+				industryBlock.queue_free()
+			
+		captureStatusTexture.self_modulate = Color.DARK_RED
+		captureState = Enums.BlockState.Enemy
+			
+
+func UpdateIndustryIcon():
+	var output = ""
+	if industry != null:
+		output += "Lv: " + str(industry.level)
+		output += Enums.GoodTypeToString(industry.productionType)
+	
+	tempIndustryLabel.text = output

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dklvtdgerxe54"]
 
-[ext_resource type="Script" path="res://Scenes/IndustryBlock.gd" id="1_oofys"]
+[ext_resource type="Script" path="res://Scripts/IndustryBlock.gd" id="1_oofys"]
 [ext_resource type="Texture2D" uid="uid://bweni00tvg2ju" path="res://Art/32x32_white_square.png" id="2_ydpy2"]
 
 [node name="IndustryBlock" type="Control" node_paths=PackedStringArray("industry")]

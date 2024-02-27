@@ -60,6 +60,11 @@ func _process(delta):
 			productionTimer.stop()
 			return
 	
+	# disable if not placed in an industry slot
+	if !(get_parent() is IndustrySlot):
+		productionTimer.stop()
+		return
+		
 	allIngredientsAvailable = CheckIngredientsSatisfied()
 	
 	

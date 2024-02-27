@@ -6,27 +6,30 @@ var industryBlockScene = load("res://Scenes/industry_block.tscn")
 @onready var grid = $Editor/Grid
 @onready var deck = $Editor/Deck
 
+static var instance: IndustryEditor
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	IndustryEditor.instance = self
 	LinkNeighbors()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("toggle_industry_editor"):
 		visible = !visible
 
 
-func AddIndustryBlock(data: Industry):
+func AddIndustryBlock(data: Industry) -> IndustryBlock:
 	var newBlock: IndustryBlock = industryBlockScene.instantiate()
 	newBlock.industry = data
 	
 	deck.add_child(newBlock)
 	
+	return newBlock
+	
 	
 func LinkNeighbors():
-	var target: IndustrySlot
 	for i in range(grid.get_child_count()):
 		# up
 		if i - 7 >= 0:

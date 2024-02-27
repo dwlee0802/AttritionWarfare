@@ -12,18 +12,29 @@ var armoredData: UnitData = load("res://Data/armored.tres")
 
 @export var currentBlock: Block
 
+@onready var spawnTimer: Timer = $SpawnTimer
+@onready var spawnTimer2: Timer = $SpawnTimer2
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if autoSpawn:
-		$SpawnTimer.start()
-		$SpawnTimer2.start()
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
+func _process(_delta):
+	print(str(autoSpawn))
+	if autoSpawn:
+		if spawnTimer.is_stopped():
+			spawnTimer.start()
+		if spawnTimer2.is_stopped():
+			spawnTimer2.start()
+	else:
+		if !spawnTimer.is_stopped():
+			spawnTimer.stop()
+		if !spawnTimer2.is_stopped():
+			spawnTimer2.stop()
+		
 
 # spawns a unit of type unittype at its location
 func SpawnUnit(unitType):
@@ -40,3 +51,7 @@ func SpawnUnit(unitType):
 	newUnit.SetPlayerUnit(isPlayerHQ)
 	newUnit.currentBlock = currentBlock
 	newUnit.currentSlot = currentBlock.GetEmptySlot(newUnit.global_position)
+
+
+func _on_auto_spawn_button_toggled(toggled_on):
+	autoSpawn = toggled_on
