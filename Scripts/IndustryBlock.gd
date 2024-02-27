@@ -32,6 +32,8 @@ func _process(_delta):
 	UpdateGoodType()
 	ApplyBonus()
 	
+	industry.active = get_parent() is IndustrySlot
+		
 
 func UpdateProgressShade(ratio):
 	progressShade.anchor_bottom = ratio

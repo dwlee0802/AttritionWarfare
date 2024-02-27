@@ -44,6 +44,8 @@ var bonusAmount: float = 0.1
 # how much this got
 var receivedBonusAmount: float = 0
 
+var active: bool = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -61,9 +63,11 @@ func _process(delta):
 			return
 	
 	# disable if not placed in an industry slot
-	if !(get_parent() is IndustrySlot):
-		productionTimer.stop()
+	if !active:
+		if !productionTimer.is_stopped():
+			productionTimer.stop()
 		return
+		
 		
 	allIngredientsAvailable = CheckIngredientsSatisfied()
 	
