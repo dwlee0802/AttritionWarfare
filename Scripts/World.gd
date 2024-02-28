@@ -1,4 +1,5 @@
 extends Control
+class_name World
 
 const MAP_PAN_SPEED: int = 200
 
