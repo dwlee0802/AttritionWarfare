@@ -15,6 +15,8 @@ var armoredData: UnitData = load("res://Data/armored.tres")
 @onready var spawnTimer: Timer = $SpawnTimer
 @onready var spawnTimer2: Timer = $SpawnTimer2
 
+var units = []
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -50,7 +52,14 @@ func SpawnUnit(unitType):
 	newUnit.SetPlayerUnit(isPlayerHQ)
 	newUnit.currentBlock = currentBlock
 	newUnit.currentSlot = currentBlock.GetEmptySlot(newUnit.global_position)
+	units.append(newUnit)
 
 
 func _on_auto_spawn_button_toggled(toggled_on):
 	autoSpawn = toggled_on
+
+
+func _on_kill_all_units():
+	for unit: Unit in units:
+		if is_instance_valid(unit):
+			unit.ReceiveHit(1000)

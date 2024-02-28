@@ -1402,6 +1402,8 @@ text = "Clear Enemy Units"
 [connection signal="timeout" from="World/EnemyHQ/SpawnTimer" to="World/EnemyHQ" method="SpawnUnit" binds= [0]]
 [connection signal="timeout" from="World/EnemyHQ/SpawnTimer2" to="World/EnemyHQ" method="SpawnUnit" binds= [1]]
 [connection signal="toggled" from="DebugTab/PlayerAutoSpawnButton" to="World/PlayerHQ" method="_on_auto_spawn_button_toggled"]
+[connection signal="pressed" from="DebugTab/PlayerKillAllButton" to="World/PlayerHQ" method="_on_kill_all_units"]
 [connection signal="toggled" from="DebugTab/EnemyAutoSpawnButton" to="World/EnemyHQ" method="_on_auto_spawn_button_toggled"]
+[connection signal="pressed" from="DebugTab/EnemyKillAllButton" to="World/EnemyHQ" method="_on_kill_all_units"]
 
 [editable path="IndustryEditor"]

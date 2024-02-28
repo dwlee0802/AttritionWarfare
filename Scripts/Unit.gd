@@ -196,8 +196,15 @@ func ReceiveHit(amount, pene = 0):
 		Game.MakeDamagePopup("MISS", global_position, Color.RED)
 		
 	if hitPoints < 0:
-		currentBlock.curCombatWidth -= 1
-		currentSlot.isOccupied = false
+		if currentBlock != null:
+			currentBlock.curCombatWidth -= 1
+			currentSlot.isOccupied = false
+			
+		if isPlayerUnit:
+			Game.playerNation.hq.units.erase(self)
+		else:
+			Game.enemyNation.hq.units.erase(self)
+			
 		queue_free()
 
 
