@@ -102,8 +102,8 @@ func CheckResourceAvailable(type, amount) -> bool:
 		return false
 
 
-func CheckStockSpace(type, amount) -> bool:
-	if resources[type] < stockMax[type]:
+func CheckStockSpace(type, amount = 0) -> bool:
+	if resources[type] + amount <= stockMax[type]:
 		return true
 	else:
 		return false

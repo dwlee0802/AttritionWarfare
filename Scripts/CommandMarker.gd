@@ -27,7 +27,7 @@ func _ready():
 		$Sprite2D/Sprite2D.self_modulate = Color.DARK_ORANGE
 		
 		
-func _physics_process(delta):
+func _physics_process(_delta):
 	if OrderTab.selectedType == type and Input.is_action_pressed("right_click"):
 		global_position = get_global_mouse_position()
 	else:
