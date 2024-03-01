@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bvyo1sjvno0yx"]
+[gd_scene load_steps=34 format=3 uid="uid://bvyo1sjvno0yx"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_haicd"]
 [ext_resource type="Script" path="res://Scripts/IndustryTab.gd" id="2_acc5o"]
@@ -16,11 +16,13 @@
 [ext_resource type="ButtonGroup" uid="uid://wj5dpb8njxdy" path="res://Misc/artillery_order_button_group.tres" id="9_l64jy"]
 [ext_resource type="ButtonGroup" uid="uid://6mx1hky7l8wr" path="res://Misc/armored_order_button_group.tres" id="10_v5opw"]
 [ext_resource type="ButtonGroup" uid="uid://cw040k3tugkfl" path="res://Misc/antitank_order_button_group.tres" id="11_tirxr"]
+[ext_resource type="Script" path="res://Scenes/ConstructionTab.gd" id="14_jv0wn"]
 [ext_resource type="Script" path="res://Scripts/World.gd" id="16_g4x6a"]
 [ext_resource type="PackedScene" uid="uid://vpwwfpyp3c50" path="res://Scenes/command_marker.tscn" id="17_uqvni"]
 [ext_resource type="Script" path="res://Scripts/Ground.gd" id="18_c33n3"]
 [ext_resource type="PackedScene" uid="uid://ps851n03q6ik" path="res://Scenes/block.tscn" id="19_n67nq"]
 [ext_resource type="PackedScene" uid="uid://b8dplhrs8j080" path="res://Scenes/industry_editor.tscn" id="21_250fa"]
+[ext_resource type="Script" path="res://Scenes/Deck.gd" id="23_b2mc6"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_2uyt1"]
 device = -1
@@ -955,6 +957,22 @@ text = "CD: 4s"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ConstructionTab" type="Label" parent="."]
+layout_mode = 0
+offset_left = 295.0
+offset_top = 302.0
+offset_right = 395.0
+offset_bottom = 325.0
+text = "Construction"
+script = ExtResource("14_jv0wn")
+
+[node name="FundsLabel" type="Label" parent="ConstructionTab"]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 65.0
+offset_bottom = 51.0
+text = "Funds: 0"
+
 [node name="PlayerNation" type="Node" parent="." node_paths=PackedStringArray("hq")]
 script = ExtResource("4_kokw5")
 hq = NodePath("../World/PlayerHQ")
@@ -1224,9 +1242,10 @@ script = ExtResource("18_c33n3")
 [node name="Block" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
 
-[node name="Block2" parent="World/Ground" instance=ExtResource("19_n67nq")]
+[node name="Block2" parent="World/Ground" node_paths=PackedStringArray("industry") instance=ExtResource("19_n67nq")]
 layout_mode = 2
 ignoreCombatWidth = true
+industry = NodePath("../../../PlayerNation/Industry/Gun Factory")
 
 [node name="Block3" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
@@ -1235,14 +1254,17 @@ layout_mode = 2
 layout_mode = 2
 industry = NodePath("../../../PlayerNation/Industry/Coal Mines")
 
-[node name="Block5" parent="World/Ground" instance=ExtResource("19_n67nq")]
+[node name="Block5" parent="World/Ground" node_paths=PackedStringArray("industry") instance=ExtResource("19_n67nq")]
 layout_mode = 2
+industry = NodePath("../../../PlayerNation/Industry/Iron Mines")
 
-[node name="Block6" parent="World/Ground" instance=ExtResource("19_n67nq")]
+[node name="Block6" parent="World/Ground" node_paths=PackedStringArray("industry") instance=ExtResource("19_n67nq")]
 layout_mode = 2
+industry = NodePath("../../../PlayerNation/Industry/Steel Mill")
 
-[node name="Block7" parent="World/Ground" instance=ExtResource("19_n67nq")]
+[node name="Block7" parent="World/Ground" node_paths=PackedStringArray("industry") instance=ExtResource("19_n67nq")]
 layout_mode = 2
+industry = NodePath("../../../PlayerNation/Industry/Ammo Factory")
 
 [node name="Block8" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
@@ -1322,7 +1344,6 @@ layout_mode = 2
 
 [node name="IndustryEditor" parent="." instance=ExtResource("21_250fa")]
 process_priority = 1
-visible = false
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -1333,6 +1354,9 @@ offset_right = 657.0
 offset_bottom = 539.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="Deck" parent="IndustryEditor/Editor" index="1"]
+script = ExtResource("23_b2mc6")
 
 [node name="DebugTab" type="Label" parent="."]
 layout_mode = 0

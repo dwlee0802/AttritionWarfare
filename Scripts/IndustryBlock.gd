@@ -116,6 +116,56 @@ func make_drag_preview() -> TextureRect:
 	return t
 
 
+# return true for swapping
+func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
+	if data is IndustryBlock:
+		return true
+		
+	return false
+
+
+# swap positions with new block
+func _drop_data(_at_position: Vector2, data: Variant) -> void:
+	if data == self:
+		return
+		
+	# remove old parent's neighbors' bonuses
+	var parent = get_parent()
+	var theirParent = data.get_parent()
+	
+	# swap bonuses for their parent
+	if theirParent is IndustrySlot:
+		for key in theirParent.neighborSlots.keys():
+			theirParent.neighborSlots[key].bonus_speed += industry.bonusAmount
+			theirParent.neighborSlots[key].bonus_speed -= data.industry.bonusAmount
+			
+	# for our parent
+	if parent is IndustrySlot:
+		for key in parent.neighborSlots.keys():
+			parent.neighborSlots[key].bonus_speed -= industry.bonusAmount
+			parent.neighborSlots[key].bonus_speed += data.industry.bonusAmount
+	
+	# decoupling
+	parent.remove_child(self)	
+	theirParent.remove_child(data)
+	
+	# swap children
+	if theirParent is IndustrySlot:
+		theirParent.get_child(0).add_sibling(self)
+		theirParent._data = self
+	else:
+		theirParent.add_child(self)
+		
+	if parent is IndustrySlot:
+		parent.get_child(0).add_sibling(data)
+		parent._data = data
+	else:
+		parent.add_child(data)
+	
+	position = Vector2.ZERO
+	data.position = Vector2.ZERO
+	
+	
 func ApplyBonus():
 	var parent = get_parent()
 	if parent is IndustrySlot:

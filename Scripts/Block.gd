@@ -168,7 +168,7 @@ func UpdateCaptureStatus():
 			# this block was just lost from player
 			# remove self's IB from deck or editor
 			if industryBlock != null:
-				if industryBlock.get_parent() is BlockSlot:
+				if industryBlock.get_parent() is IndustrySlot:
 					industryBlock.get_parent().RemoveBonus()
 				
 				industryBlock.queue_free()

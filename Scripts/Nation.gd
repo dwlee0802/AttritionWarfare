@@ -15,7 +15,7 @@ var industries = []
 var supplyOrders = []
 const MAX_PRIORITY_LEVEL: int = 10
 
-var revenue: float = 0
+var funds: float = 0
 var revenuePerSecond: float = 100
 
 
@@ -67,7 +67,7 @@ func ProcessSupplyOrders():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	revenue += delta * revenuePerSecond
+	funds += delta * revenuePerSecond
 	
 	ProcessSupplyOrders()
 	ClearSupplyOrders()

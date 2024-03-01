@@ -12,7 +12,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	resourceStockLabel.text = str(int(Game.playerNation.revenue)) + " (" + str(Game.playerNation.revenuePerSecond) + "/s)"
+	pass
 
 
 func MakeIndustryPanel() -> IndustryPanel:

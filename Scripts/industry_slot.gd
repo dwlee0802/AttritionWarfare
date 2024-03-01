@@ -45,7 +45,7 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	# remove old parent's neighbors' bonuses
 	if data.get_parent() is IndustrySlot:
 		for key in data.get_parent().neighborSlots.keys():
-			neighborSlots[key].bonus_speed -= data.industry.bonusAmount
+			data.get_parent().neighborSlots[key].bonus_speed -= data.industry.bonusAmount
 			if neighborSlots[key].bonus_speed < 0:
 				print("ERROR bonus shouldnt go below zero")
 				neighborSlots[key].bonus_speed = 0
@@ -66,7 +66,8 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 func RemoveBonus():
 	if _data == null:
 		return
-		
+	
 	for key in neighborSlots.keys():
 		neighborSlots[key].bonus_speed -= _data.industry.bonusAmount
-		_data = null
+		
+	_data = null
