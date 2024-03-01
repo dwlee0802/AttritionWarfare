@@ -973,12 +973,13 @@ offset_right = 65.0
 offset_bottom = 51.0
 text = "Funds: 0"
 
-[node name="IndustryButton" type="Button" parent="ConstructionTab"]
+[node name="Build" type="Button" parent="ConstructionTab"]
 layout_mode = 0
 offset_top = 55.0
 offset_right = 73.0
 offset_bottom = 86.0
-text = "Industry"
+toggle_mode = true
+text = "Build"
 
 [node name="PlayerNation" type="Node" parent="." node_paths=PackedStringArray("hq")]
 script = ExtResource("4_kokw5")
@@ -1429,6 +1430,7 @@ text = "Clear Enemy Units"
 [connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/OffensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [3, 0]]
 [connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/DefensiveButton" to="OrderTab" method="_on_order_button_pressed" binds= [3, 1]]
 [connection signal="pressed" from="OrderTab/MarkerControl/AntiTank/RetreatButton" to="OrderTab" method="_on_order_button_pressed" binds= [3, 2]]
+[connection signal="toggled" from="ConstructionTab/Build" to="ConstructionTab" method="_on_build_toggled"]
 [connection signal="timeout" from="World/PlayerHQ/SpawnTimer" to="World/PlayerHQ" method="SpawnUnit" binds= [0]]
 [connection signal="timeout" from="World/PlayerHQ/SpawnTimer2" to="World/PlayerHQ" method="SpawnUnit" binds= [1]]
 [connection signal="timeout" from="World/EnemyHQ/SpawnTimer" to="World/EnemyHQ" method="SpawnUnit" binds= [0]]

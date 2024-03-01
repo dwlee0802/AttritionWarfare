@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ps851n03q6ik"]
+[gd_scene load_steps=7 format=3 uid="uid://ps851n03q6ik"]
 
 [ext_resource type="Script" path="res://Scripts/Block.gd" id="2_568kp"]
 [ext_resource type="Texture2D" uid="uid://bweni00tvg2ju" path="res://Art/32x32_white_square.png" id="2_dmnni"]
+[ext_resource type="Script" path="res://Scenes/IndustryIcons.gd" id="3_57e5e"]
+[ext_resource type="Texture2D" uid="uid://bu5glklx5xfyl" path="res://Art/build_icon.jpg" id="3_wcdb0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mp6jl"]
 size = Vector2(64, 371)
@@ -27,6 +29,7 @@ offset_top = -10.0
 grow_horizontal = 2
 
 [node name="IndustryIcon" type="TextureRect" parent="CaptureStatus"]
+visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 1
 anchors_preset = -1
@@ -43,6 +46,172 @@ grow_vertical = 0
 texture = ExtResource("2_dmnni")
 
 [node name="TempIndustryLabel" type="Label" parent="CaptureStatus/IndustryIcon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Lv. 1 Coal"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="IndustryIcons" type="VBoxContainer" parent="CaptureStatus"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 2
+script = ExtResource("3_57e5e")
+
+[node name="BuildButton" type="TextureButton" parent="CaptureStatus/IndustryIcons"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("3_wcdb0")
+
+[node name="BuildOptions" type="Control" parent="CaptureStatus/IndustryIcons/BuildButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Industry" type="VBoxContainer" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+alignment = 1
+
+[node name="CoalButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Coal Mine"
+
+[node name="IronButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Iron Mine"
+
+[node name="SteelButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Steel Mill"
+
+[node name="GunButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Gun"
+
+[node name="SteelButton3" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Cannon"
+
+[node name="SteelButton4" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Engine"
+
+[node name="Infrastructure" type="VBoxContainer" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -37.0
+offset_bottom = 37.0
+grow_horizontal = 0
+grow_vertical = 2
+alignment = 1
+
+[node name="RoadButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Infrastructure"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Road"
+
+[node name="BridgeButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Infrastructure"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Bridge"
+
+[node name="TypeButtons" type="Control" parent="CaptureStatus/IndustryIcons/BuildButton"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IndustryButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/TypeButtons"]
+custom_minimum_size = Vector2(76, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.0
+offset_right = 76.0
+offset_bottom = 11.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = "Industry"
+
+[node name="InfrastructureButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/TypeButtons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -11.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = "Infrastructure"
+
+[node name="IndustryIcon" type="TextureRect" parent="CaptureStatus/IndustryIcons"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_dmnni")
+
+[node name="TempIndustryLabel" type="Label" parent="CaptureStatus/IndustryIcons/IndustryIcon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Lv. 1 Coal"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="IndustryIcon2" type="TextureRect" parent="CaptureStatus/IndustryIcons"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_dmnni")
+
+[node name="TempIndustryLabel" type="Label" parent="CaptureStatus/IndustryIcons/IndustryIcon2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

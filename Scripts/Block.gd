@@ -187,3 +187,7 @@ func UpdateIndustryIcon():
 		tempIndustryLabel.get_parent().visible = false
 	
 	tempIndustryLabel.text = output
+
+
+func _on_build_button_pressed():
+	pass # Replace with function body.
