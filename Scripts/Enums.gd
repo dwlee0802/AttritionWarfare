@@ -1,6 +1,6 @@
 class_name Enums
 
-enum GoodType {Coal, Iron, Steel, Gun, Cannon, Tank, Ammunition, Infantry, Artillery, Armored, AntiTank, None}
+enum GoodType {Coal, Iron, Steel, Gun, Cannon, Engine, Ammunition, Infantry, Artillery, Armored, AntiTank, None}
 static var GOOD_TYPE_COUNT: int = 7
 static func GoodTypeToString(num):
 	if num == 0:

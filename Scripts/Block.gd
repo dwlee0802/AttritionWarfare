@@ -189,5 +189,5 @@ func UpdateIndustryIcon():
 	tempIndustryLabel.text = output
 
 
-func _on_build_button_pressed():
-	pass # Replace with function body.
+func BuildIndustry(type: Enums.GoodType):
+	pass

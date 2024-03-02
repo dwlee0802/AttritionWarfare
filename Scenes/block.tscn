@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://ps851n03q6ik"]
+[gd_scene load_steps=9 format=3 uid="uid://ps851n03q6ik"]
 
 [ext_resource type="Script" path="res://Scripts/Block.gd" id="2_568kp"]
 [ext_resource type="Texture2D" uid="uid://bweni00tvg2ju" path="res://Art/32x32_white_square.png" id="2_dmnni"]
 [ext_resource type="Script" path="res://Scenes/IndustryIcons.gd" id="3_57e5e"]
 [ext_resource type="Texture2D" uid="uid://bu5glklx5xfyl" path="res://Art/build_icon.jpg" id="3_wcdb0"]
+[ext_resource type="ButtonGroup" uid="uid://h7t1wd2bnwok" path="res://build_button_group.tres" id="4_3fbij"]
+[ext_resource type="Script" path="res://Scenes/BuildTypeButton.gd" id="6_ijsgh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mp6jl"]
 size = Vector2(64, 371)
@@ -16,8 +18,10 @@ texture_filter = 1
 custom_minimum_size = Vector2(64, 450)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 64.0
-offset_bottom = 500.0
+offset_left = 772.0
+offset_top = 352.0
+offset_right = 836.0
+offset_bottom = 852.0
 script = ExtResource("2_568kp")
 
 [node name="CaptureStatus" type="ColorRect" parent="."]
@@ -67,97 +71,25 @@ anchor_right = 0.5
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 alignment = 2
 script = ExtResource("3_57e5e")
 
 [node name="BuildButton" type="TextureButton" parent="CaptureStatus/IndustryIcons"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("4_3fbij")
 texture_normal = ExtResource("3_wcdb0")
 
-[node name="BuildOptions" type="Control" parent="CaptureStatus/IndustryIcons/BuildButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Industry" type="VBoxContainer" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions"]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -20.0
-offset_right = 40.0
-offset_bottom = 20.0
-grow_vertical = 2
-alignment = 1
-
-[node name="CoalButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Coal Mine"
-
-[node name="IronButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Iron Mine"
-
-[node name="SteelButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Steel Mill"
-
-[node name="GunButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Gun"
-
-[node name="SteelButton3" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Cannon"
-
-[node name="SteelButton4" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Engine"
-
-[node name="Infrastructure" type="VBoxContainer" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions"]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -56.0
-offset_top = -37.0
-offset_bottom = 37.0
-grow_horizontal = 0
-grow_vertical = 2
-alignment = 1
-
-[node name="RoadButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Infrastructure"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Road"
-
-[node name="BridgeButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Infrastructure"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Bridge"
-
 [node name="TypeButtons" type="Control" parent="CaptureStatus/IndustryIcons/BuildButton"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="IndustryButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/TypeButtons"]
 custom_minimum_size = Vector2(76, 0)
@@ -186,6 +118,100 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 10
 text = "Infrastructure"
+
+[node name="BuildOptions" type="Control" parent="CaptureStatus/IndustryIcons/BuildButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Industry" type="VBoxContainer" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+alignment = 1
+
+[node name="CoalButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Coal Mine"
+script = ExtResource("6_ijsgh")
+goodType = 0
+
+[node name="IronButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Iron Mine"
+script = ExtResource("6_ijsgh")
+goodType = 1
+
+[node name="SteelButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Steel Mill"
+script = ExtResource("6_ijsgh")
+goodType = 2
+
+[node name="GunButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Gun"
+script = ExtResource("6_ijsgh")
+goodType = 3
+
+[node name="CannonButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Cannon"
+script = ExtResource("6_ijsgh")
+goodType = 4
+
+[node name="EngineButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Engine"
+script = ExtResource("6_ijsgh")
+goodType = 5
+
+[node name="AmmoButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Ammo"
+script = ExtResource("6_ijsgh")
+goodType = 6
+
+[node name="Infrastructure" type="VBoxContainer" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -37.0
+offset_bottom = 37.0
+grow_horizontal = 0
+grow_vertical = 2
+alignment = 1
+
+[node name="RoadButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Infrastructure"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Road"
+
+[node name="BridgeButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Infrastructure"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Bridge"
 
 [node name="IndustryIcon" type="TextureRect" parent="CaptureStatus/IndustryIcons"]
 custom_minimum_size = Vector2(32, 32)
@@ -317,3 +343,7 @@ layout_mode = 1
 anchors_preset = -1
 offset_top = -20.0
 theme_override_font_sizes/font_size = 10
+
+[connection signal="toggled" from="CaptureStatus/IndustryIcons/BuildButton" to="CaptureStatus/IndustryIcons" method="_on_build_button_toggled"]
+[connection signal="pressed" from="CaptureStatus/IndustryIcons/BuildButton/TypeButtons/IndustryButton" to="CaptureStatus/IndustryIcons" method="_on_type_button_pressed" binds= [true]]
+[connection signal="pressed" from="CaptureStatus/IndustryIcons/BuildButton/TypeButtons/InfrastructureButton" to="CaptureStatus/IndustryIcons" method="_on_type_button_pressed" binds= [false]]
