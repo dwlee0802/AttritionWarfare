@@ -24,6 +24,8 @@ var slotScene = load("res://Scenes/block_slot.tscn")
 var slots = []
 
 # industry stuff
+# maybe redundant? just keep track of industry block and not industry
+# unparent it from deck/editor when it is lost. could be better for performance too.
 @export var industry: Industry = null
 # when capture state changes from !player to player, add an IB to deck
 # when it changes from player to !player, remove the IB
