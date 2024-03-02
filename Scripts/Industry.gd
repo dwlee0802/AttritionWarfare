@@ -3,8 +3,10 @@ class_name Industry
 
 @export var isPlayer: bool = true
 @export var level: int = 0
-@onready var nation: Nation = get_parent().get_parent()
+# change assumption so that the industry 'lives' in the IB blocks?
+var nation: Nation
 @export var levelUpCost: int = 500
+@export var data: IndustryData
 
 @export_group("Production")
 @export var industrySector: Enums.IndustrySector = Enums.IndustrySector.Basic
@@ -50,6 +52,11 @@ var active: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	productionTimer.timeout.connect(Production)
+	
+	if isPlayer:
+		nation = Game.playerNation
+	else:
+		nation = Game.enemyNation
 
 
 func _process(delta):
@@ -136,6 +143,7 @@ func AddIngredient(type, amount):
 		return
 	
 
+# might be better to decouple these?
 func IncreaseLevel(amount: int = 1):
 	if isPlayer:
 		if Game.playerNation.revenue >= levelUpCost * amount:

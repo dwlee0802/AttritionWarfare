@@ -190,4 +190,8 @@ func UpdateIndustryIcon():
 
 
 func BuildIndustry(type: Enums.GoodType):
-	pass
+	# need to remove industry first to build new one!
+	if industry != null:
+		print("ERROR! Trying to build new industry in already occupied Block.")
+		return
+	
