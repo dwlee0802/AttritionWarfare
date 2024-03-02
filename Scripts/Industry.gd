@@ -2,7 +2,7 @@ extends Node
 class_name Industry
 
 @export var isPlayer: bool = true
-@export var level: int = 0
+@export var level: int = 1
 # change assumption so that the industry 'lives' in the IB blocks?
 var nation: Nation
 @export var levelUpCost: int = 500
@@ -16,7 +16,7 @@ var nation: Nation
 @export var stockpileMax: int = 100
 
 @export var baseProductionTime: float = 1
-@onready var productionTimer: Timer = $ProductionTimer
+@onready var productionTimer: Timer
 
 @export_group("Ingredients")
 # determines the priority in which ingredients are received when there is not enough
@@ -49,8 +49,33 @@ var receivedBonusAmount: float = 0
 var active: bool = false
 
 
+func _init(_data: IndustryData = null):
+	if _data != null:
+		data = _data
+		productionType = data.productionType
+		productionAmount = data.productionAmount
+		baseProductionTime = data.baseProductionTime
+		industrySector = data.industrySector
+		
+		ingredientType0 = data.ingredientType0
+		ingredientType0_Amount = data.ingredientType0_Need
+		ingredientType1 = data.ingredientType1
+		ingredientType1_Amount = data.ingredientType1_Need
+		ingredientType2 = data.ingredientType2
+		ingredientType2_Amount = data.ingredientType2_Need
+	
+	#print("ERROR! No data in Industry")
+	
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	productionTimer = get_node_or_null("ProductionTimer")
+	
+	if productionTimer == null:
+		productionTimer = Timer.new()
+		add_child(productionTimer)
+		productionTimer.one_shot = true
+	
 	productionTimer.timeout.connect(Production)
 	
 	if isPlayer:

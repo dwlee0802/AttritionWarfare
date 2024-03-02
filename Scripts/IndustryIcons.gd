@@ -5,9 +5,12 @@ extends VBoxContainer
 @onready var industryButtons = $BuildButton/BuildOptions/Industry
 @onready var infraButtons = $BuildButton/BuildOptions/Infrastructure
 
+var block: Block
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	block = get_parent().get_parent()
 	ConnectBuildSignals()
 	Reset()
 
@@ -40,7 +43,12 @@ func Reset():
 	
 
 func _on_industry_button_pressed(extra_arg_0):
-	print(Enums.GoodTypeToString(extra_arg_0))
+	block.BuildIndustry(extra_arg_0)
+	Reset()
+	
+	
+func _on_infra_button_pressed(extra_arg_0):
+	print("pressed on " + Enums.InfraTypeToString(extra_arg_0))
 	Reset()
 
 
@@ -48,3 +56,7 @@ func ConnectBuildSignals():
 	for child in industryButtons.get_children():
 		if child is BuildTypeButton:
 			child.pressed.connect(_on_industry_button_pressed.bind(child.goodType))
+			
+	for child in infraButtons.get_children():
+		if child is BuildTypeButton:
+			child.pressed.connect(_on_infra_button_pressed.bind(child.infraType))

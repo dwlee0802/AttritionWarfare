@@ -34,7 +34,11 @@ var industryBlock: IndustryBlock = null
 @onready var captureStatusTexture : ColorRect = $CaptureStatus
 var captureState: Enums.BlockState = Enums.BlockState.Neutral
 
-@onready var tempIndustryLabel = $CaptureStatus/IndustryIcon/TempIndustryLabel
+# assume only one industry per block and two infrastructure
+@onready var infraIcon1 = $CaptureStatus/IndustryIcons/InfraIcon
+@onready var infraIcon2 = $CaptureStatus/IndustryIcons/InfraIcon2
+@onready var industryIcon = $CaptureStatus/IndustryIcons/IndustryIcon
+@onready var tempIndustryLabel = $CaptureStatus/IndustryIcons/IndustryIcon/TempIndustryLabel
 
 
 # Called when the node enters the scene tree for the first time.
@@ -180,20 +184,24 @@ func UpdateCaptureStatus():
 			
 
 func UpdateIndustryIcon():
-	var output = ""
 	if industry != null:
+		industryIcon.visible = true
+		var output = ""
 		output += "Lv: " + str(industry.level)
-		output += Enums.GoodTypeToString(industry.productionType)
+		output += Enums.GoodTypeToIndustryName(industry.productionType)
+		tempIndustryLabel.text = output
 	else:
-		tempIndustryLabel.visible = false
-		tempIndustryLabel.get_parent().visible = false
-	
-	tempIndustryLabel.text = output
+		industryIcon.visible = false
 
 
 func BuildIndustry(type: Enums.GoodType):
 	# need to remove industry first to build new one!
-	if industry != null:
+	if industry != null or industryBlock != null:
 		print("ERROR! Trying to build new industry in already occupied Block.")
 		return
 	
+	industry = Industry.new(load(Enums.GoodTypeToDataPath(type)))
+	add_child(industry)
+	industryBlock = IndustryEditor.instance.AddIndustryBlock(industry)
+	
+	print("Built new " + Enums.GoodTypeToIndustryName(type) + " at " + name)

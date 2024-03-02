@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="IndustryData" load_steps=2 format=3 uid="uid://cnnih05lwo3v"]
+
+[ext_resource type="Script" path="res://Data/Industry/industry_data.gd" id="1_phbxp"]
+
+[resource]
+script = ExtResource("1_phbxp")
+productionType = 2
+industrySector = 1
+baseProductionTime = 1.0
+productionAmount = 1
+ingredientType0 = 0
+ingredientType0_Need = 1
+ingredientType1 = 1
+ingredientType1_Need = 1
+ingredientType2 = 11
+ingredientType2_Need = 0

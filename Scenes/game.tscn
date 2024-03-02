@@ -989,7 +989,6 @@ hq = NodePath("../World/PlayerHQ")
 
 [node name="Coal Mines" type="Node" parent="PlayerNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 productionType = 0
 productionAmount = 3
 
@@ -998,7 +997,6 @@ one_shot = true
 
 [node name="Iron Mines" type="Node" parent="PlayerNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 productionType = 1
 productionAmount = 2
 
@@ -1007,7 +1005,6 @@ one_shot = true
 
 [node name="Steel Mill" type="Node" parent="PlayerNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 industrySector = 1
 productionType = 2
 productionAmount = 1
@@ -1021,7 +1018,6 @@ one_shot = true
 
 [node name="Gun Factory" type="Node" parent="PlayerNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 industrySector = 2
 productionType = 3
 productionAmount = 10
@@ -1033,7 +1029,6 @@ one_shot = true
 
 [node name="Cannon Factory" type="Node" parent="PlayerNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 industrySector = 2
 productionType = 4
 productionAmount = 1
@@ -1045,7 +1040,6 @@ one_shot = true
 
 [node name="Tank Factory" type="Node" parent="PlayerNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 industrySector = 2
 productionType = 5
 productionAmount = 1
@@ -1059,7 +1053,6 @@ one_shot = true
 
 [node name="Ammo Factory" type="Node" parent="PlayerNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 industrySector = 2
 productionType = 6
 productionAmount = 10
@@ -1077,7 +1070,6 @@ hq = NodePath("../World/EnemyHQ")
 
 [node name="Coal Mines" type="Node" parent="EnemyNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 productionType = 0
 productionAmount = 3
 
@@ -1086,7 +1078,6 @@ one_shot = true
 
 [node name="Iron Mines" type="Node" parent="EnemyNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 productionType = 1
 productionAmount = 2
 
@@ -1095,7 +1086,6 @@ one_shot = true
 
 [node name="Steel Mill" type="Node" parent="EnemyNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 industrySector = 1
 productionType = 2
 productionAmount = 1
@@ -1109,7 +1099,6 @@ one_shot = true
 
 [node name="Gun Factory" type="Node" parent="EnemyNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 industrySector = 2
 productionType = 3
 productionAmount = 10
@@ -1121,7 +1110,6 @@ one_shot = true
 
 [node name="Cannon Factory" type="Node" parent="EnemyNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 industrySector = 2
 productionType = 4
 productionAmount = 1
@@ -1133,7 +1121,6 @@ one_shot = true
 
 [node name="Tank Factory" type="Node" parent="EnemyNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 industrySector = 2
 productionType = 5
 productionAmount = 1
@@ -1147,7 +1134,6 @@ one_shot = true
 
 [node name="Ammo Factory" type="Node" parent="EnemyNation/Industry"]
 script = ExtResource("5_2rvh2")
-level = 1
 industrySector = 2
 productionType = 6
 productionAmount = 10
@@ -1253,26 +1239,22 @@ layout_mode = 2
 [node name="Block2" parent="World/Ground" node_paths=PackedStringArray("industry") instance=ExtResource("19_n67nq")]
 layout_mode = 2
 ignoreCombatWidth = true
-industry = NodePath("../../../PlayerNation/Industry/Gun Factory")
+industry = NodePath("../../../PlayerNation/Industry/Coal Mines")
 
 [node name="Block3" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
 
-[node name="Block4" parent="World/Ground" node_paths=PackedStringArray("industry") instance=ExtResource("19_n67nq")]
+[node name="Block4" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
-industry = NodePath("../../../PlayerNation/Industry/Coal Mines")
 
-[node name="Block5" parent="World/Ground" node_paths=PackedStringArray("industry") instance=ExtResource("19_n67nq")]
+[node name="Block5" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
-industry = NodePath("../../../PlayerNation/Industry/Iron Mines")
 
-[node name="Block6" parent="World/Ground" node_paths=PackedStringArray("industry") instance=ExtResource("19_n67nq")]
+[node name="Block6" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
-industry = NodePath("../../../PlayerNation/Industry/Steel Mill")
 
-[node name="Block7" parent="World/Ground" node_paths=PackedStringArray("industry") instance=ExtResource("19_n67nq")]
+[node name="Block7" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
-industry = NodePath("../../../PlayerNation/Industry/Ammo Factory")
 
 [node name="Block8" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
@@ -1352,7 +1334,6 @@ layout_mode = 2
 
 [node name="IndustryEditor" parent="." instance=ExtResource("21_250fa")]
 process_priority = 1
-visible = false
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ps851n03q6ik"]
+[gd_scene load_steps=10 format=3 uid="uid://ps851n03q6ik"]
 
 [ext_resource type="Script" path="res://Scripts/Block.gd" id="2_568kp"]
 [ext_resource type="Texture2D" uid="uid://bweni00tvg2ju" path="res://Art/32x32_white_square.png" id="2_dmnni"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bu5glklx5xfyl" path="res://Art/build_icon.jpg" id="3_wcdb0"]
 [ext_resource type="ButtonGroup" uid="uid://h7t1wd2bnwok" path="res://build_button_group.tres" id="4_3fbij"]
 [ext_resource type="Script" path="res://Scenes/BuildTypeButton.gd" id="6_ijsgh"]
+[ext_resource type="PackedScene" uid="uid://d3fg8bwdnwgyv" path="res://Scenes/industry_icon.tscn" id="7_gmh5v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mp6jl"]
 size = Vector2(64, 371)
@@ -32,37 +33,6 @@ anchor_right = 1.0
 offset_top = -10.0
 grow_horizontal = 2
 
-[node name="IndustryIcon" type="TextureRect" parent="CaptureStatus"]
-visible = false
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -16.0
-offset_top = -42.0
-offset_right = 16.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("2_dmnni")
-
-[node name="TempIndustryLabel" type="Label" parent="CaptureStatus/IndustryIcon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 10
-text = "Lv. 1 Coal"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
 [node name="IndustryIcons" type="VBoxContainer" parent="CaptureStatus"]
 layout_mode = 1
 anchors_preset = -1
@@ -83,6 +53,7 @@ button_group = ExtResource("4_3fbij")
 texture_normal = ExtResource("3_wcdb0")
 
 [node name="TypeButtons" type="Control" parent="CaptureStatus/IndustryIcons/BuildButton"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -129,6 +100,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Industry" type="VBoxContainer" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -207,49 +179,27 @@ alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Road"
+script = ExtResource("6_ijsgh")
+infraType = 0
 
 [node name="BridgeButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Infrastructure"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Bridge"
+script = ExtResource("6_ijsgh")
+infraType = 1
 
-[node name="IndustryIcon" type="TextureRect" parent="CaptureStatus/IndustryIcons"]
-custom_minimum_size = Vector2(32, 32)
+[node name="InfraIcon" parent="CaptureStatus/IndustryIcons" instance=ExtResource("7_gmh5v")]
+visible = false
 layout_mode = 2
-texture = ExtResource("2_dmnni")
 
-[node name="TempIndustryLabel" type="Label" parent="CaptureStatus/IndustryIcons/IndustryIcon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 10
-text = "Lv. 1 Coal"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="IndustryIcon2" type="TextureRect" parent="CaptureStatus/IndustryIcons"]
-custom_minimum_size = Vector2(32, 32)
+[node name="InfraIcon2" parent="CaptureStatus/IndustryIcons" instance=ExtResource("7_gmh5v")]
+visible = false
 layout_mode = 2
-texture = ExtResource("2_dmnni")
 
-[node name="TempIndustryLabel" type="Label" parent="CaptureStatus/IndustryIcons/IndustryIcon2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 10
-text = "Lv. 1 Coal"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
+[node name="IndustryIcon" parent="CaptureStatus/IndustryIcons" instance=ExtResource("7_gmh5v")]
+visible = false
+layout_mode = 2
 
 [node name="GroundTexture" type="VBoxContainer" parent="."]
 layout_mode = 1

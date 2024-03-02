@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="IndustryData" load_steps=2 format=3 uid="uid://8jb3tm6p12vu"]
+
+[ext_resource type="Script" path="res://Data/Industry/industry_data.gd" id="1_1t3qm"]
+
+[resource]
+script = ExtResource("1_1t3qm")
+productionType = 4
+industrySector = 2
+baseProductionTime = 1.0
+productionAmount = 1
+ingredientType0 = 2
+ingredientType0_Need = 1
+ingredientType1 = 11
+ingredientType1_Need = 0
+ingredientType2 = 11
+ingredientType2_Need = 0
