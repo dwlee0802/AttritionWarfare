@@ -259,7 +259,7 @@ goodType = 6
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
-text = "Ammo"
+text = "Sell"
 
 [node name="Infrastructure" type="VBoxContainer" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions"]
 visible = false

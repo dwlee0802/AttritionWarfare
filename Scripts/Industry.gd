@@ -172,8 +172,8 @@ func AddIngredient(type, amount):
 # might be better to decouple these?
 func IncreaseLevel(amount: int = 1):
 	if isPlayer:
-		if Game.playerNation.revenue >= levelUpCost * amount:
-			Game.playerNation.revenue -= levelUpCost * amount
+		if Game.playerNation.funds >= levelUpCost * amount:
+			Game.playerNation.funds -= levelUpCost * amount
 			level += 1
 
 
@@ -182,5 +182,5 @@ func DecreaseLevel(amount: int = 1):
 		return
 	
 	if isPlayer:
-		Game.playerNation.revenue += levelUpCost * 0.8 * amount
+		Game.playerNation.funds += levelUpCost * 0.8 * amount
 		level -= amount

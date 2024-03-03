@@ -44,9 +44,17 @@ var captureState: Enums.BlockState = Enums.BlockState.Neutral
 
 @onready var buildOptions = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions
 
+@onready var sellButton = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry/SellButton
+
+@onready var industryButtons = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry
+@onready var infraButtons = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry
+
+@onready var industryIcons = $CaptureStatus/IndustryIcons
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry/SellButton.pressed.connect(SellButtonPressed)
 	maxCombatWidth = randi_range(1, 9)
 	CheckIfCapital()
 	
@@ -54,7 +62,8 @@ func _ready():
 		var newSlot = slotScene.instantiate()
 		slots.append(newSlot)
 		slotContainer.add_child(newSlot)
-	
+		
+	ConnectBuildSignals()
 	UpdateOptionButtons()
 	
 
@@ -218,10 +227,13 @@ func UpdateIndustryIcon():
 # otherwise show options and their costs
 func UpdateOptionButtons():
 	if industry == null:
+		sellButton.visible = false
 		for child in buildOptions.get_node("Industry").get_children():
 			if child is BuildTypeButton:
+				var cost = load(Enums.GoodTypeToDataPath(child.goodType)).levelUpCost
 				child.visible = true
-				child.text = Enums.GoodTypeToIndustryName(child.goodType) + " (" + str(load(Enums.GoodTypeToDataPath(child.goodType)).levelUpCost) + ")"
+				child.cost = cost
+				child.text = Enums.GoodTypeToIndustryName(child.goodType) + " (" + str(cost) + ")"
 	else:
 		for child in buildOptions.get_node("Industry").get_children():
 			if child is BuildTypeButton:
@@ -229,7 +241,9 @@ func UpdateOptionButtons():
 				if child.goodType == industry.productionType:
 					child.visible = true
 					child.text = "Level up " + " (" + str(industry.levelUpCost * (industry.level + 1)) + ")"
-
+		sellButton.visible = true
+		sellButton.text = "Sell (" + str(industry.levelUpCost * 0.8) + ")"
+		
 
 func BuildIndustry(type: Enums.GoodType):
 	# need to remove industry first to build new one!
@@ -241,11 +255,49 @@ func BuildIndustry(type: Enums.GoodType):
 			industry.level += 1
 			print("Increased level.")
 			UpdateOptionButtons()
+			industryIcons.Reset()
 			return
 	
 	industry = Industry.new(load(Enums.GoodTypeToDataPath(type)))
 	add_child(industry)
 	industryBlock = IndustryEditor.instance.AddIndustryBlock(industry)
 	
+	Game.playerNation.ChangeFunds(-500)
+	industryIcons.Reset()
+	
 	print("Built new " + Enums.GoodTypeToIndustryName(type) + " at " + name)
 	UpdateOptionButtons()
+	industryIcons.Reset()
+
+
+func BuildInfrastructure(type: Enums.InfrastructureType):
+	pass
+	
+	
+func SellButtonPressed():
+	if industry == null:
+		print("ERROR! Sell button pressed on empty block")
+	else:
+		industry.DecreaseLevel()
+		if industry.level == 0:
+			industry.free()
+			industry = null
+			
+			if industryBlock != null:
+				if industryBlock.get_parent() is IndustrySlot:
+					industryBlock.get_parent().RemoveBonus()
+				
+				industryBlock.queue_free()
+				
+		UpdateOptionButtons()
+		industryIcons.Reset()
+
+
+func ConnectBuildSignals():
+	for child in industryButtons.get_children():
+		if child is BuildTypeButton:
+			child.pressed.connect(BuildIndustry.bind(child.goodType))
+			
+	for child in infraButtons.get_children():
+		if child is BuildTypeButton:
+			child.pressed.connect(BuildInfrastructure.bind(child.infraType))
