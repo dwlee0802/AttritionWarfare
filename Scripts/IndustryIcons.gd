@@ -1,4 +1,7 @@
 extends VBoxContainer
+class_name IndustryIcons
+
+@onready var buildButton = $BuildButton
 
 @onready var typeButtons = $BuildButton/TypeButtons
 
@@ -17,13 +20,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
+	if buildButton.button_pressed == false:
+		Reset()
+	
 
 func _on_build_button_toggled(toggled_on):
 	typeButtons.visible = toggled_on
-	if toggled_on == false:
-		Reset()
 
 
 func _on_type_button_pressed(is_industry):
@@ -36,7 +38,7 @@ func _on_type_button_pressed(is_industry):
 
 
 func Reset():
-	$BuildButton.button_pressed = false
+	buildButton.button_pressed = false
 	typeButtons.visible = false
 	industryButtons.visible = false
 	infraButtons.visible = false

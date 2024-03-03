@@ -114,3 +114,13 @@ func AddResource(type, amount):
 	
 	if resources[type] > stockMax[type]:
 		resources[type] = stockMax[type]
+		
+
+func CheckEnoughFunds(amount):
+	return amount <= funds
+	
+	
+func ChangeFunds(amount: int = 0):
+	funds += amount
+	if funds < 0:
+		funds = 0

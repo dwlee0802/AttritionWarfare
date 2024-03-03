@@ -34,6 +34,8 @@ var industryBlock: IndustryBlock = null
 @onready var captureStatusTexture : ColorRect = $CaptureStatus
 var captureState: Enums.BlockState = Enums.BlockState.Neutral
 
+@onready var buildButton = $CaptureStatus/IndustryIcons/BuildButton
+
 # assume only one industry per block and two infrastructure
 @onready var infraIcon1 = $CaptureStatus/IndustryIcons/InfraIcon
 @onready var infraIcon2 = $CaptureStatus/IndustryIcons/InfraIcon2
@@ -65,6 +67,20 @@ func _process(_delta):
 	UpdateCaptureStatus()
 	UpdateIndustryIcon()
 	
+	
+	# need to disable other build buttons when one is pressed
+	var pressedButton = buildButton.button_group.get_pressed_button()
+	if pressedButton != null:
+		if pressedButton != buildButton:
+			buildButton.visible = false
+		else:
+			buildButton.visible = true
+	else:
+		if ConstructionTab.isBuildMode and captureState == Enums.BlockState.Player:
+			buildButton.visible = true
+		else:
+			buildButton.visible = false
+			
 
 func UpdateContentsLabel():
 	var output = ""
@@ -197,8 +213,13 @@ func UpdateIndustryIcon():
 func BuildIndustry(type: Enums.GoodType):
 	# need to remove industry first to build new one!
 	if industry != null or industryBlock != null:
-		print("ERROR! Trying to build new industry in already occupied Block.")
-		return
+		if industry.productionType != type:
+			print("ERROR! Trying to build new industry in already occupied Block.")
+			return
+		else:
+			industry.level += 1
+			print("Increased level.")
+			return
 	
 	industry = Industry.new(load(Enums.GoodTypeToDataPath(type)))
 	add_child(industry)

@@ -7,5 +7,6 @@ class_name BuildTypeButton
 
 
 func _process(delta):
-	# check if this button can be pressed based on available funds and cost
-	pass
+	if Game.playerNation != null:
+		# check if this button can be pressed based on available funds and cost
+		disabled = !Game.playerNation.CheckEnoughFunds(500)
