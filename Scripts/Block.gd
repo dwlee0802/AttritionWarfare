@@ -241,6 +241,7 @@ func UpdateOptionButtons():
 				if child.goodType == industry.productionType:
 					child.visible = true
 					child.text = "Level up " + " (" + str(industry.levelUpCost * (industry.level + 1)) + ")"
+					child.cost = industry.levelUpCost * (industry.level + 1)
 		sellButton.visible = true
 		sellButton.text = "Sell (" + str(industry.levelUpCost * 0.8) + ")"
 		
