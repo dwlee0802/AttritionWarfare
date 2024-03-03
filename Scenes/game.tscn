@@ -95,14 +95,14 @@ text = "Basic"
 [node name="IndustryPanel" parent="IndustryTab/BasicIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
 offset_top = 23.0
 offset_bottom = 168.0
-industry = NodePath("../../../PlayerNation/Industry/Coal Mines")
+industry = NodePath("")
 
 [node name="IndustryPanel2" parent="IndustryTab/BasicIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
 offset_left = 172.0
 offset_top = 23.0
 offset_right = 343.0
 offset_bottom = 168.0
-industry = NodePath("../../../PlayerNation/Industry/Iron Mines")
+industry = NodePath("")
 
 [node name="ProcessedIndustry" type="Control" parent="IndustryTab"]
 anchors_preset = 0
@@ -120,7 +120,7 @@ text = "Processed"
 [node name="IndustryPanel" parent="IndustryTab/ProcessedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
 offset_top = 25.0
 offset_bottom = 170.0
-industry = NodePath("../../../PlayerNation/Industry/Steel Mill")
+industry = NodePath("")
 
 [node name="ManufacturedIndustry" type="Control" parent="IndustryTab"]
 anchors_preset = 0
@@ -140,28 +140,28 @@ offset_left = 1.0
 offset_top = 25.0
 offset_right = 172.0
 offset_bottom = 170.0
-industry = NodePath("../../../PlayerNation/Industry/Gun Factory")
+industry = NodePath("")
 
 [node name="IndustryPanel2" parent="IndustryTab/ManufacturedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
 offset_left = 173.0
 offset_top = 25.0
 offset_right = 344.0
 offset_bottom = 170.0
-industry = NodePath("../../../PlayerNation/Industry/Cannon Factory")
+industry = NodePath("")
 
 [node name="IndustryPanel3" parent="IndustryTab/ManufacturedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
 offset_left = 344.0
 offset_top = 25.0
 offset_right = 515.0
 offset_bottom = 170.0
-industry = NodePath("../../../PlayerNation/Industry/Tank Factory")
+industry = NodePath("")
 
 [node name="IndustryPanel4" parent="IndustryTab/ManufacturedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
 offset_left = 516.0
 offset_top = 26.0
 offset_right = 687.0
 offset_bottom = 171.0
-industry = NodePath("../../../PlayerNation/Industry/Ammo Factory")
+industry = NodePath("")
 
 [node name="ResourceStockLabel" type="Label" parent="IndustryTab"]
 layout_mode = 0
@@ -985,83 +985,6 @@ text = "Build"
 script = ExtResource("4_kokw5")
 hq = NodePath("../World/PlayerHQ")
 
-[node name="Industry" type="Node" parent="PlayerNation"]
-
-[node name="Coal Mines" type="Node" parent="PlayerNation/Industry"]
-script = ExtResource("5_2rvh2")
-productionType = 0
-productionAmount = 3
-
-[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Coal Mines"]
-one_shot = true
-
-[node name="Iron Mines" type="Node" parent="PlayerNation/Industry"]
-script = ExtResource("5_2rvh2")
-productionType = 1
-productionAmount = 2
-
-[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Iron Mines"]
-one_shot = true
-
-[node name="Steel Mill" type="Node" parent="PlayerNation/Industry"]
-script = ExtResource("5_2rvh2")
-industrySector = 1
-productionType = 2
-productionAmount = 1
-ingredientType0 = 0
-ingredientType0_Amount = 2
-ingredientType1 = 1
-ingredientType1_Amount = 1
-
-[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Steel Mill"]
-one_shot = true
-
-[node name="Gun Factory" type="Node" parent="PlayerNation/Industry"]
-script = ExtResource("5_2rvh2")
-industrySector = 2
-productionType = 3
-productionAmount = 10
-ingredientType0 = 2
-ingredientType0_Amount = 2
-
-[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Gun Factory"]
-one_shot = true
-
-[node name="Cannon Factory" type="Node" parent="PlayerNation/Industry"]
-script = ExtResource("5_2rvh2")
-industrySector = 2
-productionType = 4
-productionAmount = 1
-ingredientType0 = 2
-ingredientType0_Amount = 1
-
-[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Cannon Factory"]
-one_shot = true
-
-[node name="Tank Factory" type="Node" parent="PlayerNation/Industry"]
-script = ExtResource("5_2rvh2")
-industrySector = 2
-productionType = 5
-productionAmount = 1
-ingredientType0 = 2
-ingredientType0_Amount = 1
-ingredientType1 = 4
-ingredientType1_Amount = 1
-
-[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Tank Factory"]
-one_shot = true
-
-[node name="Ammo Factory" type="Node" parent="PlayerNation/Industry"]
-script = ExtResource("5_2rvh2")
-industrySector = 2
-productionType = 6
-productionAmount = 10
-ingredientType0 = 2
-ingredientType0_Amount = 1
-
-[node name="ProductionTimer" type="Timer" parent="PlayerNation/Industry/Ammo Factory"]
-one_shot = true
-
 [node name="EnemyNation" type="Node" parent="." node_paths=PackedStringArray("hq")]
 script = ExtResource("4_kokw5")
 hq = NodePath("../World/EnemyHQ")
@@ -1238,7 +1161,7 @@ layout_mode = 2
 
 [node name="Block2" parent="World/Ground" node_paths=PackedStringArray("industry") instance=ExtResource("19_n67nq")]
 layout_mode = 2
-industry = NodePath("../../../PlayerNation/Industry/Coal Mines")
+industry = NodePath("")
 
 [node name="Block3" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2

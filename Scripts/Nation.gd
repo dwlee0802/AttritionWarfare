@@ -21,9 +21,6 @@ var revenuePerSecond: float = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for item in get_node("Industry").get_children():
-		industries.append(item)
-	
 	for i in range(Enums.GOOD_TYPE_COUNT):
 		var new2D = Array()
 		for j in range(MAX_PRIORITY_LEVEL):

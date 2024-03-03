@@ -8,6 +8,7 @@ productionType = 2
 industrySector = 1
 baseProductionTime = 1.0
 productionAmount = 1
+levelUpCost = 500
 ingredientType0 = 0
 ingredientType0_Need = 1
 ingredientType1 = 1
