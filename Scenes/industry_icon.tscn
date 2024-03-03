@@ -5,6 +5,7 @@
 [node name="IndustryIcon" type="TextureRect"]
 texture_filter = 1
 custom_minimum_size = Vector2(32, 32)
+mouse_filter = 2
 texture = ExtResource("1_xl1fa")
 
 [node name="TempIndustryLabel" type="Label" parent="."]

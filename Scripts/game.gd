@@ -41,3 +41,5 @@ static func MakeDamagePopup(text, where, color = Color.RED):
 	newPopup.modulate = color
 	newPopup.global_position = where
 	gameWorld.add_child(newPopup)
+	
+	return newPopup

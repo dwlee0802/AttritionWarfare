@@ -46,6 +46,7 @@ func Reset():
 
 func _on_industry_button_pressed(extra_arg_0):
 	block.BuildIndustry(extra_arg_0)
+	Game.playerNation.ChangeFunds(-500)
 	Reset()
 	
 	

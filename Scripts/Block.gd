@@ -42,6 +42,8 @@ var captureState: Enums.BlockState = Enums.BlockState.Neutral
 @onready var industryIcon = $CaptureStatus/IndustryIcons/IndustryIcon
 @onready var tempIndustryLabel = $CaptureStatus/IndustryIcons/IndustryIcon/TempIndustryLabel
 
+@onready var buildOptions = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -52,7 +54,9 @@ func _ready():
 		var newSlot = slotScene.instantiate()
 		slots.append(newSlot)
 		slotContainer.add_child(newSlot)
-		
+	
+	UpdateOptionButtons()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -210,15 +214,33 @@ func UpdateIndustryIcon():
 		industryIcon.visible = false
 
 
+# show sell button and level up button if industry exists
+# otherwise show options and their costs
+func UpdateOptionButtons():
+	if industry == null:
+		for child in buildOptions.get_node("Industry").get_children():
+			if child is BuildTypeButton:
+				child.visible = true
+				child.text = Enums.GoodTypeToIndustryName(child.goodType) + " (" + str(load(Enums.GoodTypeToDataPath(child.goodType)).levelUpCost) + ")"
+	else:
+		for child in buildOptions.get_node("Industry").get_children():
+			if child is BuildTypeButton:
+				child.visible = false
+				if child.goodType == industry.productionType:
+					child.visible = true
+					child.text = "Level up " + " (" + str(industry.levelUpCost * (industry.level + 1)) + ")"
+
+
 func BuildIndustry(type: Enums.GoodType):
 	# need to remove industry first to build new one!
-	if industry != null or industryBlock != null:
+	if industry != null:
 		if industry.productionType != type:
 			print("ERROR! Trying to build new industry in already occupied Block.")
 			return
 		else:
 			industry.level += 1
 			print("Increased level.")
+			UpdateOptionButtons()
 			return
 	
 	industry = Industry.new(load(Enums.GoodTypeToDataPath(type)))
@@ -226,3 +248,4 @@ func BuildIndustry(type: Enums.GoodType):
 	industryBlock = IndustryEditor.instance.AddIndustryBlock(industry)
 	
 	print("Built new " + Enums.GoodTypeToIndustryName(type) + " at " + name)
+	UpdateOptionButtons()

@@ -56,6 +56,7 @@ func _init(_data: IndustryData = null):
 		productionAmount = data.productionAmount
 		baseProductionTime = data.baseProductionTime
 		industrySector = data.industrySector
+		levelUpCost = data.levelUpCost
 		
 		ingredientType0 = data.ingredientType0
 		ingredientType0_Amount = data.ingredientType0_Need

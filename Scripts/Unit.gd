@@ -189,7 +189,8 @@ func ReceiveHit(amount, pene = 0):
 	
 	if randi_range(0, 100) > defense:
 		hitPoints -= amount
-		Game.MakeDamagePopup(str(amount), global_position, Color.RED)
+		var popup = Game.MakeDamagePopup(str(amount), global_position, Color.RED)
+		popup.global_position = global_position
 		hitAnimationPlayer.play("hit_animation")
 		ChangeEntrenchment(-1)
 	else:
