@@ -234,12 +234,12 @@ func UpdateOptionButtons():
 		sellButton.visible = false
 		for child in buildOptions.get_node("Industry").get_children():
 			if child is BuildTypeButton:
-				if child.goodType == Enums.GoodType.Coal and !canBuildCoal:
+				if child.goodType == Enums.GoodType.Coal and canBuildCoal == false:
 					child.visible = false
-					return
-				if child.goodType == Enums.GoodType.Iron and !canBuildIron:
+					continue
+				if child.goodType == Enums.GoodType.Iron and canBuildIron == false:
 					child.visible = false
-					return
+					continue
 					
 				var cost = load(Enums.GoodTypeToDataPath(child.goodType)).levelUpCost
 				child.visible = true
