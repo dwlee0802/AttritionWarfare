@@ -92,17 +92,15 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "Basic"
 
-[node name="IndustryPanel" parent="IndustryTab/BasicIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+[node name="IndustryPanel" parent="IndustryTab/BasicIndustry" instance=ExtResource("3_kbdac")]
 offset_top = 23.0
 offset_bottom = 168.0
-industry = NodePath("")
 
-[node name="IndustryPanel2" parent="IndustryTab/BasicIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+[node name="IndustryPanel2" parent="IndustryTab/BasicIndustry" instance=ExtResource("3_kbdac")]
 offset_left = 172.0
 offset_top = 23.0
 offset_right = 343.0
 offset_bottom = 168.0
-industry = NodePath("")
 
 [node name="ProcessedIndustry" type="Control" parent="IndustryTab"]
 anchors_preset = 0
@@ -117,10 +115,9 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "Processed"
 
-[node name="IndustryPanel" parent="IndustryTab/ProcessedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+[node name="IndustryPanel" parent="IndustryTab/ProcessedIndustry" instance=ExtResource("3_kbdac")]
 offset_top = 25.0
 offset_bottom = 170.0
-industry = NodePath("")
 
 [node name="ManufacturedIndustry" type="Control" parent="IndustryTab"]
 anchors_preset = 0
@@ -135,33 +132,29 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "Manufactured"
 
-[node name="IndustryPanel" parent="IndustryTab/ManufacturedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+[node name="IndustryPanel" parent="IndustryTab/ManufacturedIndustry" instance=ExtResource("3_kbdac")]
 offset_left = 1.0
 offset_top = 25.0
 offset_right = 172.0
 offset_bottom = 170.0
-industry = NodePath("")
 
-[node name="IndustryPanel2" parent="IndustryTab/ManufacturedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+[node name="IndustryPanel2" parent="IndustryTab/ManufacturedIndustry" instance=ExtResource("3_kbdac")]
 offset_left = 173.0
 offset_top = 25.0
 offset_right = 344.0
 offset_bottom = 170.0
-industry = NodePath("")
 
-[node name="IndustryPanel3" parent="IndustryTab/ManufacturedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+[node name="IndustryPanel3" parent="IndustryTab/ManufacturedIndustry" instance=ExtResource("3_kbdac")]
 offset_left = 344.0
 offset_top = 25.0
 offset_right = 515.0
 offset_bottom = 170.0
-industry = NodePath("")
 
-[node name="IndustryPanel4" parent="IndustryTab/ManufacturedIndustry" node_paths=PackedStringArray("industry") instance=ExtResource("3_kbdac")]
+[node name="IndustryPanel4" parent="IndustryTab/ManufacturedIndustry" instance=ExtResource("3_kbdac")]
 offset_left = 516.0
 offset_top = 26.0
 offset_right = 687.0
 offset_bottom = 171.0
-industry = NodePath("")
 
 [node name="ResourceStockLabel" type="Label" parent="IndustryTab"]
 layout_mode = 0
@@ -1159,9 +1152,8 @@ script = ExtResource("18_c33n3")
 [node name="Block" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
 
-[node name="Block2" parent="World/Ground" node_paths=PackedStringArray("industry") instance=ExtResource("19_n67nq")]
+[node name="Block2" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2
-industry = NodePath("")
 
 [node name="Block3" parent="World/Ground" instance=ExtResource("19_n67nq")]
 layout_mode = 2

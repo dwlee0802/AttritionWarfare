@@ -51,6 +51,10 @@ var captureState: Enums.BlockState = Enums.BlockState.Neutral
 
 @onready var industryIcons = $CaptureStatus/IndustryIcons
 
+# temporary testing values
+var canBuildCoal: bool = false
+var canBuildIron: bool = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -230,6 +234,13 @@ func UpdateOptionButtons():
 		sellButton.visible = false
 		for child in buildOptions.get_node("Industry").get_children():
 			if child is BuildTypeButton:
+				if child.goodType == Enums.GoodType.Coal and !canBuildCoal:
+					child.visible = false
+					return
+				if child.goodType == Enums.GoodType.Iron and !canBuildIron:
+					child.visible = false
+					return
+					
 				var cost = load(Enums.GoodTypeToDataPath(child.goodType)).levelUpCost
 				child.visible = true
 				child.cost = cost
