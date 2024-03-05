@@ -54,6 +54,7 @@ var captureState: Enums.BlockState = Enums.BlockState.Neutral
 @onready var industryIcons = $CaptureStatus/IndustryIcons
 
 # temporary testing values
+@export var terrainType: Modifier
 @export var modifiers = []
 
 var modifierIconScene = load("res://Scenes/block_modifier_icon.tscn")
@@ -271,8 +272,27 @@ func UpdateOptionButtons():
 					child.cost = industry.levelUpCost * (industry.level + 1)
 		sellButton.visible = true
 		sellButton.text = "Sell (" + str(industry.levelUpCost * 0.8) + ")"
-		
+	
+	# update infrastructure buttons
+	for child in buildOptions.get_node("Infrastructure").get_children():
+		if child is BuildTypeButton:
+			# check if the block's terrain type is appropriate for this infrastructure
+			if CheckCorrectTypeForInfra(child.infraType):
+				child.visible = true
+				child.cost = load(Enums.GoodTypeToDataPath(child.goodType)).levelUpCost
+				child.text = Enums.InfraTypeToString(child.goodType) + " (" + str(child.cost) + ")"
 
+
+# checks if this block's terrain type allows infra of infraType to be built on
+func CheckCorrectTypeForInfra(infraType: Enums.InfrastructureType):
+	if DataManager.modifierData[infraType] == Enums.InfrastructureType.None:
+		return true
+	if terrainType.type == DataManager.modifierData[infraType]:
+		return true
+
+	return false
+	
+	
 func BuildIndustry(type: Enums.GoodType):
 	# need to remove industry first to build new one!
 	if industry != null:
@@ -328,11 +348,18 @@ func ConnectBuildSignals():
 			
 	for child in infraButtons.get_children():
 		if child is BuildTypeButton:
-			child.pressed.connect(BuildInfrastructure.bind(child.infraType))
+			#child.pressed.connect(BuildInfrastructure.bind(child.infraType))
+			child.pressed.connect(AddModifier.bind(DataManager.modifierData[child.infraType]))
 
 
-func AddModifier(mod: Modifier):
-	modifiers.append(mod)
+func AddModifier(mod: Modifier, isType: bool = false):
+	if isType:
+		if terrainType == null:
+			terrainType = mod
+		else:
+			print("ERROR! Trying to put terrain type into a block that already has one.")
+	else:
+		modifiers.append(mod)
 	
 	var newModifierIcon = modifierIconScene.instantiate()
 	
