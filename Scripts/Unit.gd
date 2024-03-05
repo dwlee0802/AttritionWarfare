@@ -15,6 +15,7 @@ var hitPoints: float = 100
 var attackRange: int = 300
 @onready var attackArea: Area2D = $AttackArea
 var attackTarget
+var attackTargetBlock: Block = null
 
 var damageAmount: int = 20
 # attack speed in attacks per second
@@ -45,6 +46,8 @@ var hasVisitedCurrentBlock: bool = true
 @onready var debugLabel: Label = $DebugLabel
 var debugStatus: String = ""
 @onready var debugLine: Line2D = $DebugLine
+
+signal current_block_changed
 
 
 func _ready():
@@ -317,6 +320,8 @@ func UpdateVelocity() -> bool:
 		return false
 	else:
 		attackTarget = SearchForAttackTarget()
+		attackTarget.current_block_changed.connect(SetAttackTargetToNull)
+		
 		# check if we can attack
 		if attackTarget != null:
 			velocity = Vector2.ZERO
@@ -350,6 +355,7 @@ func UpdateVelocity() -> bool:
 						debugStatus = "have permission"
 						currentSlot = nextSlot
 						currentBlock = nextBlock
+						current_block_changed.emit()
 						velocity = global_position.direction_to(currentSlot.GetCenterPosition()).normalized() * speed
 						return false
 					else:
@@ -370,3 +376,7 @@ func AtCurrent():
 
 func AtTarget():
 	return abs(target_position - global_position.x) < POSITION_ERROR
+
+
+func SetAttackTargetToNull():
+	attackTarget = null
