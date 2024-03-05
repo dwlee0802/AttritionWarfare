@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Modifier" load_steps=2 format=3 uid="uid://b10w4sje2o6nn"]
+
+[ext_resource type="Script" path="res://Data/modifier_data.gd" id="1_vjkcb"]
+
+[resource]
+script = ExtResource("1_vjkcb")
+name = "Road"
+isTerrain = false
+type = 2
+cost = 500
+requiresType = 9
+slotChange = 1
+coalDeposit = false
+ironDeposit = false

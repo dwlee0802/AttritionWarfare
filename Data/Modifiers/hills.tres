@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Modifier" load_steps=2 format=3 uid="uid://o8katq23xqk8"]
+
+[ext_resource type="Script" path="res://Data/modifier_data.gd" id="1_gm4la"]
+
+[resource]
+script = ExtResource("1_gm4la")
+name = "Hills"
+isTerrain = true
+type = 8
+cost = 0
+requiresType = 8
+slotChange = -1
+coalDeposit = false
+ironDeposit = false

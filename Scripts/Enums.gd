@@ -104,3 +104,5 @@ static func InfraTypeToString(num):
 		return "Bridge"
 		
 	return "None"
+
+enum ModifierType {CoalDeposit, IronDeposit, Road, Bridge, River, Mountain, Tunnel, Plains, Hills, None}

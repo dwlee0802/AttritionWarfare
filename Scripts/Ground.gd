@@ -39,6 +39,8 @@ func GenerateMap():
 	Block.baseCombatWidth = baseCombatWidth
 	
 	for i in range(mapSize):
-		var newBlock = blockScene.instantiate()
+		var newBlock: Block = blockScene.instantiate()
 		blocks.append(newBlock)
 		add_child(newBlock)
+		if i % 3 == 0:
+			newBlock.AddModifier(load("res://Data/Modifiers/road.tres"))

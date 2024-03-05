@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Modifier" load_steps=2 format=3 uid="uid://c7gcowge0v613"]
+
+[ext_resource type="Script" path="res://Data/modifier_data.gd" id="1_f2tei"]
+
+[resource]
+script = ExtResource("1_f2tei")
+name = "Plains"
+isTerrain = true
+type = 7
+cost = 0
+requiresType = 9
+slotChange = 2
+coalDeposit = false
+ironDeposit = false

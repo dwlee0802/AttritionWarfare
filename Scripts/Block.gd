@@ -316,3 +316,20 @@ func ConnectBuildSignals():
 	for child in infraButtons.get_children():
 		if child is BuildTypeButton:
 			child.pressed.connect(BuildInfrastructure.bind(child.infraType))
+
+
+func AddModifier(mod: Modifier):
+	modifiers.append(mod)
+	
+	canBuildCoal = mod.coalDeposit
+	canBuildIron = mod.ironDeposit
+	
+	if mod.slotChange < 0:
+		for i in range(abs(mod.slotChange)):
+			if slotContainer.get_child_count() > 1:
+				slotContainer.get_child(0).queue_free()
+	if mod.slotChange > 0:
+		for i in range(mod.slotChange):
+			var newSlot = slotScene.instantiate()
+			slots.append(newSlot)
+			slotContainer.add_child(newSlot)

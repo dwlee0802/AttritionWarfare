@@ -5,7 +5,9 @@
 [resource]
 script = ExtResource("1_0duav")
 name = "Coal Deposit"
+type = 0
 cost = 0
+requiresType = 7
 slotChange = 0
 coalDeposit = false
 ironDeposit = true

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Modifier" load_steps=2 format=3 uid="uid://dosy4tdq75f8s"]
+
+[ext_resource type="Script" path="res://Data/modifier_data.gd" id="1_fajif"]
+
+[resource]
+script = ExtResource("1_fajif")
+name = "River"
+isTerrain = false
+type = 4
+cost = 0
+requiresType = 9
+slotChange = -3
+coalDeposit = false
+ironDeposit = false
