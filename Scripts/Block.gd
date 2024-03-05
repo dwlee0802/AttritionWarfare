@@ -285,9 +285,14 @@ func UpdateOptionButtons():
 
 # checks if this block's terrain type allows infra of infraType to be built on
 func CheckCorrectTypeForInfra(infraType: Enums.InfrastructureType):
-	if DataManager.modifierData[infraType] == Enums.InfrastructureType.None:
+	if terrainType == null:
+		return false
+		
+	# no requirements
+	if DataManager.modifierData[infraType].requiresType == Enums.InfrastructureType.None:
 		return true
-	if terrainType.type == DataManager.modifierData[infraType]:
+	# requirement is terrain type
+	if terrainType.type == DataManager.modifierData[infraType].requiresType:
 		return true
 
 	return false
