@@ -9,7 +9,11 @@ var blockScene = load("res://Scenes/block.tscn")
 
 @export var randomFeatures: bool = true
 
+@export var modifierOccurRate: float = 0
+
 @export var baseCombatWidth: int = 5
+
+const starting_blocks_count = 5
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,8 +28,14 @@ func _ready():
 		# set next
 		if i + 1 < len(blocks):
 			blocks[i].nextBlock = blocks[i + 1]
-
-
+	
+	for i in range(starting_blocks_count):
+		blocks[i].captureState = Enums.BlockState.Player
+		blocks[-i-1].captureState = Enums.BlockState.Enemy
+		blocks[i].UpdateCaptureStateIndicator()
+		blocks[-i-1].UpdateCaptureStateIndicator()
+		
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
@@ -42,5 +52,13 @@ func GenerateMap():
 		var newBlock: Block = blockScene.instantiate()
 		blocks.append(newBlock)
 		add_child(newBlock)
-		if i % 3 == 0:
-			newBlock.AddModifier(load("res://Data/Modifiers/road.tres"))
+		
+		# add terrain type modifier
+		var rng = DataManager.terrainTypeData.keys().pick_random()
+		newBlock.AddModifier(DataManager.terrainTypeData[rng])
+		
+		if randf() < modifierOccurRate:
+			rng = DataManager.modifierData.keys().pick_random()
+			newBlock.AddModifier(DataManager.modifierData[rng])
+		
+		

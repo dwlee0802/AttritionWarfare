@@ -56,6 +56,8 @@ var captureState: Enums.BlockState = Enums.BlockState.Neutral
 # temporary testing values
 @export var modifiers = []
 
+var modifierIconScene = load("res://Scenes/block_modifier_icon.tscn")
+
 var canBuildCoal: bool = false
 var canBuildIron: bool = false
 
@@ -219,6 +221,17 @@ func UpdateCaptureStatus():
 		captureState = Enums.BlockState.Enemy
 			
 
+func UpdateCaptureStateIndicator():
+	if captureState == Enums.BlockState.Player:
+		captureStatusTexture.self_modulate = Color.DEEP_SKY_BLUE
+		
+	if captureState == Enums.BlockState.Enemy:
+		captureStatusTexture.self_modulate = Color.DARK_RED
+		
+	if captureState == Enums.BlockState.Neutral:
+		captureStatusTexture.self_modulate = Color.GRAY
+		
+		
 func UpdateIndustryIcon():
 	if industry != null:
 		industryIcon.visible = true
@@ -321,13 +334,22 @@ func ConnectBuildSignals():
 func AddModifier(mod: Modifier):
 	modifiers.append(mod)
 	
+	var newModifierIcon = modifierIconScene.instantiate()
+	
+	# temporary label update
+	newModifierIcon.get_node("TempLabel").text = mod.name
+	
+	industryIcon.add_sibling(newModifierIcon)
+	
 	canBuildCoal = mod.coalDeposit
 	canBuildIron = mod.ironDeposit
 	
 	if mod.slotChange < 0:
-		for i in range(abs(mod.slotChange)):
-			if slotContainer.get_child_count() > 1:
-				slotContainer.get_child(0).queue_free()
+		# how much to remove
+		var removeCount = mod.slotChange
+		if slotContainer.get_child_count() > abs(mod.slotChange):
+			for i in range(abs(mod.slotChange)):
+				slotContainer.get_child(i).queue_free()	
 	if mod.slotChange > 0:
 		for i in range(mod.slotChange):
 			var newSlot = slotScene.instantiate()
