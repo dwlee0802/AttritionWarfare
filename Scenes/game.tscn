@@ -1073,7 +1073,6 @@ script = ExtResource("16_g4x6a")
 position = Vector2(34, 611)
 collision_mask = 0
 script = ExtResource("5_ajpi1")
-autoSpawn = true
 currentBlock = NodePath("../Ground/Block")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/PlayerHQ"]
@@ -1100,7 +1099,6 @@ collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ajpi1")
 isPlayerHQ = false
-autoSpawn = true
 currentBlock = NodePath("../Ground/Block32")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/EnemyHQ"]
@@ -1276,7 +1274,6 @@ offset_top = 35.0
 offset_right = 149.0
 offset_bottom = 66.0
 toggle_mode = true
-button_pressed = true
 text = "Player Autospawn"
 
 [node name="PlayerKillAllButton" type="Button" parent="DebugTab"]
@@ -1294,7 +1291,6 @@ offset_top = 102.0
 offset_right = 153.0
 offset_bottom = 133.0
 toggle_mode = true
-button_pressed = true
 text = "Enemy Autospawn"
 
 [node name="EnemyKillAllButton" type="Button" parent="DebugTab"]

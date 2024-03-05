@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Modifier" load_steps=2 format=3 uid="uid://dv48l6xglxgxi"]
+
+[ext_resource type="Script" path="res://Data/modifier_data.gd" id="1_0duav"]
+
+[resource]
+script = ExtResource("1_0duav")
+name = "Coal Deposit"
+cost = 0
+slotChange = 0
+coalDeposit = false
+ironDeposit = true

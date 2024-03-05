@@ -1,7 +1,7 @@
 extends Control
 class_name World
 
-const MAP_PAN_SPEED: int = 200
+const MAP_PAN_SPEED: int = 500
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

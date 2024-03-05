@@ -10,6 +10,8 @@ var curCombatWidth: int = 0
 var maxCombatWidth: int = 1
 var tempCombatWidth: int = 0
 
+static var baseCombatWidth: int = 5
+
 @onready var contentsLabel: RichTextLabel = $GroundTexture/SideTexture/ContentsLabel
 
 var insideUnits = []
@@ -52,6 +54,8 @@ var captureState: Enums.BlockState = Enums.BlockState.Neutral
 @onready var industryIcons = $CaptureStatus/IndustryIcons
 
 # temporary testing values
+@export var modifiers = []
+
 var canBuildCoal: bool = false
 var canBuildIron: bool = false
 
@@ -59,10 +63,9 @@ var canBuildIron: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry/SellButton.pressed.connect(SellButtonPressed)
-	maxCombatWidth = randi_range(1, 9)
 	CheckIfCapital()
 	
-	for i in range(maxCombatWidth):
+	for i in range(Block.baseCombatWidth):
 		var newSlot = slotScene.instantiate()
 		slots.append(newSlot)
 		slotContainer.add_child(newSlot)
