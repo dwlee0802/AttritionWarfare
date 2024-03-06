@@ -320,10 +320,11 @@ func UpdateVelocity() -> bool:
 		return false
 	else:
 		attackTarget = SearchForAttackTarget()
-		attackTarget.current_block_changed.connect(SetAttackTargetToNull)
 		
 		# check if we can attack
 		if attackTarget != null:
+			if !attackTarget.current_block_changed.is_connected(SetAttackTargetToNull):
+				attackTarget.current_block_changed.connect(SetAttackTargetToNull)
 			velocity = Vector2.ZERO
 			if attackTimer.is_stopped():
 				attackTimer.start(1/ attackSpeed)

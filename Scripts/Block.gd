@@ -377,11 +377,11 @@ func AddModifier(mod: Modifier, isType: bool = false):
 	canBuildIron = mod.ironDeposit
 	
 	if mod.slotChange < 0:
-		# how much to remove
-		var removeCount = mod.slotChange
 		if slotContainer.get_child_count() > abs(mod.slotChange):
 			for i in range(abs(mod.slotChange)):
-				slotContainer.get_child(i).queue_free()	
+				var target = slots.pop_front()
+				target.queue_free()
+				
 	if mod.slotChange > 0:
 		for i in range(mod.slotChange):
 			var newSlot = slotScene.instantiate()

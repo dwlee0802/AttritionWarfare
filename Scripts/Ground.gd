@@ -19,7 +19,7 @@ const starting_blocks_count = 5
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GenerateMap()
-
+	
 	for i in range(len(blocks)):
 		# set prev
 		if i >= 1:
@@ -35,10 +35,13 @@ func _ready():
 		blocks[i].UpdateCaptureStateIndicator()
 		blocks[-i-1].UpdateCaptureStateIndicator()
 		
-	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	if Game.playerNation.hq.currentBlock == null:
+		Game.playerNation.hq.currentBlock = blocks[0]
+	if Game.enemyNation.hq.currentBlock == null:
+		Game.enemyNation.hq.currentBlock = blocks[-1]
 	
 	
 func GenerateMap():
