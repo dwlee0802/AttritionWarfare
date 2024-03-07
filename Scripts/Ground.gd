@@ -57,8 +57,8 @@ func GenerateMap():
 		add_child(newBlock)
 		
 		# add terrain type modifier
-		var rng = DataManager.terrainTypeData.keys().pick_random()
-		newBlock.AddModifier(DataManager.terrainTypeData[rng])
+		var rng = DataManager.terrainData.keys().pick_random()
+		newBlock.AddTerrain(DataManager.terrainData[rng])
 		
 		if randf() < modifierOccurRate:
 			rng = DataManager.modifierData.keys().pick_random()

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Terrain" load_steps=2 format=3 uid="uid://drfkg6fyp5jp"]
+
+[ext_resource type="Script" path="res://Data/terrain_data.gd" id="1_yjpyk"]
+
+[resource]
+script = ExtResource("1_yjpyk")
+name = "Plains"
+type = 0
+slotChange = 1

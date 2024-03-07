@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Infrastructure" load_steps=2 format=3 uid="uid://ds6wcv4g3r1e5"]
+
+[ext_resource type="Script" path="res://Data/infra_data.gd" id="1_w1d6u"]
+
+[resource]
+script = ExtResource("1_w1d6u")
+name = "Bridge"
+type = 1
+slotChange = 1
+cost = 500
+requiresType = 2

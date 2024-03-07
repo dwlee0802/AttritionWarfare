@@ -95,18 +95,41 @@ enum Direction {Up, Right, Left, Down}
 enum BlockState {Player, Enemy, Neutral}
 
 
-enum InfrastructureType {Road, Bridge, None}
+enum ModifierDataTypes {Terrain, Modifier, Infrastructure}
 
-static func InfraTypeToString(num):
-	if num == 0:
-		return "Road"
-	if num == 1:
-		return "Bridge"
-		
+enum TerrainType {Plains, Hills, River, Mountain, None}
+
+enum ModifierType {CoalDeposit, IronDeposit, None}
+
+enum InfrastructureType {Road, Bridge, Tunnel, None}
+
+
+static func ModifierTypeToString(num: TerrainType):
+	if num == TerrainType.Plains:
+		return "Plains"
+	if num == TerrainType.Hills:
+		return "Hills"
+	if num == TerrainType.River:
+		return "River"
+	if num == TerrainType.Mountain:
+		return "Mountain"
+	
 	return "None"
-
-enum ModifierType {CoalDeposit, IronDeposit, Road, Bridge, River, Mountain, Tunnel, Plains, Hills, None}
-
-static func ModifierTypeToString(num):
-	if num == 0:
+	
+static func TerrainTypeToString(num: ModifierType):
+	if num == ModifierType.CoalDeposit:
 		return "CoalDeposit"
+	if num == ModifierType.IronDeposit:
+		return "IronDeposit"
+	
+	return "None"
+	
+static func InfrastructureTypeToString(num: InfrastructureType):
+	if num == InfrastructureType.Road:
+		return "Road"
+	if num == InfrastructureType.Bridge:
+		return "Bridge"
+	if num == InfrastructureType.Tunnel:
+		return "Tunnel"
+	
+	return "None"

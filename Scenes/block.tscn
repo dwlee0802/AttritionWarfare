@@ -6,8 +6,8 @@
 [ext_resource type="ButtonGroup" uid="uid://h7t1wd2bnwok" path="res://Misc/build_button_group.tres" id="4_3fbij"]
 [ext_resource type="Texture2D" uid="uid://c3kv3gjfg1qnf" path="res://Art/build_button.jpg" id="4_j73oh"]
 [ext_resource type="Texture2D" uid="uid://bwaor8guq4mb" path="res://Art/build_button_pressed.jpg" id="5_1rnr8"]
-[ext_resource type="Script" path="res://Scenes/BuildButton.gd" id="6_3vmh6"]
-[ext_resource type="Script" path="res://Scenes/BuildTypeButton.gd" id="6_ijsgh"]
+[ext_resource type="Script" path="res://Scripts/BuildButton.gd" id="6_3vmh6"]
+[ext_resource type="Script" path="res://Scripts/BuildTypeButton.gd" id="6_ijsgh"]
 [ext_resource type="PackedScene" uid="uid://d3fg8bwdnwgyv" path="res://Scenes/industry_icon.tscn" id="7_gmh5v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mp6jl"]
@@ -288,6 +288,13 @@ text = "Bridge"
 script = ExtResource("6_ijsgh")
 infraType = 1
 
+[node name="TunnelButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Infrastructure"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Tunnel"
+script = ExtResource("6_ijsgh")
+infraType = 2
+
 [node name="InfraIcon" parent="CaptureStatus/IndustryIcons" instance=ExtResource("7_gmh5v")]
 visible = false
 layout_mode = 2
@@ -301,7 +308,6 @@ visible = false
 layout_mode = 2
 
 [node name="DebugLabel" type="Label" parent="."]
-visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = -1

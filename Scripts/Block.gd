@@ -54,8 +54,9 @@ var captureState: Enums.BlockState = Enums.BlockState.Neutral
 @onready var industryIcons = $CaptureStatus/IndustryIcons
 
 # temporary testing values
-@export var terrainType: Modifier
+@export var terrainType: Terrain
 @export var modifiers = []
+@export var infrastructures = []
 
 var modifierIconScene = load("res://Scenes/block_modifier_icon.tscn")
 
@@ -82,8 +83,12 @@ func _process(_delta):
 	centerPosition = detectionArea.global_position.x
 	insideUnits = GetUnitsInside()
 	UpdateContentsLabel()
-	debugLabel.text = str(global_position)
 	
+	if terrainType != null:
+		debugLabel.text = str(terrainType.name)
+	else:
+		debugLabel.text = "terrain empty"
+		
 	if curCombatWidth < 0:
 		curCombatWidth = 0
 	
@@ -279,9 +284,11 @@ func UpdateOptionButtons():
 			# check if the block's terrain type is appropriate for this infrastructure
 			if CheckCorrectTypeForInfra(child.infraType):
 				child.visible = true
-				child.cost = load(Enums.GoodTypeToDataPath(child.goodType)).levelUpCost
-				child.text = Enums.InfraTypeToString(child.goodType) + " (" + str(child.cost) + ")"
-
+				child.cost = DataManager.infraData[child.infraType].cost
+				child.text = Enums.InfrastructureTypeToString(child.infraType) + " (" + str(child.cost) + ")"
+			else:
+				child.visible = false
+				
 
 # checks if this block's terrain type allows infra of infraType to be built on
 func CheckCorrectTypeForInfra(infraType: Enums.InfrastructureType):
@@ -289,10 +296,10 @@ func CheckCorrectTypeForInfra(infraType: Enums.InfrastructureType):
 		return false
 		
 	# no requirements
-	if DataManager.modifierData[infraType].requiresType == Enums.InfrastructureType.None:
+	if DataManager.infraData[infraType].requiresType == Enums.TerrainType.None:
 		return true
 	# requirement is terrain type
-	if terrainType.type == DataManager.modifierData[infraType].requiresType:
+	if DataManager.infraData[infraType].requiresType == terrainType.type:
 		return true
 
 	return false
@@ -323,7 +330,7 @@ func BuildIndustry(type: Enums.GoodType):
 	industryIcons.Reset()
 
 
-func BuildInfrastructure(type: Enums.InfrastructureType):
+func BuildInfrastructure(type: Enums.ModifierType):
 	pass
 	
 	
@@ -354,17 +361,11 @@ func ConnectBuildSignals():
 	for child in infraButtons.get_children():
 		if child is BuildTypeButton:
 			#child.pressed.connect(BuildInfrastructure.bind(child.infraType))
-			child.pressed.connect(AddModifier.bind(DataManager.modifierData[child.infraType]))
+			child.pressed.connect(AddInfrastructure.bind(DataManager.infraData[child.infraType]))
 
 
-func AddModifier(mod: Modifier, isType: bool = false):
-	if isType:
-		if terrainType == null:
-			terrainType = mod
-		else:
-			print("ERROR! Trying to put terrain type into a block that already has one.")
-	else:
-		modifiers.append(mod)
+func AddModifier(mod: Modifier):
+	modifiers.append(mod)
 	
 	var newModifierIcon = modifierIconScene.instantiate()
 	
@@ -387,3 +388,61 @@ func AddModifier(mod: Modifier, isType: bool = false):
 			var newSlot = slotScene.instantiate()
 			slots.append(newSlot)
 			slotContainer.add_child(newSlot)
+	
+	UpdateOptionButtons()
+
+
+func AddTerrain(terrain: Terrain):
+	if terrainType != null:
+		print("Warning! Overriding already set terrain type!")
+	
+	terrainType = terrain
+	
+	var newModifierIcon = modifierIconScene.instantiate()
+	
+	# temporary label update
+	newModifierIcon.get_node("TempLabel").text = terrain.name
+	
+	industryIcon.add_sibling(newModifierIcon)
+	
+	if terrain.slotChange < 0:
+		if slotContainer.get_child_count() > abs(terrain.slotChange):
+			for i in range(abs(terrain.slotChange)):
+				var target = slots.pop_front()
+				target.queue_free()
+				
+	if terrain.slotChange > 0:
+		for i in range(terrain.slotChange):
+			var newSlot = slotScene.instantiate()
+			slots.append(newSlot)
+			slotContainer.add_child(newSlot)
+	
+	UpdateOptionButtons()
+
+
+func AddInfrastructure(infra: Infrastructure):
+	if terrainType != null:
+		print("Warning! Overriding already set terrain type!")
+	
+	infrastructures.append(infra)
+	
+	var newModifierIcon = modifierIconScene.instantiate()
+	
+	# temporary label update
+	newModifierIcon.get_node("TempLabel").text = infra.name
+	
+	industryIcon.add_sibling(newModifierIcon)
+	
+	if infra.slotChange < 0:
+		if slotContainer.get_child_count() > abs(infra.slotChange):
+			for i in range(abs(infra.slotChange)):
+				var target = slots.pop_front()
+				target.queue_free()
+				
+	if infra.slotChange > 0:
+		for i in range(infra.slotChange):
+			var newSlot = slotScene.instantiate()
+			slots.append(newSlot)
+			slotContainer.add_child(newSlot)
+	
+	UpdateOptionButtons()
