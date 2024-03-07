@@ -49,7 +49,7 @@ var captureState: Enums.BlockState = Enums.BlockState.Neutral
 @onready var sellButton = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry/SellButton
 
 @onready var industryButtons = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry
-@onready var infraButtons = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry
+@onready var infraButtons = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Infrastructure
 
 @onready var industryIcons = $CaptureStatus/IndustryIcons
 
@@ -360,7 +360,6 @@ func ConnectBuildSignals():
 			
 	for child in infraButtons.get_children():
 		if child is BuildTypeButton:
-			#child.pressed.connect(BuildInfrastructure.bind(child.infraType))
 			child.pressed.connect(AddInfrastructure.bind(DataManager.infraData[child.infraType]))
 
 
@@ -393,6 +392,10 @@ func AddModifier(mod: Modifier):
 
 
 func AddTerrain(terrain: Terrain):
+	if terrain == null:
+		print("Warning! Null input in add terrain")
+		return
+		
 	if terrainType != null:
 		print("Warning! Overriding already set terrain type!")
 	

@@ -9,7 +9,7 @@ var blockScene = load("res://Scenes/block.tscn")
 
 @export var randomFeatures: bool = true
 
-@export var modifierOccurRate: float = 0
+@export var modifierOccurRate: float = 1
 
 @export var baseCombatWidth: int = 5
 
@@ -57,7 +57,7 @@ func GenerateMap():
 		add_child(newBlock)
 		
 		# add terrain type modifier
-		var rng = DataManager.terrainData.keys().pick_random()
+		var rng = randi_range(0,3)
 		newBlock.AddTerrain(DataManager.terrainData[rng])
 		
 		if randf() < modifierOccurRate:
