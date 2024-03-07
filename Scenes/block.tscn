@@ -295,6 +295,12 @@ text = "Tunnel"
 script = ExtResource("6_ijsgh")
 infraType = 2
 
+[node name="SellButton" type="Button" parent="CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Infrastructure"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Destroy"
+
 [node name="InfraIcon" parent="CaptureStatus/IndustryIcons" instance=ExtResource("7_gmh5v")]
 visible = false
 layout_mode = 2

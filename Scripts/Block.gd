@@ -47,6 +47,7 @@ var captureState: Enums.BlockState = Enums.BlockState.Neutral
 @onready var buildOptions = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions
 
 @onready var sellButton = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry/SellButton
+@onready var destroyButton = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Infrastructure/SellButton
 
 @onready var industryButtons = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry
 @onready var infraButtons = $CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Infrastructure
@@ -67,6 +68,7 @@ var canBuildIron: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Industry/SellButton.pressed.connect(SellButtonPressed)
+	$CaptureStatus/IndustryIcons/BuildButton/BuildOptions/Infrastructure/SellButton.pressed.connect(DestroyInfraPressed)
 	CheckIfCapital()
 	
 	for i in range(Block.baseCombatWidth):
@@ -288,6 +290,8 @@ func UpdateOptionButtons():
 			else:
 				child.visible = false
 				
+	destroyButton.visible = infrastructures.size() > 0
+				
 
 # checks if this block's terrain type allows infra of infraType to be built on
 func CheckCorrectTypeForInfra(infraType: Enums.InfrastructureType):
@@ -348,6 +352,12 @@ func SellButtonPressed():
 		industryIcons.Reset()
 
 
+func DestroyInfraPressed():
+	infrastructures.clear()
+	UpdateOptionButtons()
+	industryIcons.Reset()
+	
+	
 func ConnectBuildSignals():
 	for child in industryButtons.get_children():
 		if child is BuildTypeButton:
@@ -421,7 +431,7 @@ func AddTerrain(terrain: Terrain):
 func AddInfrastructure(infra: Infrastructure):
 	if terrainType != null:
 		print("Warning! Overriding already set terrain type!")
-	
+		
 	infrastructures.append(infra)
 	
 	var newModifierIcon = modifierIconScene.instantiate()
@@ -444,3 +454,7 @@ func AddInfrastructure(infra: Infrastructure):
 			slotContainer.add_child(newSlot)
 	
 	UpdateOptionButtons()
+
+
+func ReloadIcons():
+	pass
