@@ -284,7 +284,7 @@ func UpdateOptionButtons():
 	for child in buildOptions.get_node("Infrastructure").get_children():
 		if child is BuildTypeButton:
 			# check if the block's terrain type is appropriate for this infrastructure
-			if CheckCorrectTypeForInfra(child.infraType):
+			if CheckCorrectTypeForInfra(child.infraType) and !infrastructures.has(DataManager.infraData[child.infraType]):
 				child.visible = true
 				child.cost = DataManager.infraData[child.infraType].cost
 				child.text = Enums.InfrastructureTypeToString(child.infraType) + " (" + str(child.cost) + ")"
