@@ -81,6 +81,8 @@ func _ready():
 	ConnectBuildSignals()
 	UpdateOptionButtons()
 	
+	ReloadIcons()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -94,7 +96,6 @@ func _process(_delta):
 		curCombatWidth = 0
 	
 	UpdateCaptureStatus()
-	UpdateIndustryIcon()
 	
 	
 	# need to disable other build buttons when one is pressed
@@ -331,6 +332,7 @@ func BuildIndustry(type: Enums.GoodType):
 	print("Built new " + Enums.GoodTypeToIndustryName(type) + " at " + name)
 	UpdateOptionButtons()
 	industryIcons.Reset()
+	ReloadIcons()
 	
 	
 func SellButtonPressed():
@@ -356,6 +358,7 @@ func DestroyInfraPressed():
 	infrastructures.clear()
 	UpdateOptionButtons()
 	industryIcons.Reset()
+	ReloadIcons()
 	
 	
 func ConnectBuildSignals():
@@ -370,13 +373,6 @@ func ConnectBuildSignals():
 
 func AddModifier(mod: Modifier):
 	modifiers.append(mod)
-	
-	var newModifierIcon = modifierIconScene.instantiate()
-	
-	# temporary label update
-	newModifierIcon.get_node("TempLabel").text = mod.name
-	
-	industryIcon.add_sibling(newModifierIcon)
 	
 	canBuildCoal = mod.coalDeposit
 	canBuildIron = mod.ironDeposit
@@ -394,6 +390,7 @@ func AddModifier(mod: Modifier):
 			slotContainer.add_child(newSlot)
 	
 	UpdateOptionButtons()
+	ReloadIcons()
 
 
 func AddTerrain(terrain: Terrain):
@@ -405,13 +402,6 @@ func AddTerrain(terrain: Terrain):
 		print("Warning! Overriding already set terrain type!")
 	
 	terrainType = terrain
-	
-	var newModifierIcon = modifierIconScene.instantiate()
-	
-	# temporary label update
-	newModifierIcon.get_node("TempLabel").text = terrain.name
-	
-	industryIcon.add_sibling(newModifierIcon)
 	
 	if terrain.slotChange < 0:
 		if slotContainer.get_child_count() > abs(terrain.slotChange):
@@ -426,6 +416,7 @@ func AddTerrain(terrain: Terrain):
 			slotContainer.add_child(newSlot)
 	
 	UpdateOptionButtons()
+	ReloadIcons()
 
 
 func AddInfrastructure(infra: Infrastructure):
@@ -433,13 +424,6 @@ func AddInfrastructure(infra: Infrastructure):
 		print("Warning! Overriding already set terrain type!")
 		
 	infrastructures.append(infra)
-	
-	var newModifierIcon = modifierIconScene.instantiate()
-	
-	# temporary label update
-	newModifierIcon.get_node("TempLabel").text = infra.name
-	
-	industryIcon.add_sibling(newModifierIcon)
 	
 	if infra.slotChange < 0:
 		if slotContainer.get_child_count() > abs(infra.slotChange):
@@ -454,7 +438,36 @@ func AddInfrastructure(infra: Infrastructure):
 			slotContainer.add_child(newSlot)
 	
 	UpdateOptionButtons()
+	ReloadIcons()
 
 
 func ReloadIcons():
-	pass
+	# clear current icons except build button
+	var first: bool = true
+	for child in industryIcons.get_children():
+		if first:
+			first = false
+			continue
+		
+		child.queue_free()
+	
+	if terrainType != null:
+		var newIcon = modifierIconScene.instantiate()
+		newIcon.get_node("TempLabel").text = terrainType.name
+		buildButton.add_sibling(newIcon)
+	
+	for mod in modifiers:
+		var newIcon = modifierIconScene.instantiate()
+		newIcon.get_node("TempLabel").text = mod.name
+		buildButton.add_sibling(newIcon)
+	
+	for infra in infrastructures:
+		var newIcon = modifierIconScene.instantiate()
+		newIcon.get_node("TempLabel").text = infra.name
+		buildButton.add_sibling(newIcon)
+	
+	if industry != null:
+		var newIcon = modifierIconScene.instantiate()
+		newIcon.get_node("TempLabel").text = Enums.GoodTypeToIndustryName(industry.productionType) + " " + str(industry.level)
+		buildButton.add_sibling(newIcon)
+			

@@ -15,7 +15,7 @@ var industries = []
 var supplyOrders = []
 const MAX_PRIORITY_LEVEL: int = 10
 
-var funds: float = 0
+var funds: float = 1000
 var revenuePerSecond: float = 100
 
 
