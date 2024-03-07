@@ -8,7 +8,7 @@ class_name BuildTypeButton
 var cost: int = 0
 
 
-func _process(delta):
+func _process(_delta):
 	if Game.playerNation != null:
 		# check if this button can be pressed based on available funds and cost
 		disabled = !Game.playerNation.CheckEnoughFunds(cost)

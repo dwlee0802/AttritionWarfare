@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_3pwk4")
 name = "Road"
-type = 3
+type = 0
 slotChange = 1
 cost = 200
 requiresType = 4

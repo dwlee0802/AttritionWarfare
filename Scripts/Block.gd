@@ -73,7 +73,9 @@ func _ready():
 		var newSlot = slotScene.instantiate()
 		slots.append(newSlot)
 		slotContainer.add_child(newSlot)
-		
+	
+	industryIcons.options_toggled.connect(UpdateOptionButtons)
+	
 	ConnectBuildSignals()
 	UpdateOptionButtons()
 	
@@ -84,10 +86,7 @@ func _process(_delta):
 	insideUnits = GetUnitsInside()
 	UpdateContentsLabel()
 	
-	if terrainType != null:
-		debugLabel.text = str(terrainType.name)
-	else:
-		debugLabel.text = "terrain empty"
+	debugLabel.text = str(canBuildCoal) + "/" + str(canBuildIron) 
 		
 	if curCombatWidth < 0:
 		curCombatWidth = 0
@@ -328,10 +327,6 @@ func BuildIndustry(type: Enums.GoodType):
 	print("Built new " + Enums.GoodTypeToIndustryName(type) + " at " + name)
 	UpdateOptionButtons()
 	industryIcons.Reset()
-
-
-func BuildInfrastructure(type: Enums.ModifierType):
-	pass
 	
 	
 func SellButtonPressed():

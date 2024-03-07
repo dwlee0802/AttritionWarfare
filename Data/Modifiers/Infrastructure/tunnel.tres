@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_a1num")
 name = "Tunnel"
-type = 3
+type = 2
 slotChange = 1
-cost = 500
+cost = 700
 requiresType = 3

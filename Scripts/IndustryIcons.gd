@@ -10,6 +10,8 @@ class_name IndustryIcons
 
 var block: Block
 
+signal options_toggled
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,7 +20,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if buildButton.button_pressed == false:
 		Reset()
 	
@@ -29,6 +31,8 @@ func _on_build_button_toggled(toggled_on):
 
 func _on_type_button_pressed(is_industry):
 	typeButtons.visible = false
+	
+	options_toggled.emit()
 	
 	if is_industry:
 		industryButtons.visible = true

@@ -6,8 +6,6 @@
 script = ExtResource("1_bhlhv")
 name = "Iron Deposit"
 type = 1
-cost = 0
-requiresType = 7
 slotChange = 0
-coalDeposit = true
-ironDeposit = false
+coalDeposit = false
+ironDeposit = true

@@ -9,9 +9,9 @@ static func _static_init():
 	modifierData[Enums.ModifierType.IronDeposit] = load("res://Data/Modifiers/Modifiers/iron_deposit.tres")
 	
 	# infra types
-	infraData[Enums.InfrastructureType.Road] = load("res://Data/Modifiers/Infrastructure/bridge.tres")
-	infraData[Enums.InfrastructureType.Tunnel] = load("res://Data/Modifiers/Infrastructure/bridge.tres")
-	infraData[Enums.InfrastructureType.Bridge] = load("res://Data/Modifiers/Infrastructure/tunnel.tres")
+	infraData[Enums.InfrastructureType.Road] = load("res://Data/Modifiers/Infrastructure/road.tres")
+	infraData[Enums.InfrastructureType.Tunnel] = load("res://Data/Modifiers/Infrastructure/tunnel.tres")
+	infraData[Enums.InfrastructureType.Bridge] = load("res://Data/Modifiers/Infrastructure/bridge.tres")
 	
 	# terrain types
 	terrainData[Enums.TerrainType.Hills] = load("res://Data/Modifiers/Terrain/hills.tres")
