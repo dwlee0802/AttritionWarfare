@@ -9,11 +9,11 @@ var blockScene = load("res://Scenes/block.tscn")
 
 @export var randomFeatures: bool = true
 
-@export var modifierOccurRate: float = 1
+@export var modifierOccurRate: float = 0.4
 
 @export var baseCombatWidth: int = 5
 
-const starting_blocks_count = 5
+const starting_blocks_count = 10
 
 
 # Called when the node enters the scene tree for the first time.

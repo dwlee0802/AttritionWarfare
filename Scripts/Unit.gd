@@ -170,6 +170,9 @@ func SearchForAttackTarget() -> Unit:
 		nextBlock = currentBlock.nextBlock
 		
 	for i in range(unitData.attackBlockRange):
+		if nextBlock == null:
+			break
+			
 		newTarget = FindClosest(nextBlock.GetUnitsInside(!isPlayerUnit))
 		if newTarget != null:
 			break
