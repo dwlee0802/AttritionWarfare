@@ -320,6 +320,7 @@ func BuildIndustry(type: Enums.GoodType):
 			print("Increased level.")
 			UpdateOptionButtons()
 			industryIcons.Reset()
+			ReloadIcons()
 			return
 	
 	industry = Industry.new(load(Enums.GoodTypeToDataPath(type)))
@@ -352,6 +353,7 @@ func SellButtonPressed():
 				
 		UpdateOptionButtons()
 		industryIcons.Reset()
+		ReloadIcons()
 
 
 func DestroyInfraPressed():
@@ -456,7 +458,15 @@ func ReloadIcons():
 		newIcon.get_node("TempLabel").text = terrainType.name
 		buildButton.add_sibling(newIcon)
 	
-	for mod in modifiers:
+	# dont show modifiers if they are used
+	for mod: Modifier in modifiers:
+		if industry != null:
+			if mod.type == Enums.ModifierType.CoalDeposit:
+				if industry.productionType == Enums.GoodType.Coal:
+					continue
+			if mod.type == Enums.ModifierType.IronDeposit:
+				if industry.productionType == Enums.GoodType.Iron:
+					continue
 		var newIcon = modifierIconScene.instantiate()
 		newIcon.get_node("TempLabel").text = mod.name
 		buildButton.add_sibling(newIcon)

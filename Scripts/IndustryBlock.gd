@@ -111,6 +111,8 @@ func make_drag_preview() -> TextureRect:
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.self_modulate = Color.BLACK
 	
+	t.position = Camera.pos
+	
 	t.add_child(icon)
 	
 	return t
