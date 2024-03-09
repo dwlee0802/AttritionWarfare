@@ -481,3 +481,14 @@ func ReloadIcons():
 		newIcon.get_node("TempLabel").text = Enums.GoodTypeToIndustryName(industry.productionType) + " " + str(industry.level)
 		buildButton.add_sibling(newIcon)
 			
+
+# returns all units inside that has a lower movement priority than input
+func GetSwapTarget(isPlayer: bool, priorityLevel: int):
+	var candidates = GetUnitsInside(isPlayer)
+	var output = []
+	for unit : Unit in candidates:
+		if unit.movementPriorityLevel < priorityLevel:
+			output.append(unit)
+			
+	return output
+	

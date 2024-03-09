@@ -7,6 +7,8 @@ static var bulletScene = preload("res://Scenes/projectile.tscn")
 
 var supplyPriorityLevel: int = 2
 
+var movementPriorityLevel: int = 0
+
 # hit points correspond to how much equipment this unit has stocked
 var hitPoints: float = 100
 @onready var hitPointBar: ProgressBar = $HPProgressBar
@@ -363,10 +365,15 @@ func UpdateVelocity() -> bool:
 						velocity = global_position.direction_to(currentSlot.GetCenterPosition()).normalized() * speed
 						return false
 					else:
-						# no space do nothing
-						debugStatus = "no space"
-						velocity = Vector2.ZERO
-						return false
+						# no space. See if the block desired has units that has lower priority than this
+						var potentialSwapTargets = nextBlock.GetSwapTarget(isPlayerUnit, movementPriorityLevel)
+						if potentialSwapTargets == null:
+							debugStatus = "no space"
+							velocity = Vector2.ZERO
+							return false
+						else:
+							# swap positions
+							SwapPositions(FindClosest(potentialSwapTargets))
 				
 	return false
 
@@ -384,3 +391,16 @@ func AtTarget():
 
 func SetAttackTargetToNull():
 	attackTarget = null
+
+
+# swap current locations without unoccupying blocks
+# UpdateVelocity should take care of the actual moving since hasVisitedCurrentBlock is set to false
+func SwapPositions(target: Unit):
+	var curSlot = currentSlot
+	var curBlock = currentBlock
+	currentSlot = target.currentSlot
+	currentBlock = target.currentBlock
+	target.currentSlot = curSlot
+	target.currentBlock = curBlock
+	hasVisitedCurrentBlock = false
+	target.hasVisitedCurrentBlock = false
